@@ -33,4 +33,4 @@ class APIService {
   }
 }
 
-export default new APIService();
+export default new APIService().service;
