@@ -3,6 +3,7 @@ import axios from "axios";
 class APIService {
   constructor() {
     let service = axios.create({
+      baseURL: '/api/'
       //   headers: { someHeader: "someValue" }
     });
     service.interceptors.request.use(
