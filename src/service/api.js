@@ -1,9 +1,9 @@
 import axios from "axios";
 
-class APIService {
+class Service {
   constructor() {
     let service = axios.create({
-      baseURL: '/api/'
+      baseURL: "/api/"
       //   headers: { someHeader: "someValue" }
     });
     service.interceptors.request.use(
@@ -34,4 +34,4 @@ class APIService {
   }
 }
 
-export default new APIService().service;
+export const API = new Service();
