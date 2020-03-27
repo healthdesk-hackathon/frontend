@@ -9,7 +9,7 @@
       Trying to reach backend...
     </div>
     <div v-else>
-      Backend is reachable
+      Backend is reachable!
     </div>
     <router-view />
   </div>
