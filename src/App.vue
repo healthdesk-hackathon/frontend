@@ -5,7 +5,7 @@
       |
       <router-link to="/about">About</router-link>
     </div>
-    <div v-if="!healthCheck">
+    <div v-if="!healthcheckResult">
       Trying to reach backend...
     </div>
     <div v-else>
@@ -21,10 +21,10 @@ import { mapState } from "vuex";
 export default {
   name: "App",
   computed: {
-    ...mapState(["healthCheck"])
+    ...mapState("healthcheck", ["healthcheckResult"])
   },
   mounted() {
-    this.$store.dispatch("getHealthCheck");
+    this.$store.dispatch("healthcheck/getHealthcheckResult");
   }
 };
 </script>
