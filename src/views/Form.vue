@@ -14,7 +14,7 @@
 
     <b-step-item label="Additional information" icon="plus">
       <FormStepContentWrapper title="Additional information">
-        Your personal data
+        <FormStepRelatedConditions v-model="relatedConditions" />
       </FormStepContentWrapper>
     </b-step-item>
 
@@ -64,6 +64,7 @@
 import FormStepContentWrapper from "@/components/Form/FormStepContentWrapper.vue";
 import FormStepPersonalData from "@/components/Form/FormStepPersonalData.vue";
 import FormStepCommonSymptoms from "@/components/Form/FormStepCommonSymptoms.vue";
+import FormStepRelatedConditions from "@/components/Form/FormStepRelatedConditions.vue";
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -79,7 +80,8 @@ export default {
   components: {
     FormStepContentWrapper,
     FormStepPersonalData,
-    FormStepCommonSymptoms
+    FormStepCommonSymptoms,
+    FormStepRelatedConditions
   },
   data() {
     return {
@@ -88,7 +90,8 @@ export default {
       ...mapState("forms", ["submission"]),
       personalData: {},
       phone: {},
-      commonSymptoms: {}
+      commonSymptoms: {},
+      relatedConditions: {}
     };
   }
 };

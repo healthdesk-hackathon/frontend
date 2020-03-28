@@ -1,8 +1,8 @@
 <template>
   <section>
-    <section class="subsection">
+    <section>
       <h5 class="subtitle is-4 has-text-centered">How do you feel overall?</h5>
-      <br />
+
       <b-slider
         :min="1"
         :max="10"
@@ -90,7 +90,7 @@ export default {
 
 <style lang="scss" scoped>
 .subsection {
-  padding-top: 5rem;
+  padding-top: 3rem;
 }
 
 .column .switch {
