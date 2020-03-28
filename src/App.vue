@@ -16,13 +16,13 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin: auto;
-  width: 50%;
-  text-align: center;
-}
+// All custom theme variables are prepended automatically to every component (and thus usable in there without an import).
+// Check vue.config.js and styles/theme.scss. Order below matters.
+
+// Import custom styles
+@import "@/assets/styles/styles.scss";
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
 </style>
