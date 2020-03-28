@@ -2,25 +2,23 @@
   <div class="home">
     <h1>Hello World!</h1>
     <div>
-      <ul>
-        <li v-for="item in items" :key="item.id">
-          {{ item.greeting + ' ' + item.target }}
-        </li>
-      </ul>
+      <p v-for="item in items" :key="item.id">
+        {{ item.greeting + " " + item.target }}
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import { mapState } from "vuex";
 
 export default {
   name: "Home",
   computed: {
-    ...mapState('dummy', [ 'items', 'loading', 'error' ])
+    ...mapState("dummy", ["items", "loading", "error"])
   },
   mounted() {
-    this.$store.dispatch('dummy/fetchDummies')
+    this.$store.dispatch("dummy/fetchDummies");
   }
 };
 </script>
