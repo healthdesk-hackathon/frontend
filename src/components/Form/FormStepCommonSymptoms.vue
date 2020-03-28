@@ -7,7 +7,7 @@
         :min="1"
         :max="10"
         ticks
-        v-model="model.overall_wellbeing"
+        v-model="model.overall_wellbeing.overall_value"
         size="is-medium"
       ></b-slider>
     </section>

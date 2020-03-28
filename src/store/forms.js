@@ -1,21 +1,28 @@
 import { API } from "@/service/api";
+import dayjs from "dayjs";
 
 const SUBMISSION_ENDPOINT = "submission";
+const PERSONAL_DATA_ENDPOINT = "personal-data";
+const COMMON_SYMPTOMS_ENDPOINT = "common-symptoms";
+const RELATED_CONDITIONS_ENDPOINT = "related-conditions";
+const OVERALL_WELLBEING_ENDPOINT = "overall-wellbeing";
 
 const MUTATIONS = {
   SET_SUBMISSION: "SET_SUBMISSION",
   SET_COMMON_SYMPTOMS: "SET_COMMON_SYMPTOMS",
   SET_GRADED_SYMPTOMS: "SET_GRADED_SYMPTOMS",
   SET_OVERALL_WELLBEING: "SET_OVERALL_WELLBEING",
-  SET_RELATED_CONDITONS: "SET_RELATED_CONDITIONS",
+  SET_RELATED_CONDITIONS: "SET_RELATED_CONDITIONS",
   SET_PERSONAL_DATA: "SET_PERSONAL_DATA"
 };
 
 const state = {
   submission: {},
-  commonSymptoms: {},
+  commonSymptoms: {
+    overall_wellbeing: {}
+  },
+  overallWellbeing: {},
   gradedSymptoms: {},
-  overallWellbeing: 0,
   personalData: {}
 };
 
@@ -24,6 +31,26 @@ const getters = {};
 const mutations = {
   [MUTATIONS.SET_SUBMISSION](state, submission) {
     state.submission = { ...state.submission, ...submission };
+  },
+  [MUTATIONS.SET_PERSONAL_DATA](state, data) {
+    state.personalData = { ...state.personalData, ...data };
+  },
+  [MUTATIONS.SET_COMMON_SYMPTOMS](state, symptoms) {
+    state.commonSymptoms = {
+      ...state.commonSymptoms,
+      ...symptoms,
+      overall_wellbeing: state.overallWellbeing
+    };
+  },
+  [MUTATIONS.SET_GRADED_SYMPTOMS](state, symptoms) {
+    state.gradedSymptoms = { ...state.gradedSymptoms, ...symptoms };
+  },
+  [MUTATIONS.SET_OVERALL_WELLBEING](state, owObj) {
+    state.overallWellbeing = { ...state.overallWellbeing, ...owObj };
+    state.commonSymptoms.overall_wellbeing = owObj;
+  },
+  [MUTATIONS.SET_RELATED_CONDITIONS](state, conditions) {
+    state.relatedConditions = { ...state.relatedConditions, ...conditions };
   }
 };
 
@@ -40,12 +67,98 @@ const actions = {
     }
   },
 
-  async savePersonalData(info, personalData) {
-    console.log(personalData);
+  async savePersonalData({ commit, state }, personalData) {
+    try {
+      const value = {
+        submission: state.submission.id,
+        ...personalData,
+        date_of_birth: dayjs(personalData.date_of_birth).format("YYYY-MM-DD")
+      };
+      let response = null;
+      if (value.id) {
+        response = await API.service.put(
+          `${PERSONAL_DATA_ENDPOINT}/${value.id}/`,
+          value
+        );
+      } else {
+        response = await API.service.post(`${PERSONAL_DATA_ENDPOINT}/`, value);
+      }
+      commit(MUTATIONS.SET_PERSONAL_DATA, response.data);
+    } catch (e) {
+      console.error(e);
+    }
   },
 
-  async saveCommonSymptoms(info, symptoms) {
-    console.log(symptoms);
+  async saveCommonSymptoms({ commit }, symptoms) {
+    try {
+      const value = {
+        submission: state.submission.id,
+        ...symptoms
+      };
+      let response = null;
+      if (value.id) {
+        response = await API.service.put(
+          `${COMMON_SYMPTOMS_ENDPOINT}/${value.id}/`,
+          value
+        );
+      } else {
+        response = await API.service.post(
+          `${COMMON_SYMPTOMS_ENDPOINT}/`,
+          value
+        );
+      }
+      commit(MUTATIONS.SET_COMMON_SYMPTOMS, response.data);
+    } catch (e) {
+      console.error(e);
+    }
+  },
+
+  async saveRelatedConditions({ commit }, conditions) {
+    try {
+      const value = {
+        submission: state.submission.id,
+        ...conditions
+      };
+      let response = null;
+      if (value.id) {
+        response = await API.service.put(
+          `${RELATED_CONDITIONS_ENDPOINT}/${value.id}/`,
+          value
+        );
+      } else {
+        response = await API.service.post(
+          `${RELATED_CONDITIONS_ENDPOINT}/`,
+          value
+        );
+      }
+      commit(MUTATIONS.SET_RELATED_CONDITIONS, response.data);
+    } catch (e) {
+      console.error(e);
+    }
+  },
+
+  async saveOverallWellbeing({ commit }, owObj) {
+    const value = {
+      submission: state.submission.id,
+      ...owObj
+    };
+    try {
+      let response = null;
+      if (owObj.id) {
+        response = await API.service.put(
+          `${OVERALL_WELLBEING_ENDPOINT}/${value.id}/`,
+          value
+        );
+      } else {
+        response = await API.service.post(
+          `${OVERALL_WELLBEING_ENDPOINT}/`,
+          value
+        );
+      }
+      commit(MUTATIONS.SET_OVERALL_WELLBEING, response.data);
+    } catch (e) {
+      console.error(e);
+    }
   },
 
   /**
