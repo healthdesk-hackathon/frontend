@@ -70,6 +70,7 @@ const actions = {
   async savePersonalData({ commit, state }, personalData) {
     try {
       const value = {
+        ...state.personalData,
         submission: state.submission.id,
         ...personalData,
         date_of_birth: dayjs(personalData.date_of_birth).format("YYYY-MM-DD")
@@ -89,9 +90,10 @@ const actions = {
     }
   },
 
-  async saveCommonSymptoms({ commit }, symptoms) {
+  async saveCommonSymptoms({ commit, state }, symptoms) {
     try {
       const value = {
+        ...state.commonSymptoms,
         submission: state.submission.id,
         ...symptoms
       };
@@ -113,9 +115,10 @@ const actions = {
     }
   },
 
-  async saveRelatedConditions({ commit }, conditions) {
+  async saveRelatedConditions({ commit, state }, conditions) {
     try {
       const value = {
+        ...state.relatedConditions,
         submission: state.submission.id,
         ...conditions
       };
@@ -137,14 +140,15 @@ const actions = {
     }
   },
 
-  async saveOverallWellbeing({ commit }, owObj) {
+  async saveOverallWellbeing({ commit, state }, owObj) {
     const value = {
+      ...state.overallWellbeing,
       submission: state.submission.id,
       ...owObj
     };
     try {
       let response = null;
-      if (owObj.id) {
+      if (value.id) {
         response = await API.service.put(
           `${OVERALL_WELLBEING_ENDPOINT}/${value.id}/`,
           value
