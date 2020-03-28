@@ -8,22 +8,20 @@
       <b-input v-model="model.last_name"></b-input>
     </b-field>
 
-    <b-field grouped>
-      <b-field label="Gender">
-        <b-select v-model="model.gender">
-          <option
-            v-for="genderOption in genderOptions"
-            :value="genderOption.value"
-            :key="genderOption.key"
-          >
-            {{ genderOption.label }}
-          </option>
-        </b-select>
-      </b-field>
+    <b-field label="Gender">
+      <b-select v-model="model.gender" expanded>
+        <option
+          v-for="genderOption in genderOptions"
+          :value="genderOption.key"
+          :key="genderOption.key"
+        >
+          {{ genderOption.label }}
+        </option>
+      </b-select>
+    </b-field>
 
-      <b-field label="Date of birth" expanded>
-        <b-datepicker v-model="model.date_of_birth"></b-datepicker>
-      </b-field>
+    <b-field label="Date of birth" expanded>
+      <b-datepicker v-model="model.date_of_birth"></b-datepicker>
     </b-field>
 
     <b-field label="Street and number">

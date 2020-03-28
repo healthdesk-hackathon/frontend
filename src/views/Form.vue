@@ -79,7 +79,8 @@ export default {
       "getSubmissionByID",
       "saveSubmission",
       "savePersonalData",
-      "saveCommonSymptoms"
+      "saveCommonSymptoms",
+      "saveOverallWellbeing"
     ]),
     async save(cb) {
       switch (this.activeStep) {
@@ -88,7 +89,10 @@ export default {
           cb();
           break;
         case 1:
-          await this.saveCommonSymptoms(this.commonSymptoms);
+          await Promise.all([
+            this.saveCommonSymptoms(this.commonSymptoms),
+            this.saveOverallWellbeing(this.commonSymptoms.overall_wellbeing)
+          ]);
           cb();
           break;
         default:
@@ -111,7 +115,7 @@ export default {
       // data
       personalData: {},
       phone: {},
-      commonSymptoms: {},
+      commonSymptoms: { overall_wellbeing: {} },
       relatedConditions: {}
     };
   }
