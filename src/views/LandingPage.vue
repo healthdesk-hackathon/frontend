@@ -1,46 +1,34 @@
 <template>
-  <div class="landing-page container is-multiline columns">
-    <template v-if="formIdentificationActive">
-      <FormIdentification
-        @submit="createSubmission($event)"
-        @cancel="formIdentificationActive = false"
-      />
-    </template>
-    <template v-else>
-      <div class="has-text-centered logo column is-full">
-        Logo will be here
-      </div>
-      <div class="column is-full">
-        <h1 class="has-text-primary has-text-centered title is-2">
-          Healthdesk
-        </h1>
-      </div>
-      <div class="has-text-centered has-text-grey column is-full">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-        consectetur ante vitae ligula tincidunt condimentum. Suspendisse
-        potenti. Aliquam imperdiet tellus dui, vel ultricies enim tempus vitae.
-        Curabitur eget turpis lobortis magna elementum dignissim ac ac lacus.
-      </div>
-      <div class="columns is-multiline links column is-full">
-        <div class="column is-full has-text-centered">
-          How can we help you?
-        </div>
-        <div class="column is-full">
+  <section class="section">
+    <FormIdentification
+      v-if="formIdentificationActive"
+      @submit="createSubmission($event)"
+      @cancel="formIdentificationActive = false"
+    />
+    <div v-else>
+      <h1 class="has-text-centered title is-1 is-spaced">
+        Healthdesk
+      </h1>
+      <h1 class="has-text-centered subtitle is-4">
+        Do you think you have COVID-19 (Corona Virus) Symptoms?<br />
+        Let us help you by answering a few questions 👇
+      </h1>
+      <br />
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-half">
           <b-button
+            class="has-text-weight-bold cta-button"
             @click="formIdentificationActive = true"
             type="is-primary"
             rounded
             expanded
-          >
-            Find a medical center
+            size="is-medium"
+            >Start
           </b-button>
         </div>
-        <div class="column is-full">
-          <b-button type="is-light" rounded expanded>Authorize</b-button>
-        </div>
       </div>
-    </template>
-  </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -75,10 +63,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.logo {
-  border: 1px solid black;
-}
-
 .links {
   margin-top: 1rem;
 }
