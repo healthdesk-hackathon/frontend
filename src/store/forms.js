@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 const SUBMISSION_ENDPOINT = "submission";
 const PERSONAL_DATA_ENDPOINT = "personal-data";
 const COMMON_SYMPTOMS_ENDPOINT = "common-symptoms";
+const RELATED_CONDITIONS_ENDPOINT = "related-conditions";
 const OVERALL_WELLBEING_ENDPOINT = "overall-wellbeing";
 
 const MUTATIONS = {
@@ -107,6 +108,30 @@ const actions = {
         );
       }
       commit(MUTATIONS.SET_COMMON_SYMPTOMS, response.data);
+    } catch (e) {
+      console.error(e);
+    }
+  },
+
+  async saveRelatedConditions({ commit }, conditions) {
+    try {
+      const value = {
+        submission: state.submission.id,
+        ...conditions
+      };
+      let response = null;
+      if (value.id) {
+        response = await API.service.put(
+          `${RELATED_CONDITIONS_ENDPOINT}/${value.id}/`,
+          value
+        );
+      } else {
+        response = await API.service.post(
+          `${RELATED_CONDITIONS_ENDPOINT}/`,
+          value
+        );
+      }
+      commit(MUTATIONS.SET_RELATED_CONDITIONS, response.data);
     } catch (e) {
       console.error(e);
     }

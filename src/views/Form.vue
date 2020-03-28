@@ -42,7 +42,7 @@
             rounded
             class="has-text-weight-bold"
             type="is-primary is-large"
-            @click.prevent="saveSubmission"
+            @click.prevent="submissionOver"
           >
             Finish</b-button
           >
@@ -77,11 +77,16 @@ export default {
   methods: {
     ...mapActions("forms", [
       "getSubmissionByID",
-      "saveSubmission",
       "savePersonalData",
       "saveCommonSymptoms",
+      "saveRelatedConditions",
       "saveOverallWellbeing"
     ]),
+    submissionOver() {
+      alert(
+        "Congrats, you reached the end of actual implemented features in frontend. See you next when further progress are made ;)"
+      );
+    },
     async save(cb) {
       switch (this.activeStep) {
         case 0:
@@ -93,6 +98,10 @@ export default {
             this.saveCommonSymptoms(this.commonSymptoms),
             this.saveOverallWellbeing(this.commonSymptoms.overall_wellbeing)
           ]);
+          cb();
+          break;
+        case 2:
+          await this.saveRelatedConditions(this.relatedConditions);
           cb();
           break;
         default:
