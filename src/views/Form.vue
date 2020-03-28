@@ -20,7 +20,7 @@
 
     <b-step-item label="Finish" icon="check">
       <FormStepContentWrapper title="Finish">
-        Finish the whole thing
+        <FormStepFinish />
       </FormStepContentWrapper>
     </b-step-item>
     <template slot="navigation" slot-scope="{ previous, next }">
@@ -65,6 +65,7 @@ import FormStepContentWrapper from "@/components/Form/FormStepContentWrapper.vue
 import FormStepPersonalData from "@/components/Form/FormStepPersonalData.vue";
 import FormStepCommonSymptoms from "@/components/Form/FormStepCommonSymptoms.vue";
 import FormStepRelatedConditions from "@/components/Form/FormStepRelatedConditions.vue";
+import FormStepFinish from "@/components/Form/FormStepFinish.vue";
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -81,7 +82,8 @@ export default {
     FormStepContentWrapper,
     FormStepPersonalData,
     FormStepCommonSymptoms,
-    FormStepRelatedConditions
+    FormStepRelatedConditions,
+    FormStepFinish
   },
   data() {
     return {
