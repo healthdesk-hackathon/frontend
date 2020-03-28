@@ -1,5 +1,6 @@
 import { API } from "@/service/api";
 import dayjs from "dayjs";
+import { isEmpty, cloneDeep } from "lodash";
 
 const SUBMISSION_ENDPOINT = "submission";
 const PERSONAL_DATA_ENDPOINT = "personal-data";
@@ -23,10 +24,18 @@ const state = {
   },
   overallWellbeing: {},
   gradedSymptoms: {},
-  personalData: {}
+  personalData: {},
+  relatedConditions: {}
 };
 
-const getters = {};
+const getters = {
+  submissionReview: state => {
+    let personalData = cloneDeep(state.personalData);
+    delete personalData.id;
+    delete personalData.submission;
+    return isEmpty(personalData) ? null : personalData;
+  }
+};
 
 const mutations = {
   [MUTATIONS.SET_SUBMISSION](state, submission) {

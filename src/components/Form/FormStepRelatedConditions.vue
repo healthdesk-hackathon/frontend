@@ -1,11 +1,9 @@
 <template>
-  <section>
-    <section>
-      <h5 class="subtitle is-4 has-text-centered">
-        Do you have any preexisting condition?
-      </h5>
-      <br />
-
+  <div>
+    <h4 class="subtitle is-4 has-text-centered">
+      Do you have any preexisting condition?
+    </h4>
+    <section class="section">
       <div class="columns">
         <div class="column">
           <b-switch size="is-medium" v-model="model.heart_condition"
@@ -46,7 +44,7 @@
         </div>
       </div>
     </section>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -68,10 +66,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.subsection {
-  padding-top: 5rem;
-}
-
 .column .switch {
   margin-bottom: 1rem;
 }
