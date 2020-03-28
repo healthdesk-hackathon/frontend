@@ -2,27 +2,27 @@
   <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
     {{ activeStep }}
     <b-step-item label="Personal data" icon="account">
-      <FormStepContent title="Personal data">
-        Your personal data
-      </FormStepContent>
+      <FormStepContentWrapper title="Personal data">
+        <FormStepPersonalData v-model="personalData" />
+      </FormStepContentWrapper>
     </b-step-item>
 
     <b-step-item label="Symptoms" icon="alert-circle-outline">
-      <FormStepContent title="Symptoms">
+      <FormStepContentWrapper title="Symptoms">
         Your symptoms
-      </FormStepContent>
+      </FormStepContentWrapper>
     </b-step-item>
 
     <b-step-item label="Additional information" icon="plus">
-      <FormStepContent title="Additional information">
+      <FormStepContentWrapper title="Additional information">
         Your personal data
-      </FormStepContent>
+      </FormStepContentWrapper>
     </b-step-item>
 
     <b-step-item label="Finish" icon="check">
-      <FormStepContent title="Finish">
+      <FormStepContentWrapper title="Finish">
         Finish the whole thing
-      </FormStepContent>
+      </FormStepContentWrapper>
     </b-step-item>
     <template slot="navigation" slot-scope="{ previous, next }">
       <div class="has-text-centered">
@@ -60,7 +60,8 @@
 </template>
 
 <script>
-import FormStepContent from "@/components/FormStepContent.vue";
+import FormStepContentWrapper from "@/components/Form/FormStepContentWrapper.vue";
+import FormStepPersonalData from "@/components/Form/FormStepPersonalData.vue";
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -70,18 +71,21 @@ export default {
   mounted() {
     this.getSubmissionByID(this.id);
   },
-  computed: {
-    ...mapState("forms", ["submission"])
-  },
   methods: {
-    ...mapActions("forms", ["getSubmissionByID, saveSubmission"])
+    ...mapActions("forms", ["getSubmissionByID", "saveSubmission"])
   },
   components: {
-    FormStepContent
+    FormStepContentWrapper,
+    FormStepPersonalData
   },
   data() {
     return {
-      activeStep: 0
+      activeStep: 0,
+      // data
+      ...mapState("forms", ["submission"]),
+      personalData: {},
+      phone: {},
+      commonSymptoms: {}
     };
   }
 };

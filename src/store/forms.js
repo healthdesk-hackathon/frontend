@@ -24,7 +24,7 @@ const actions = {
    */
   async getSubmissionByID({ commit }, ID) {
     try {
-      const response = await API.service.get(`SUBMISSION_ENDPOINT/${ID}`);
+      const response = await API.service.get(`${SUBMISSION_ENDPOINT}/${ID}`);
       commit(MUTATIONS.SET_SUBMISSION, response.data);
     } catch (e) {
       console.log(e);
