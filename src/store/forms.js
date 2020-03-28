@@ -3,18 +3,27 @@ import { API } from "@/service/api";
 const SUBMISSION_ENDPOINT = "submission";
 
 const MUTATIONS = {
-  SET_SUBMISSION: "SET_SUBMISSION"
+  SET_SUBMISSION: "SET_SUBMISSION",
+  SET_COMMON_SYMPTOMS: "SET_COMMON_SYMPTOMS",
+  SET_GRADED_SYMPTOMS: "SET_GRADED_SYMPTOMS",
+  SET_OVERALL_WELLBEING: "SET_OVERALL_WELLBEING",
+  SET_RELATED_CONDITONS: "SET_RELATED_CONDITIONS",
+  SET_PERSONAL_DATA: "SET_PERSONAL_DATA"
 };
 
 const state = {
-  submission: null
+  submission: {},
+  commonSymptoms: {},
+  gradedSymptoms: {},
+  overallWellbeing: 0,
+  personalData: {}
 };
 
 const getters = {};
 
 const mutations = {
   [MUTATIONS.SET_SUBMISSION](state, submission) {
-    state.submission = submission;
+    state.submission = { ...state.submission, ...submission };
   }
 };
 
@@ -29,6 +38,14 @@ const actions = {
     } catch (e) {
       console.log(e);
     }
+  },
+
+  async savePersonalData(info, personalData) {
+    console.log(personalData);
+  },
+
+  async saveCommonSymptoms(info, symptoms) {
+    console.log(symptoms);
   },
 
   /**

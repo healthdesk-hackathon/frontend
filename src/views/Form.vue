@@ -32,7 +32,7 @@
             rounded
             class="has-text-weight-bold"
             type="is-primary is-large"
-            @click.prevent="next.action"
+            @click.prevent="save(next.action)"
           >
             Next step</b-button
           >
@@ -50,7 +50,7 @@
           <b-button
             type="is-text is-small"
             :disabled="previous.disabled"
-            @click.prevent="previous.action"
+            @click.prevent="save(previous.action)"
           >
             Previous step
           </b-button>
@@ -76,7 +76,26 @@ export default {
     this.getSubmissionByID(this.id);
   },
   methods: {
-    ...mapActions("forms", ["getSubmissionByID", "saveSubmission"])
+    ...mapActions("forms", [
+      "getSubmissionByID",
+      "saveSubmission",
+      "savePersonalData",
+      "saveCommonSymptoms"
+    ]),
+    async save(cb) {
+      switch (this.activeStep) {
+        case 0:
+          await this.savePersonalData(this.personalData);
+          cb();
+          break;
+        case 1:
+          await this.saveCommonSymptoms(this.commonSymptoms);
+          cb();
+          break;
+        default:
+          console.error("Unknown operation");
+      }
+    }
   },
   components: {
     FormStepContentWrapper,
@@ -85,11 +104,13 @@ export default {
     FormStepRelatedConditions,
     FormStepFinish
   },
+  computed: {
+    ...mapState("forms", ["submission"])
+  },
   data() {
     return {
       activeStep: 0,
       // data
-      ...mapState("forms", ["submission"]),
       personalData: {},
       phone: {},
       commonSymptoms: {},
