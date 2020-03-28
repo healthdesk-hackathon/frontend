@@ -35,13 +35,18 @@ const actions = {
    * Creates a new submission
    * Only done through the admin for nowm should be from backoffice later
    */
-  // async createSubmission({ dispatch }, submission) {
-  //   try {
-  //     await API.service.post(SUBMISSION_ENDPOINT + "/", submission);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // },
+  async createSubmission({ commit }) {
+    try {
+      const phoneNumber = prompt("What is your phone number?");
+      const response = await API.service.post(SUBMISSION_ENDPOINT + "/", {
+        identifier: phoneNumber,
+        id_type: "PHONE"
+      });
+      commit(MUTATIONS.SET_SUBMISSION, response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  },
 
   /**
    * Updates a submission and refreshes the list
