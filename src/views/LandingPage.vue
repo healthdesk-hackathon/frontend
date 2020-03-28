@@ -17,11 +17,9 @@
         How can we help you?
       </div>
       <div class="column is-full">
-        <router-link to="/form" v-slot="{ navigate }">
-          <b-button @click="navigate" type="is-primary" rounded expanded
-            >Find a medical center</b-button
-          >
-        </router-link>
+        <b-button @click="createSubmission" type="is-primary" rounded expanded>
+          Find a medical center
+        </b-button>
       </div>
       <div class="column is-full">
         <b-button type="is-light" rounded expanded>Authorize</b-button>
@@ -29,6 +27,28 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  name: "LandingPage",
+  computed: {
+    ...mapState("forms", ["submission"])
+  },
+  methods: {
+    createSubmission() {
+      this.$store.dispatch("forms/createSubmission");
+    }
+  },
+  watch: {
+    submission(value) {
+      if (!value) return;
+      this.$router.push({ name: "Form", params: { id: value.id } });
+    }
+  }
+};
+</script>
 
 <style scoped lang="scss">
 .logo {
