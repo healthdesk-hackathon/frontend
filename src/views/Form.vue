@@ -21,7 +21,7 @@
 
       <b-step-item label="Done" icon="check">
         <FormStepContentWrapper title="Final review">
-          <FormStepFinish />
+          <FormStepFinish :submissionReview="submissionReview" />
         </FormStepContentWrapper>
       </b-step-item>
       <template slot="navigation" slot-scope="{ previous, next }">
@@ -68,7 +68,7 @@ import FormStepPersonalData from "@/components/Form/FormStepPersonalData.vue";
 import FormStepCommonSymptoms from "@/components/Form/FormStepCommonSymptoms.vue";
 import FormStepRelatedConditions from "@/components/Form/FormStepRelatedConditions.vue";
 import FormStepFinish from "@/components/Form/FormStepFinish.vue";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   props: {
@@ -120,7 +120,8 @@ export default {
     FormStepFinish
   },
   computed: {
-    ...mapState("forms", ["submission"])
+    ...mapState("forms", ["submission"]),
+    ...mapGetters("forms", ["submissionReview"])
   },
   data() {
     return {

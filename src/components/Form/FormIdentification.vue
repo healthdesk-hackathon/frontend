@@ -78,8 +78,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.subsection {
-  padding-top: 3rem;
-}
-</style>
+<style lang="scss"></style>
