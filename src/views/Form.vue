@@ -9,7 +9,7 @@
 
     <b-step-item label="Symptoms" icon="alert-circle-outline">
       <FormStepContentWrapper title="Symptoms">
-        Your symptoms
+        <FormStepCommonSymptoms v-model="commonSymptoms" />
       </FormStepContentWrapper>
     </b-step-item>
 
@@ -64,6 +64,7 @@
 <script>
 import FormStepContentWrapper from "@/components/Form/FormStepContentWrapper.vue";
 import FormStepPersonalData from "@/components/Form/FormStepPersonalData.vue";
+import FormStepCommonSymptoms from "@/components/Form/FormStepCommonSymptoms.vue";
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -78,7 +79,8 @@ export default {
   },
   components: {
     FormStepContentWrapper,
-    FormStepPersonalData
+    FormStepPersonalData,
+    FormStepCommonSymptoms
   },
   data() {
     return {
