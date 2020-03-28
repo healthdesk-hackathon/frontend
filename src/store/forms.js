@@ -50,14 +50,12 @@ const actions = {
 
   /**
    * Creates a new submission
-   * Only done through the admin for nowm should be from backoffice later
    */
-  async createSubmission({ commit }) {
+  async createSubmission({ commit }, { identifier, identifierType }) {
     try {
-      const phoneNumber = prompt("What is your phone number?");
       const response = await API.service.post(SUBMISSION_ENDPOINT + "/", {
-        identifier: phoneNumber,
-        id_type: "PHONE"
+        identifier: identifier,
+        id_type: identifierType
       });
       commit(MUTATIONS.SET_SUBMISSION, response.data);
     } catch (e) {

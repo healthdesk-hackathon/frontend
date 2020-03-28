@@ -13,7 +13,7 @@
         <b-select v-model="model.gender">
           <option
             v-for="genderOption in genderOptions"
-            :value="genderOption.value"
+            :value="genderOption.key"
             :key="genderOption.key"
           >
             {{ genderOption.label }}
