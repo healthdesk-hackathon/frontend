@@ -21,29 +21,28 @@ const mutations = {
     state.items = dummies;
   },
   [MUTATIONS.SET_DUMMIES_LOADING](state, isLoading) {
-    state.loading = isLoading
+    state.loading = isLoading;
   },
   [MUTATIONS.SET_DUMMIES_ERR](state, error) {
-    state.error = error
+    state.error = error;
   }
 };
 
 const actions = {
-
   /**
    * Getting all dummies
    */
   async fetchDummies({ commit }) {
-    commit(MUTATIONS.SET_DUMMIES_LOADING, true)
+    commit(MUTATIONS.SET_DUMMIES_LOADING, true);
 
     try {
-      const response = await API.service.get(DUMMY_ENDPOINT);
+      const response = await API.service.get(DUMMY_ENDPOINT + "/");
       commit(MUTATIONS.SET_DUMMIES, response.data);
-      commit(MUTATIONS.SET_DUMMIES_ERR, null)
+      commit(MUTATIONS.SET_DUMMIES_ERR, null);
     } catch (e) {
-      commit(MUTATIONS.SET_DUMMIES_ERR, e.response.data)
+      commit(MUTATIONS.SET_DUMMIES_ERR, e.response.data);
     } finally {
-      commit(MUTATIONS.SET_DUMMIES_LOADING, false)
+      commit(MUTATIONS.SET_DUMMIES_LOADING, false);
     }
   },
 
@@ -51,15 +50,15 @@ const actions = {
    * Creates a new dummy and refreshes the list
    */
   async createDummy({ dispatch, commit }, dummy) {
-    commit(MUTATIONS.SET_DUMMIES_LOADING, true)
+    commit(MUTATIONS.SET_DUMMIES_LOADING, true);
 
     try {
-      await API.service.post(DUMMY_ENDPOINT, dummy);
-      await dispatch('fetchDummies') // Refetching the whole list
+      await API.service.post(DUMMY_ENDPOINT + "/", dummy);
+      await dispatch("fetchDummies"); // Refetching the whole list
     } catch (e) {
-      commit(MUTATIONS.SET_DUMMIES_ERR, e.response.data)
+      commit(MUTATIONS.SET_DUMMIES_ERR, e.response.data);
     } finally {
-      commit(MUTATIONS.SET_DUMMIES_LOADING, false)
+      commit(MUTATIONS.SET_DUMMIES_LOADING, false);
     }
   },
 
@@ -67,15 +66,15 @@ const actions = {
    * Updates a dummy and refreshes the list
    */
   async updateDummy({ dispatch, commit }, dummy) {
-    commit(MUTATIONS.SET_DUMMIES_LOADING, true)
+    commit(MUTATIONS.SET_DUMMIES_LOADING, true);
 
     try {
       await API.service.put(`${DUMMY_ENDPOINT}/${dummy.id}`, dummy);
-      await dispatch('fetchDummies') // Refetching the whole list
+      await dispatch("fetchDummies"); // Refetching the whole list
     } catch (e) {
-      commit(MUTATIONS.SET_DUMMIES_ERR, e.response.data)
+      commit(MUTATIONS.SET_DUMMIES_ERR, e.response.data);
     } finally {
-      commit(MUTATIONS.SET_DUMMIES_LOADING, false)
+      commit(MUTATIONS.SET_DUMMIES_LOADING, false);
     }
   },
 
@@ -83,10 +82,10 @@ const actions = {
    * Updates or creates a dummy depending on its id
    */
   async saveDummy({ dispatch }, dummy) {
-    if(dummy.id) {
-      dispatch('createDummy', dummy)
+    if (dummy.id === undefined || dummy.id === null) {
+      dispatch("createDummy", dummy);
     } else {
-      dispatch('updateDummy', dummy)
+      dispatch("updateDummy", dummy);
     }
   },
 
@@ -94,17 +93,17 @@ const actions = {
    * Deletes dummy and refreshes the list
    */
   async deleteDummy({ dispatch, commit }, dummy) {
-    commit(MUTATIONS.SET_DUMMIES_LOADING, true)
+    commit(MUTATIONS.SET_DUMMIES_LOADING, true);
 
     try {
       await API.service.delete(`${DUMMY_ENDPOINT}/${dummy.id}`);
-      await dispatch('fetchDummies') // Refetching the whole list
+      await dispatch("fetchDummies"); // Refetching the whole list
     } catch (e) {
-      commit(MUTATIONS.SET_DUMMIES_ERR, e.response.data)
+      commit(MUTATIONS.SET_DUMMIES_ERR, e.response.data);
     } finally {
-      commit(MUTATIONS.SET_DUMMIES_LOADING, false)
+      commit(MUTATIONS.SET_DUMMIES_LOADING, false);
     }
-  },
+  }
 };
 
 export default {
