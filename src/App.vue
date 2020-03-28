@@ -25,4 +25,8 @@ export default {
 // Import Bulma and Buefy styles
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
+
+body {
+  height: 100vh;
+}
 </style>
