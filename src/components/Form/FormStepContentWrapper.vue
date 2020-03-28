@@ -1,8 +1,10 @@
 <template>
   <div class="form-step">
     <h1 class="title has-text-centered">{{ title }}</h1>
-    <div class="has-text-centered">
-      <slot></slot>
+    <div class="columns">
+      <div class="column is-half is-offset-one-quarter">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>

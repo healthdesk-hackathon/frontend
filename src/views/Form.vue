@@ -25,35 +25,37 @@
       </FormStepContentWrapper>
     </b-step-item>
     <template slot="navigation" slot-scope="{ previous, next }">
-      <div class="has-text-centered">
-        <b-button
-          v-if="!next.disabled"
-          expanded
-          rounded
-          class="has-text-weight-bold"
-          type="is-primary is-large"
-          @click.prevent="next.action"
-        >
-          Next step</b-button
-        >
-        <b-button
-          v-else
-          expanded
-          rounded
-          class="has-text-weight-bold"
-          type="is-primary is-large"
-          @click.prevent="saveSubmission"
-        >
-          Finish</b-button
-        >
-        <br />
-        <b-button
-          type="is-text is-small"
-          :disabled="previous.disabled"
-          @click.prevent="previous.action"
-        >
-          Previous step
-        </b-button>
+      <div class=" columns">
+        <div class="column is-half is-offset-one-quarter has-text-centered">
+          <b-button
+            v-if="!next.disabled"
+            expanded
+            rounded
+            class="has-text-weight-bold"
+            type="is-primary is-large"
+            @click.prevent="next.action"
+          >
+            Next step</b-button
+          >
+          <b-button
+            v-else
+            expanded
+            rounded
+            class="has-text-weight-bold"
+            type="is-primary is-large"
+            @click.prevent="saveSubmission"
+          >
+            Finish</b-button
+          >
+          <br />
+          <b-button
+            type="is-text is-small"
+            :disabled="previous.disabled"
+            @click.prevent="previous.action"
+          >
+            Previous step
+          </b-button>
+        </div>
       </div>
     </template>
   </b-steps>
