@@ -1,6 +1,5 @@
 <template>
   <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
-    {{ activeStep }}
     <b-step-item label="Personal data" icon="account">
       <FormStepContentWrapper title="Personal data">
         <FormStepPersonalData v-model="personalData" />
@@ -15,7 +14,7 @@
 
     <b-step-item label="Additional information" icon="plus">
       <FormStepContentWrapper title="Additional information">
-        Your personal data
+        <FormStepRelatedConditions v-model="relatedConditions" />
       </FormStepContentWrapper>
     </b-step-item>
 
@@ -65,6 +64,7 @@
 import FormStepContentWrapper from "@/components/Form/FormStepContentWrapper.vue";
 import FormStepPersonalData from "@/components/Form/FormStepPersonalData.vue";
 import FormStepCommonSymptoms from "@/components/Form/FormStepCommonSymptoms.vue";
+import FormStepRelatedConditions from "@/components/Form/FormStepRelatedConditions.vue";
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -99,7 +99,8 @@ export default {
   components: {
     FormStepContentWrapper,
     FormStepPersonalData,
-    FormStepCommonSymptoms
+    FormStepCommonSymptoms,
+    FormStepRelatedConditions
   },
   computed: {
     ...mapState("forms", ["submission"])
@@ -110,7 +111,8 @@ export default {
       // data
       personalData: {},
       phone: {},
-      commonSymptoms: {}
+      commonSymptoms: {},
+      relatedConditions: {}
     };
   }
 };
