@@ -7,11 +7,8 @@
       />
     </template>
     <template v-else>
-      <div class="has-text-centered logo column is-full">
-        Logo will be here
-      </div>
       <div class="column is-full">
-        <h1 class="has-text-primary has-text-centered title is-2">
+        <h1 class="has-text-primary has-text-centered title is-1">
           Healthdesk
         </h1>
       </div>
@@ -72,10 +69,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.logo {
-  border: 1px solid black;
-}
-
 .links {
   margin-top: 1rem;
 }
