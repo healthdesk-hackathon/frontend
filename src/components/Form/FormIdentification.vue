@@ -8,13 +8,7 @@
           Choose what's easiest for you but please make sure it's correct 🙏
         </h1>
         <section class="section">
-          <b-field position="is-centered">
-            <!-- <template slot="label">
-              Identification type
-              <b-tooltip type="is-dark" label="Help text here for explanation">
-                <b-icon size="is-small" icon="help-circle-outline"></b-icon>
-              </b-tooltip>
-            </template> -->
+          <b-field>
             <b-select
               placeholder="Choose ID, email, insurance number..."
               v-model="identification.identifierType"
@@ -37,19 +31,21 @@
           </b-field>
         </section>
         <br />
-        <b-button
-          expanded
-          rounded
-          class="has-text-weight-bold"
-          type="is-primary is-medium"
-          @click="$emit('submit', identification)"
-        >
-          Start</b-button
-        >
-        <br />
-        <b-button type="is-text is-small" @click="$emit('cancel')">
-          Cancel
-        </b-button>
+        <div class="section has-text-centered">
+          <b-button
+            expanded
+            rounded
+            class="has-text-weight-bold"
+            type="is-primary is-medium"
+            @click="$emit('submit', identification)"
+          >
+            Identify</b-button
+          >
+          <br />
+          <b-button type="is-text is-small" @click="$emit('cancel')">
+            Cancel
+          </b-button>
+        </div>
       </div>
     </div>
   </div>
