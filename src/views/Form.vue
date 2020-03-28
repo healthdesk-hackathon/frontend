@@ -1,5 +1,6 @@
 <template>
   <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
+    {{ activeStep }}
     <b-step-item label="Personal data" icon="account">
       <FormStepContent title="Personal data">
         Your personal data
@@ -26,15 +27,26 @@
     <template slot="navigation" slot-scope="{ previous, next }">
       <div class="has-text-centered">
         <b-button
+          v-if="!next.disabled"
           expanded
           rounded
           class="has-text-weight-bold"
           type="is-primary is-large"
-          :disabled="next.disabled"
           @click.prevent="next.action"
         >
           Next step</b-button
-        ><br />
+        >
+        <b-button
+          v-else
+          expanded
+          rounded
+          class="has-text-weight-bold"
+          type="is-primary is-large"
+          @click.prevent="saveSubmission"
+        >
+          Finish</b-button
+        >
+        <br />
         <b-button
           type="is-text is-small"
           :disabled="previous.disabled"
@@ -49,8 +61,21 @@
 
 <script>
 import FormStepContent from "@/components/FormStepContent.vue";
+import { mapState, mapActions } from "vuex";
 
 export default {
+  props: {
+    id: { type: String, required: true }
+  },
+  mounted() {
+    this.getSubmissionByID(this.id);
+  },
+  computed: {
+    ...mapState("forms", ["submission"])
+  },
+  methods: {
+    ...mapActions("forms", ["getSubmissionByID, saveSubmission"])
+  },
   components: {
     FormStepContent
   },
