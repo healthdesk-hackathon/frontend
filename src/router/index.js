@@ -1,14 +1,20 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+// import Example from "../views/Example.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  // {
+  //   path: "/example",
+  //   name: "Example",
+  //   component: Example
+  // },
   {
-    path: "/",
-    name: "Home",
-    component: Home
+    path: "/form/:id(.*)",
+    name: "Form",
+    props: true,
+    component: () => import(/* webpackChunkName: "about" */ "../views/Form.vue")
   },
   {
     path: "/about",
@@ -18,6 +24,13 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue")
+  },
+  {
+    path: "/",
+
+    name: "LandingPage",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/LandingPage.vue")
   }
 ];
 

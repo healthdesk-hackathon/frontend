@@ -836,6 +836,11 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
+"@mdi/font@^5.0.45":
+  version "5.0.45"
+  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-5.0.45.tgz#8eda40c41dc7ee9e7a51dbe9191c5c38b8482422"
+  integrity sha512-3sOO/UMyQqrmizW5zjvhKJP4FZFO7LblRw4G0alDxK1ekUwNxNXI7hYv8ACAv8H44riBuqlVJ7u39XDqv/Xwuw==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/@mrmlnc/readdir-enhanced/download/@mrmlnc/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -1856,6 +1861,13 @@ browserslist@^4.0.0, browserslist@^4.11.0, browserslist@^4.8.3, browserslist@^4.
     node-releases "^1.1.52"
     pkg-up "^3.1.0"
 
+buefy@^0.8.13:
+  version "0.8.13"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.8.13.tgz#90ce1645807c15d81f584dc78a2090a0feb7a70b"
+  integrity sha512-SpJq1Bl569mT6YujrEpyqn1al6U2PcBBQkVdgdKFrW+zjh1BAcs3+sNx7+r0tPSBsLYsSU2ZZsfkFzWOnOTX8A==
+  dependencies:
+    bulma "0.7.5"
+
 buffer-from@^1.0.0:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/buffer-from/download/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
@@ -1889,6 +1901,11 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/builtin-status-codes/download/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
+
+bulma@0.7.5:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.5.tgz#35066c37f82c088b68f94450be758fc00a967208"
+  integrity sha512-cX98TIn0I6sKba/DhW0FBjtaDpxTelU166pf7ICXpCCuplHWyu6C9LYZmL5PEsnePIeJaiorsTEzzNk3Tsm1hw==
 
 bytes@3.0.0:
   version "3.0.0"
@@ -2765,6 +2782,11 @@ dashdash@^1.12.0:
   integrity sha1-hTz6D3y+L+1d4gMmuN1YEDX24vA=
   dependencies:
     assert-plus "^1.0.0"
+
+dayjs@^1.8.23:
+  version "1.8.23"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.23.tgz#07b5a8e759c4d75ae07bdd0ad6977f851c01e510"
+  integrity sha512-NmYHMFONftoZbeOhVz6jfiXI4zSiPN6NoVWJgC0aZQfYVwzy/ZpESPHuCcI0B8BUMpSJQ08zenHDbofOLKq8hQ==
 
 de-indent@^1.0.2:
   version "1.0.2"

@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      |
-      <router-link to="/about">About</router-link>
+    <!-- <router-link to="/example">Example</router-link> -->
+    <div class="section">
+      <div class="container">
+        <router-view />
+      </div>
     </div>
-    <router-view />
   </div>
 </template>
 
@@ -16,13 +16,17 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin: auto;
-  width: 50%;
-  text-align: center;
+// All custom theme variables are prepended automatically to every component (and thus usable in there without an import).
+// Check vue.config.js and styles/theme.scss. Order below matters.
+
+// Import custom styles
+@import "@/assets/styles/styles.scss";
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+body {
+  height: 100vh;
 }
 </style>
