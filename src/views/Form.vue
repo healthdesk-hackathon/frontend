@@ -31,7 +31,7 @@
             expanded
             rounded
             class="has-text-weight-bold"
-            type="is-primary is-large"
+            type="is-primary is-medium"
             @click.prevent="save(next.action)"
           >
             Next step</b-button
@@ -41,7 +41,7 @@
             expanded
             rounded
             class="has-text-weight-bold"
-            type="is-primary is-large"
+            type="is-primary is-medium"
             @click.prevent="submissionOver"
           >
             Finish</b-button

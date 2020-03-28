@@ -1,18 +1,25 @@
 <template>
-  <div class="container">
-    <h1 class="title is-1 has-text-centered">Identification</h1>
+  <div>
+    <h1 class="title is-1 is-spaced has-text-centered">Identification</h1>
     <div class="columns">
       <div class="column is-half is-offset-one-quarter">
         <h1 class="subtitle is-4 has-text-centered">
-          We need something to identify you
+          We need a way to identify you.<br />
+          Choose what's easiest for you but please make sure it's correct 🙏
         </h1>
-        <p>
-          Please choose from one of the identification types below and provide
-          us the correct input for it. We will use this to get back to you.
-        </p>
-        <section class="subsection">
-          <b-field label="Identifier type">
-            <b-select v-model="identification.identifierType">
+        <section class="section">
+          <b-field position="is-centered">
+            <!-- <template slot="label">
+              Identification type
+              <b-tooltip type="is-dark" label="Help text here for explanation">
+                <b-icon size="is-small" icon="help-circle-outline"></b-icon>
+              </b-tooltip>
+            </template> -->
+            <b-select
+              placeholder="Choose ID, email, insurance number..."
+              v-model="identification.identifierType"
+              expanded
+            >
               <option
                 v-for="identifierTypeOption in identifierTypeOptions"
                 :value="identifierTypeOption.key"
@@ -22,26 +29,27 @@
               </option>
             </b-select>
           </b-field>
-          <b-field>
-            <b-input v-model="identification.identifier"></b-input>
+          <b-field v-if="identification.identifierType">
+            <b-input
+              :placeholder="inputPlaceholder"
+              v-model="identification.identifier"
+            ></b-input>
           </b-field>
         </section>
         <br />
-        <section class="subsection">
-          <b-button
-            expanded
-            rounded
-            class="has-text-weight-bold"
-            type="is-primary is-large"
-            @click="$emit('submit', identification)"
-          >
-            Start</b-button
-          >
-          <br />
-          <b-button type="is-text is-small" @click="$emit('cancel')">
-            Cancel
-          </b-button>
-        </section>
+        <b-button
+          expanded
+          rounded
+          class="has-text-weight-bold"
+          type="is-primary is-medium"
+          @click="$emit('submit', identification)"
+        >
+          Start</b-button
+        >
+        <br />
+        <b-button type="is-text is-small" @click="$emit('cancel')">
+          Cancel
+        </b-button>
       </div>
     </div>
   </div>
@@ -50,6 +58,15 @@
 <script>
 export default {
   name: "FormIdentification",
+  computed: {
+    inputPlaceholder() {
+      const selectedIdType = this.identification.identifierType;
+      const match = this.identifierTypeOptions.find(
+        ito => ito.key === selectedIdType
+      );
+      return match ? `Type in your ${match.label}` : "Nothing selected";
+    }
+  },
   data() {
     return {
       identification: {},
