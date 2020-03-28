@@ -1,14 +1,19 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+// import Example from "../views/Example.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  // {
+  //   path: "/example",
+  //   name: "Example",
+  //   component: Example
+  // },
   {
-    path: "/",
-    name: "Home",
-    component: Home
+    path: "/form",
+    name: "Form",
+    component: () => import(/* webpackChunkName: "about" */ "../views/Form.vue")
   },
   {
     path: "/about",
