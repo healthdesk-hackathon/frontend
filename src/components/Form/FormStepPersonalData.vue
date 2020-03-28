@@ -26,7 +26,7 @@
       </b-field>
     </b-field>
 
-    <b-field label="Street and number">
+    <!-- <b-field label="Street and number">
       <b-input v-model="model.street_and_number"></b-input>
     </b-field>
 
@@ -42,7 +42,7 @@
 
     <b-field label="Country">
       <b-input v-model="model.country" type="Country"></b-input>
-    </b-field>
+    </b-field> -->
   </section>
 </template>
 
