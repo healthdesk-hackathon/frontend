@@ -25,8 +25,8 @@
         </FormStepContentWrapper>
       </b-step-item>
       <template slot="navigation" slot-scope="{ previous, next }">
-        <div class=" columns">
-          <div class="column is-half is-offset-one-quarter has-text-centered">
+        <div class=" columns is-centered">
+          <div class="column is-half has-text-centered">
             <b-button
               v-if="!next.disabled"
               expanded

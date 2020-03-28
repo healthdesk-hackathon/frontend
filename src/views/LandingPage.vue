@@ -14,8 +14,8 @@
         Let us help you by answering a few questions 👇
       </h1>
       <br />
-      <div class="columns has-text-centered">
-        <div class="column is-half is-offset-one-quarter">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-half">
           <b-button
             class="has-text-weight-bold cta-button"
             @click="formIdentificationActive = true"

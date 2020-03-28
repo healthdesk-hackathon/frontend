@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1 class="title is-1 is-spaced has-text-centered">Identification</h1>
-    <div class="columns">
-      <div class="column is-half is-offset-one-quarter">
+    <div class="columns is-centered">
+      <div class="column is-half">
         <h1 class="subtitle is-4 has-text-centered">
           We need a way to identify you.<br />
           Choose what's easiest for you but please make sure it's correct 🙏
