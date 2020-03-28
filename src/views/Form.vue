@@ -1,63 +1,65 @@
 <template>
-  <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
-    <b-step-item label="Personal data" icon="account">
-      <FormStepContentWrapper title="Personal data">
-        <FormStepPersonalData v-model="personalData" />
-      </FormStepContentWrapper>
-    </b-step-item>
+  <section class="section">
+    <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
+      <b-step-item label="Personal data" icon="account">
+        <FormStepContentWrapper title="Personal data">
+          <FormStepPersonalData v-model="personalData" />
+        </FormStepContentWrapper>
+      </b-step-item>
 
-    <b-step-item label="Symptoms" icon="alert-circle-outline">
-      <FormStepContentWrapper title="Symptoms">
-        <FormStepCommonSymptoms v-model="commonSymptoms" />
-      </FormStepContentWrapper>
-    </b-step-item>
+      <b-step-item label="Symptoms" icon="alert-circle-outline">
+        <FormStepContentWrapper title="Symptoms">
+          <FormStepCommonSymptoms v-model="commonSymptoms" />
+        </FormStepContentWrapper>
+      </b-step-item>
 
-    <b-step-item label="Additional information" icon="plus">
-      <FormStepContentWrapper title="Additional information">
-        <FormStepRelatedConditions v-model="relatedConditions" />
-      </FormStepContentWrapper>
-    </b-step-item>
+      <b-step-item label="Additional information" icon="plus">
+        <FormStepContentWrapper title="Additional information">
+          <FormStepRelatedConditions v-model="relatedConditions" />
+        </FormStepContentWrapper>
+      </b-step-item>
 
-    <b-step-item label="Finish" icon="check">
-      <FormStepContentWrapper title="Finish">
-        <FormStepFinish />
-      </FormStepContentWrapper>
-    </b-step-item>
-    <template slot="navigation" slot-scope="{ previous, next }">
-      <div class=" columns">
-        <div class="column is-half is-offset-one-quarter has-text-centered">
-          <b-button
-            v-if="!next.disabled"
-            expanded
-            rounded
-            class="has-text-weight-bold"
-            type="is-primary is-medium"
-            @click.prevent="save(next.action)"
-          >
-            Next step</b-button
-          >
-          <b-button
-            v-else
-            expanded
-            rounded
-            class="has-text-weight-bold"
-            type="is-primary is-medium"
-            @click.prevent="submissionOver"
-          >
-            Finish</b-button
-          >
-          <br />
-          <b-button
-            type="is-text is-small"
-            :disabled="previous.disabled"
-            @click.prevent="save(previous.action)"
-          >
-            Previous step
-          </b-button>
+      <b-step-item label="Done" icon="check">
+        <FormStepContentWrapper title="Final review">
+          <FormStepFinish />
+        </FormStepContentWrapper>
+      </b-step-item>
+      <template slot="navigation" slot-scope="{ previous, next }">
+        <div class=" columns">
+          <div class="column is-half is-offset-one-quarter has-text-centered">
+            <b-button
+              v-if="!next.disabled"
+              expanded
+              rounded
+              class="has-text-weight-bold"
+              type="is-primary is-medium"
+              @click.prevent="save(next.action)"
+            >
+              Next step</b-button
+            >
+            <b-button
+              v-else
+              expanded
+              rounded
+              class="has-text-weight-bold"
+              type="is-primary is-medium"
+              @click.prevent="submissionOver"
+            >
+              Finish</b-button
+            >
+            <br />
+            <b-button
+              type="is-text is-small"
+              :disabled="previous.disabled"
+              @click.prevent="save(previous.action)"
+            >
+              Previous step
+            </b-button>
+          </div>
         </div>
-      </div>
-    </template>
-  </b-steps>
+      </template>
+    </b-steps>
+  </section>
 </template>
 
 <script>

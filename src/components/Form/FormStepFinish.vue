@@ -1,12 +1,14 @@
 <template>
   <div>
-    <h1 class="subtitle is-4 has-text-centered">
+    <h4 class="subtitle is-4 has-text-centered">
       Please review your data and confirm
-    </h1>
-    <p>
-      TODO: add some sort of recap of the gathered information from the store
-      here.
-    </p>
+    </h4>
+    <section class="section">
+      <p>
+        TODO: add some sort of recap of the gathered information from the store
+        here.
+      </p>
+    </section>
   </div>
 </template>
 

@@ -1,8 +1,11 @@
 <template>
-  <section>
-    <section>
-      <h5 class="subtitle is-4 has-text-centered">How do you feel overall?</h5>
+  <div>
+    <h4 class="subtitle is-4 has-text-centered">
+      Describe your general condition
+    </h4>
 
+    <section class="section">
+      <h5 class="subtitle is-5 has-text-centered">How do you feel overall?</h5>
       <b-slider
         :min="1"
         :max="10"
@@ -11,8 +14,8 @@
         size="is-medium"
       ></b-slider>
     </section>
-    <section class="subsection">
-      <h5 class="subtitle is-4 has-text-centered">
+    <section class="section">
+      <h5 class="subtitle is-5 has-text-centered">
         Which symptoms do you have?
       </h5>
       <br />
@@ -67,7 +70,7 @@
         </div>
       </div>
     </section>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -89,10 +92,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.subsection {
-  padding-top: 3rem;
-}
-
 .column .switch {
   margin-bottom: 1rem;
 }
