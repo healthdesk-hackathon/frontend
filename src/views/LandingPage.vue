@@ -35,9 +35,6 @@
             Find a medical center
           </b-button>
         </div>
-        <div class="column is-full">
-          <b-button type="is-light" rounded expanded>Authorize</b-button>
-        </div>
       </div>
     </template>
   </div>
