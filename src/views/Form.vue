@@ -1,6 +1,5 @@
 <template>
   <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
-    {{ activeStep }}
     <b-step-item label="Personal data" icon="account">
       <FormStepContentWrapper title="Personal data">
         <FormStepPersonalData v-model="personalData" />

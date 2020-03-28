@@ -1,6 +1,6 @@
 <template>
   <div class="form-step">
-    <h1 class="title has-text-centered">{{ title }}</h1>
+    <h1 class="title is-1 has-text-centered">{{ title }}</h1>
     <div class="columns">
       <div class="column is-half is-offset-one-quarter">
         <slot></slot>
