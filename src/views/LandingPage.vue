@@ -1,5 +1,5 @@
 <template>
-  <div class="landing-page container is-multiline columns">
+  <div class="container">
     <template v-if="formIdentificationActive">
       <FormIdentification
         @submit="createSubmission($event)"
@@ -7,32 +7,29 @@
       />
     </template>
     <template v-else>
-      <div class="column is-full">
-        <h1 class="has-text-primary has-text-centered title is-1">
+      <section class="section">
+        <h1 class="has-text-centered title is-1 is-spaced">
           Healthdesk
         </h1>
-      </div>
-      <div class="has-text-centered has-text-grey column is-full">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-        consectetur ante vitae ligula tincidunt condimentum. Suspendisse
-        potenti. Aliquam imperdiet tellus dui, vel ultricies enim tempus vitae.
-        Curabitur eget turpis lobortis magna elementum dignissim ac ac lacus.
-      </div>
-      <div class="columns is-multiline links column is-full">
-        <div class="column is-full has-text-centered">
-          How can we help you?
+        <h1 class="has-text-centered subtitle is-4">
+          Do you think you have COVID-19 (Corona Virus) Symptoms?<br />
+          Let us help you by answering a few questions 👇
+        </h1>
+        <br />
+        <div class="columns has-text-centered">
+          <div class="column is-half is-offset-one-quarter">
+            <b-button
+              class="has-text-weight-bold cta-button"
+              @click="formIdentificationActive = true"
+              type="is-primary"
+              rounded
+              expanded
+              size="is-medium"
+              >Start
+            </b-button>
+          </div>
         </div>
-        <div class="column is-full">
-          <b-button
-            @click="formIdentificationActive = true"
-            type="is-primary"
-            rounded
-            expanded
-          >
-            Find a medical center
-          </b-button>
-        </div>
-      </div>
+      </section>
     </template>
   </div>
 </template>
