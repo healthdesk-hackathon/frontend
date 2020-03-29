@@ -140,7 +140,7 @@ export default {
         this.commonSymptoms = { overall_wellbeing: {} };
         this.relatedConditions = {};
         this.identification = {};
-        this.healthcheck = {};
+        this.healthcheck = { severity: "WHITE" };
         this.admission = {};
         this.activeStep = 0;
       } catch (e) {
