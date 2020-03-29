@@ -241,10 +241,9 @@ const actions = {
    */
   async createAdmission({ commit, state }) {
     try {
-      const response = await API.service.post(
-        ADMISSION_ENDPOINT + "/",
-        state.submission.patient
-      );
+      const response = await API.service.post(ADMISSION_ENDPOINT + "/", {
+        patient: state.submission.patient
+      });
       commit(MUTATIONS.SET_ADMISSION, response.data);
     } catch (e) {
       console.log(e);
