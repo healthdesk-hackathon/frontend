@@ -2,47 +2,67 @@
   <div>
     <h4 class="subtitle is-4 has-text-centered">Proceed to healthcheck</h4>
     <section class="section">
-      <b-v-input
-        type="number"
-        label="Heart rate"
-        v-model="model.heart_rate"
-        rules="required"
-      ></b-v-input>
+      <b-field label="Heart rate">
+        <b-input type="number" v-model="model.heart_rate"></b-input>
+      </b-field>
 
-      <b-v-input
-        type="number"
-        label="Breathing rate"
-        v-model="model.breathing_rate"
-        rules="required"
-      ></b-v-input>
+      <b-field label="Breathing rate">
+        <b-input type="number" v-model="model.breathing_rate"></b-input>
+      </b-field>
 
-      <b-v-input
-        type="number"
-        label="Blood pressure"
-        v-model="model.blood_pressure"
-        rules="required"
-      ></b-v-input>
+      <b-field label="Temperature">
+        <b-input type="number" v-model="model.temperature"></b-input>
+      </b-field>
 
-      <b-v-input
-        type="number"
-        label="Oxygen situation"
-        v-model="model.oxygen_situtation"
-        rules="required"
-      ></b-v-input>
+      <b-field label="Blood pressure">
+        <b-field>
+          <b-input
+            type="number"
+            placeholder="Systolic"
+            v-model="model.blood_pressure_systolic"
+          ></b-input>
 
-      <b-v-input
-        type="number"
-        label="GCS"
-        v-model="model.gcs"
-        rules="required"
-      ></b-v-input>
+          <b-input
+            type="number"
+            placeholder="Diastolic"
+            v-model="model.blood_pressure_diastolic"
+          ></b-input>
+        </b-field>
+      </b-field>
 
-      <b-v-input
-        type="number"
-        label="Temperature"
-        v-model="model.temperature"
-        rules="required"
-      ></b-v-input>
+      <b-field label="Oxygen saturation">
+        <b-input type="number" v-model="model.oxygen_saturation"></b-input>
+      </b-field>
+
+      <b-field label="Glasgow Coma Scale">
+        <b-field>
+          <b-input
+            type="number"
+            placeholder="Eye"
+            v-model="model.gcs_eye"
+          ></b-input>
+
+          <b-input
+            type="number"
+            placeholder="Verbal"
+            v-model="model.gcs_verbal"
+          ></b-input>
+
+          <b-input
+            type="number"
+            placeholder="Motor"
+            v-model="model.gcs_motor"
+          ></b-input
+        ></b-field>
+      </b-field>
+
+      <b-field label="Observations">
+        <b-input
+          type="textarea"
+          maxlength="200"
+          v-model="model.observations"
+        ></b-input>
+      </b-field>
     </section>
   </div>
 </template>
