@@ -11,7 +11,7 @@
       </b-field>
 
       <b-field label="Temperature">
-        <b-input type="number" v-model="model.temperature"></b-input>
+        <b-input type="number" step="0.1" v-model="model.temperature"></b-input>
       </b-field>
 
       <b-field label="Blood pressure">
@@ -34,7 +34,7 @@
         <b-input type="number" v-model="model.oxygen_saturation"></b-input>
       </b-field>
 
-      <b-field label="Glasgow Coma Scale">
+      <b-field :label="`Glasgow Coma Scale: ${gcsTotal}`">
         <b-field>
           <b-input
             type="number"
@@ -86,6 +86,13 @@ export default {
       set(value) {
         this.$emit("input", value);
       }
+    },
+    gcsTotal() {
+      return (
+        (parseInt(this.model.gcs_eye) || 0) +
+        (parseInt(this.model.gcs_motor) || 0) +
+        (parseInt(this.model.gcs_verbal) || 0)
+      );
     }
   }
 };
