@@ -7,6 +7,7 @@
     </div>
     <div class="column">
       <section class="section">
+        <p>{{ things }}</p>
         <router-view />
       </section>
     </div>
@@ -14,11 +15,23 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import TheSideBar from "@/components/Dashboard/TheSidebar";
 
 export default {
   components: {
     TheSideBar
+  },
+  computed: {
+    things() {
+      return this.$store.state.triage.submissions;
+    }
+  },
+  methods: {
+    ...mapActions("triage", ["fetchSubmissions"])
+  },
+  mounted() {
+    this.fetchSubmissions();
   }
 };
 </script>

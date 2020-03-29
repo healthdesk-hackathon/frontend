@@ -4,12 +4,14 @@ import Vuex from "vuex";
 // register modules below
 // import example from "./example";
 import forms from "./forms";
+import triage from "./triage";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    forms
+    forms,
+    triage
     // example
   }
 });
