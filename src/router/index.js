@@ -19,14 +19,22 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/backoffice"),
-    redirect: { name: "Backoffice.Triage" },
+    redirect: { name: "Backoffice.TriageList" },
     children: [
       {
         path: "triage",
-        name: "Backoffice.Triage",
+        name: "Backoffice.TriageList",
         component: () =>
           import(
-            /* webpackChunkName: "about" */ "../views/backoffice/Triage.vue"
+            /* webpackChunkName: "about" */ "../views/backoffice/TriageList.vue"
+          )
+      },
+      {
+        path: "triage/sort",
+        name: "Backoffice.TriageMode",
+        component: () =>
+          import(
+            /* webpackChunkName: "about" */ "../views/backoffice/TriageMode.vue"
           )
       }
     ]
@@ -73,7 +81,8 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  routes
+  routes,
+  linkExactActiveClass: "is-active"
 });
 
 export default router;
