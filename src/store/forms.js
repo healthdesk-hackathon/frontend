@@ -6,27 +6,38 @@ const SUBMISSION_ENDPOINT = "submission";
 const PERSONAL_DATA_ENDPOINT = "personal-data";
 const COMMON_SYMPTOMS_ENDPOINT = "common-symptoms";
 const RELATED_CONDITIONS_ENDPOINT = "related-conditions";
+const HEALTHCHECK_ENDPOINT = "health-snapshot";
+const ADMISSION_ENDPOINT = "admission";
 const OVERALL_WELLBEING_ENDPOINT = "overall-wellbeing";
 
 const MUTATIONS = {
+  RESET_STATE: "RESET_STATE",
   SET_SUBMISSION: "SET_SUBMISSION",
   SET_COMMON_SYMPTOMS: "SET_COMMON_SYMPTOMS",
   SET_GRADED_SYMPTOMS: "SET_GRADED_SYMPTOMS",
   SET_OVERALL_WELLBEING: "SET_OVERALL_WELLBEING",
   SET_RELATED_CONDITIONS: "SET_RELATED_CONDITIONS",
-  SET_PERSONAL_DATA: "SET_PERSONAL_DATA"
+  SET_PERSONAL_DATA: "SET_PERSONAL_DATA",
+  SET_HEALTHCHECK: "SET_HEALTHCHECK",
+  SET_ADMISSION: "SET_ADMISSION"
 };
 
-const state = {
-  submission: {},
-  commonSymptoms: {
-    overall_wellbeing: {}
-  },
-  overallWellbeing: {},
-  gradedSymptoms: {},
-  personalData: {},
-  relatedConditions: {}
+const getDefaultState = () => {
+  return {
+    submission: {},
+    commonSymptoms: {
+      overall_wellbeing: {}
+    },
+    overallWellbeing: {},
+    gradedSymptoms: {},
+    personalData: {},
+    relatedConditions: {},
+    healthcheck: {},
+    admission: {}
+  };
 };
+
+const state = getDefaultState();
 
 const getters = {
   submissionReview: state => {
@@ -38,6 +49,12 @@ const getters = {
 };
 
 const mutations = {
+  [MUTATIONS.RESET_STATE](state) {
+    Object.assign(state, getDefaultState());
+  },
+  [MUTATIONS.SET_ADMISSION](state, admission) {
+    state.admission = { ...state.admission, ...admission };
+  },
   [MUTATIONS.SET_SUBMISSION](state, submission) {
     state.submission = { ...state.submission, ...submission };
   },
@@ -54,6 +71,9 @@ const mutations = {
   [MUTATIONS.SET_GRADED_SYMPTOMS](state, symptoms) {
     state.gradedSymptoms = { ...state.gradedSymptoms, ...symptoms };
   },
+  [MUTATIONS.SET_HEALTHCHECK](state, healthcheck) {
+    state.healthcheck = { ...state.healthcheck, ...healthcheck };
+  },
   [MUTATIONS.SET_OVERALL_WELLBEING](state, owObj) {
     state.overallWellbeing = { ...state.overallWellbeing, ...owObj };
     state.commonSymptoms.overall_wellbeing = owObj;
@@ -64,6 +84,10 @@ const mutations = {
 };
 
 const actions = {
+  // Reset the store
+  resetState({ commit }) {
+    commit(MUTATIONS.RESET_STATE);
+  },
   /**
    * Get a single submission by ID
    */
@@ -149,6 +173,29 @@ const actions = {
     }
   },
 
+  async saveHealthcheck({ commit, state }, healthcheck) {
+    try {
+      const value = {
+        ...state.healthcheck,
+        submission: state.submission.id,
+        admission: state.admission.id,
+        ...healthcheck
+      };
+      let response = null;
+      if (value.id) {
+        response = await API.service.put(
+          `${HEALTHCHECK_ENDPOINT}/${value.id}/`,
+          value
+        );
+      } else {
+        response = await API.service.post(`${HEALTHCHECK_ENDPOINT}/`, value);
+      }
+      commit(MUTATIONS.SET_HEALTHCHECK, response.data);
+    } catch (e) {
+      console.error(e);
+    }
+  },
+
   async saveOverallWellbeing({ commit, state }, owObj) {
     const value = {
       ...state.overallWellbeing,
@@ -184,6 +231,20 @@ const actions = {
         id_type: identifierType
       });
       commit(MUTATIONS.SET_SUBMISSION, response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+
+  /**
+   * Creates a new admission
+   */
+  async createAdmission({ commit, state }) {
+    try {
+      const response = await API.service.post(ADMISSION_ENDPOINT + "/", {
+        patient: state.submission.patient
+      });
+      commit(MUTATIONS.SET_ADMISSION, response.data);
     } catch (e) {
       console.log(e);
     }
