@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <ValidationObserver ref="observer" v-slot="{ invalid }">
+    <ValidationObserver ref="observer">
       <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
         <b-step-item label="Identification" icon="account">
           <FormStepContentWrapper title="Identification">
@@ -36,7 +36,6 @@
             <div class="column is-half has-text-centered">
               <b-button
                 v-if="!next.disabled"
-                :disabled="invalid"
                 expanded
                 rounded
                 class="has-text-weight-bold"
@@ -51,7 +50,7 @@
                 rounded
                 class="has-text-weight-bold"
                 type="is-primary is-medium"
-                @click.prevent="submissionOver"
+                @click.prevent="createTriage"
               >
                 Finish</b-button
               >
@@ -93,11 +92,32 @@ export default {
   },
   methods: {
     ...mapActions("forms", [
+      "createSubmission",
       "savePersonalData",
       "saveCommonSymptoms",
       "saveRelatedConditions",
-      "saveOverallWellbeing"
-    ])
+      "saveOverallWellbeing",
+      "resetState"
+    ]),
+    async createTriage() {
+      try {
+        await this.createSubmission(this.identification);
+        await Promise.all([
+          this.savePersonalData(this.personalData),
+          this.saveCommonSymptoms(this.commonSymptoms),
+          this.saveRelatedConditions(this.relatedConditions),
+          this.saveOverallWellbeing(this.commonSymptoms.overall_wellbeing)
+        ]);
+        await this.resetState;
+        this.personalData = {};
+        this.commonSymptoms = { overall_wellbeing: {} };
+        this.relatedConditions = {};
+        this.identification = {};
+        this.activeStep = 0;
+      } catch (e) {
+        console.log(e);
+      }
+    }
   },
   computed: {
     ...mapState("forms", ["submission"]),

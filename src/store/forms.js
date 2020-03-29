@@ -9,6 +9,7 @@ const RELATED_CONDITIONS_ENDPOINT = "related-conditions";
 const OVERALL_WELLBEING_ENDPOINT = "overall-wellbeing";
 
 const MUTATIONS = {
+  RESET_STATE: "RESET_STATE",
   SET_SUBMISSION: "SET_SUBMISSION",
   SET_COMMON_SYMPTOMS: "SET_COMMON_SYMPTOMS",
   SET_GRADED_SYMPTOMS: "SET_GRADED_SYMPTOMS",
@@ -17,16 +18,20 @@ const MUTATIONS = {
   SET_PERSONAL_DATA: "SET_PERSONAL_DATA"
 };
 
-const state = {
-  submission: {},
-  commonSymptoms: {
-    overall_wellbeing: {}
-  },
-  overallWellbeing: {},
-  gradedSymptoms: {},
-  personalData: {},
-  relatedConditions: {}
+const getDefaultState = () => {
+  return {
+    submission: {},
+    commonSymptoms: {
+      overall_wellbeing: {}
+    },
+    overallWellbeing: {},
+    gradedSymptoms: {},
+    personalData: {},
+    relatedConditions: {}
+  };
 };
+
+const state = getDefaultState();
 
 const getters = {
   submissionReview: state => {
@@ -38,6 +43,9 @@ const getters = {
 };
 
 const mutations = {
+  [MUTATIONS.RESET_STATE](state) {
+    Object.assign(state, getDefaultState());
+  },
   [MUTATIONS.SET_SUBMISSION](state, submission) {
     state.submission = { ...state.submission, ...submission };
   },
@@ -64,6 +72,10 @@ const mutations = {
 };
 
 const actions = {
+  // Reset the store
+  resetState({ commit }) {
+    commit(MUTATIONS.RESET_STATE);
+  },
   /**
    * Get a single submission by ID
    */
