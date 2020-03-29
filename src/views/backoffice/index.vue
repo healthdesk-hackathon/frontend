@@ -7,6 +7,7 @@
     </div>
     <div class="column">
       <section class="section">
+        <!-- <p>{{ things }}</p> -->
         <router-view />
       </section>
     </div>

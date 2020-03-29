@@ -1,23 +1,17 @@
 <template>
   <b-menu>
-    <b-menu-list label="Submission management">
-      <b-menu-item
-        :to="{ name: 'Backoffice.TriageMode' }"
-        tag="router-link"
-        icon="flash"
-        label="Triage mode"
-      ></b-menu-item>
+    <b-menu-list label="Triage">
       <b-menu-item
         :to="{ name: 'Backoffice.TriageNew' }"
         tag="router-link"
-        icon="new-box"
-        label="New submissions"
+        icon="plus"
+        label="Add a file"
       ></b-menu-item>
       <b-menu-item
-        :to="{ name: 'Backoffice.TriageTreated' }"
+        :to="{ name: 'Backoffice.TriageList' }"
         tag="router-link"
         icon="archive"
-        label="Treated submissions"
+        label="All files"
       ></b-menu-item>
     </b-menu-list>
   </b-menu>

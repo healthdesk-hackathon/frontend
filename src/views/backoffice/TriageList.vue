@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="title is-2">
-      {{ showTreatedOnly ? "Treated submissions" : "New submissions" }}
+      Files
     </h1>
     <section class="section">
       <!-- <b-table :data="data" :columns="columns"></b-table> -->
@@ -10,11 +10,7 @@
 </template>
 
 <script>
-export default {
-  props: {
-    showTreatedOnly: { type: Boolean, required: false, default: false }
-  }
-};
+export default {};
 </script>
 
 <style></style>

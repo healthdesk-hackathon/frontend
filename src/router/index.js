@@ -26,25 +26,15 @@ const routes = [
         name: "Backoffice.TriageNew",
         component: () =>
           import(
-            /* webpackChunkName: "about" */ "../views/backoffice/TriageList.vue"
-          ),
-        props: true
+            /* webpackChunkName: "about" */ "../views/backoffice/TriageSteps.vue"
+          )
       },
       {
-        path: "triage/treated",
-        name: "Backoffice.TriageTreated",
+        path: "triage/all",
+        name: "Backoffice.TriageList",
         component: () =>
           import(
             /* webpackChunkName: "about" */ "../views/backoffice/TriageList.vue"
-          ),
-        props: { showTreatedOnly: true }
-      },
-      {
-        path: "triage/sort",
-        name: "Backoffice.TriageMode",
-        component: () =>
-          import(
-            /* webpackChunkName: "about" */ "../views/backoffice/TriageMode.vue"
           )
       }
     ]
