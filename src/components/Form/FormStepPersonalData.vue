@@ -2,44 +2,53 @@
   <div>
     <h4 class="subtitle is-4 has-text-centered">Tell us more about yourself</h4>
     <section class="section">
-      <b-field label="First Name">
-        <b-input v-model="model.first_name"></b-input>
-      </b-field>
+      <b-v-input
+        label="First Name"
+        v-model="model.first_name"
+        rules="required"
+      ></b-v-input>
 
-      <b-field label="Last Name">
-        <b-input v-model="model.last_name"></b-input>
-      </b-field>
+      <b-v-input
+        label="Last Name"
+        v-model="model.last_name"
+        rules="required"
+      ></b-v-input>
 
-      <b-field label="Gender">
-        <b-select v-model="model.gender" expanded>
-          <option
-            v-for="genderOption in genderOptions"
-            :value="genderOption.key"
-            :key="genderOption.key"
-          >
-            {{ genderOption.label }}
-          </option>
-        </b-select>
-      </b-field>
+      <b-v-select
+        label="Gender"
+        v-model="model.gender"
+        rules="required"
+        expanded
+      >
+        <option
+          v-for="genderOption in genderOptions"
+          :value="genderOption.key"
+          :key="genderOption.key"
+        >
+          {{ genderOption.label }}
+        </option>
+      </b-v-select>
 
-      <b-field label="Date of birth" expanded>
-        <b-datepicker v-model="model.date_of_birth"></b-datepicker>
-      </b-field>
+      <b-v-date
+        label="Date of birth"
+        expanded
+        v-model="model.date_of_birth"
+      ></b-v-date>
 
       <!-- <b-field label="Street and number">
   <b-input v-model="model.street_and_number"></b-input>
   </b-field>
-  
+
   <b-field grouped>
   <b-field label="Postal code">
   <b-input v-model="model.postal_code" type="Number"></b-input>
   </b-field>
-  
+
   <b-field label="City" expanded>
   <b-input v-model="model.city" type="City"></b-input>
   </b-field>
   </b-field>
-  
+
   <b-field label="Country">
   <b-input v-model="model.country" type="Country"></b-input>
   </b-field> -->
