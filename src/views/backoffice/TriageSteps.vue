@@ -2,7 +2,7 @@
   <section class="section">
     <ValidationObserver v-slot="{ invalid }">
       <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
-        <b-step-item label="Identification" icon="account">
+        <b-step-item label="Identification" icon="account-plus">
           <FormStepContentWrapper title="Identification">
             <FormStepIdentification
               :active="activeStep === 0"
@@ -32,13 +32,13 @@
           </FormStepContentWrapper>
         </b-step-item>
 
-        <b-step-item label="Healthcheck" icon="alert-circle-outline">
+        <b-step-item label="Healthcheck" icon="head-check">
           <FormStepContentWrapper title="Healthcheck">
             <FormStepHealthcheck v-model="healthcheck" />
           </FormStepContentWrapper>
         </b-step-item>
 
-        <b-step-item label="Severity" icon="check">
+        <b-step-item label="Severity" icon="priority-high">
           <FormStepContentWrapper title="Severity">
             <FormStepSeverity v-model="healthcheck" />
           </FormStepContentWrapper>
