@@ -17,6 +17,26 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ "../views/Form.vue")
   },
   {
+    path: "/backoffice",
+    name: "Backoffice",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/backoffice"),
+    redirect: { name: "Backoffice.Triage" },
+    children: [
+      {
+        path: "triage",
+        name: "Backoffice.Triage",
+        component: () =>
+          import(
+            /* webpackChunkName: "about" */ "../views/backoffice/Triage.vue"
+          )
+      }
+    ]
+  },
+  {
     path: "/about",
     name: "About",
     // route level code-splitting
