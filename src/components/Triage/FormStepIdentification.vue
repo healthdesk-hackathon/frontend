@@ -1,42 +1,40 @@
 <template>
-  <ValidationObserver ref="observer">
-    <div>
-      <h4 class="subtitle is-4 has-text-centered">
-        Identify the patient
-      </h4>
-      <section class="section">
-        <b-v-select
-          placeholder="Choose ID, email, insurance number..."
-          v-model="identification.identifierType"
-          expanded
-          rules="required"
+  <div>
+    <h4 class="subtitle is-4 has-text-centered">
+      Identify the patient
+    </h4>
+    <section class="section">
+      <b-v-select
+        placeholder="Choose ID, email, insurance number..."
+        v-model="identification.identifierType"
+        expanded
+        rules="required"
+      >
+        <option
+          v-for="identifierTypeOption in identifierTypeOptions"
+          :value="identifierTypeOption.key"
+          :key="identifierTypeOption.key"
         >
-          <option
-            v-for="identifierTypeOption in identifierTypeOptions"
-            :value="identifierTypeOption.key"
-            :key="identifierTypeOption.key"
-          >
-            {{ identifierTypeOption.label }}
-          </option>
-        </b-v-select>
-        <b-v-input
-          v-if="identification.identifierType"
-          :rules="idRules"
-          :placeholder="inputPlaceholder"
-          v-model="identification.identifier"
-        ></b-v-input>
-      </section>
-    </div>
-  </ValidationObserver>
+          {{ identifierTypeOption.label }}
+        </option>
+      </b-v-select>
+      <b-v-input
+        v-if="identification.identifierType"
+        :rules="idRules"
+        :placeholder="inputPlaceholder"
+        v-model="identification.identifier"
+      ></b-v-input>
+    </section>
+  </div>
 </template>
 
 <script>
-import { ValidationObserver } from "vee-validate";
-
 export default {
-  name: "FormIdentification",
-  components: { ValidationObserver },
-  props: { value: { type: Object, required: true } },
+  name: "TriageFormIdentification",
+  props: {
+    value: { type: Object, required: true },
+    active: { type: Boolean, require: true }
+  },
   computed: {
     identification: {
       get() {

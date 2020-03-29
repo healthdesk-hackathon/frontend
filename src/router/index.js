@@ -12,7 +12,7 @@ const routes = [
   // },
 
   {
-    path: "/backoffice",
+    path: "/backoffe",
     name: "Backoffice",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
