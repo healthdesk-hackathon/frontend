@@ -2,19 +2,49 @@
   <div>
     <h4></h4>
     <section class="section">
-      <div class="block">
-        <b-radio v-model="model" name="name" native-value="WHITE">
-          White (dismissal)
-        </b-radio>
-        <b-radio v-model="model" name="name" native-value="GREEN">
-          Green
-        </b-radio>
-        <b-radio v-model="model" name="name" native-value="YELLOW">
-          Yellow
-        </b-radio>
-        <b-radio v-model="model" name="name" native-value="RED" disabled>
-          Red
-        </b-radio>
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <b-field
+            ><b-radio
+              v-model="model"
+              name="name"
+              size="is-medium"
+              native-value="WHITE"
+            >
+              White (dismissal)
+            </b-radio></b-field
+          >
+          <b-field
+            ><b-radio
+              v-model="model"
+              name="name"
+              size="is-medium"
+              native-value="GREEN"
+            >
+              Green
+            </b-radio></b-field
+          >
+          <b-field
+            ><b-radio
+              v-model="model"
+              name="name"
+              size="is-medium"
+              native-value="YELLOW"
+            >
+              Yellow
+            </b-radio></b-field
+          >
+          <b-field
+            ><b-radio
+              v-model="model"
+              name="name"
+              size="is-medium"
+              native-value="RED"
+            >
+              Red
+            </b-radio></b-field
+          >
+        </div>
       </div>
     </section>
   </div>
