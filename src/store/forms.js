@@ -7,6 +7,7 @@ const PERSONAL_DATA_ENDPOINT = "personal-data";
 const COMMON_SYMPTOMS_ENDPOINT = "common-symptoms";
 const RELATED_CONDITIONS_ENDPOINT = "related-conditions";
 const HEALTHCHECK_ENDPOINT = "health-snapshot";
+const ADMISSION_ENDPOINT = "admission";
 const OVERALL_WELLBEING_ENDPOINT = "overall-wellbeing";
 
 const MUTATIONS = {
@@ -17,7 +18,8 @@ const MUTATIONS = {
   SET_OVERALL_WELLBEING: "SET_OVERALL_WELLBEING",
   SET_RELATED_CONDITIONS: "SET_RELATED_CONDITIONS",
   SET_PERSONAL_DATA: "SET_PERSONAL_DATA",
-  SET_HEALTHCHECK: "SET_HEALTHCHECK"
+  SET_HEALTHCHECK: "SET_HEALTHCHECK",
+  SET_ADMISSION: "SET_ADMISSION"
 };
 
 const getDefaultState = () => {
@@ -30,7 +32,8 @@ const getDefaultState = () => {
     gradedSymptoms: {},
     personalData: {},
     relatedConditions: {},
-    healthcheck: {}
+    healthcheck: {},
+    admission: {}
   };
 };
 
@@ -48,6 +51,9 @@ const getters = {
 const mutations = {
   [MUTATIONS.RESET_STATE](state) {
     Object.assign(state, getDefaultState());
+  },
+  [MUTATIONS.SET_ADMISSION](state, admission) {
+    state.admission = { ...state.admission, ...admission };
   },
   [MUTATIONS.SET_SUBMISSION](state, submission) {
     state.submission = { ...state.submission, ...submission };
@@ -172,6 +178,7 @@ const actions = {
       const value = {
         ...state.healthcheck,
         submission: state.submission.id,
+        admission: state.admission.id,
         ...healthcheck
       };
       let response = null;
@@ -224,6 +231,21 @@ const actions = {
         id_type: identifierType
       });
       commit(MUTATIONS.SET_SUBMISSION, response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+
+  /**
+   * Creates a new admission
+   */
+  async createAdmission({ commit, state }) {
+    try {
+      const response = await API.service.post(
+        ADMISSION_ENDPOINT + "/",
+        state.submission.patient
+      );
+      commit(MUTATIONS.SET_ADMISSION, response.data);
     } catch (e) {
       console.log(e);
     }

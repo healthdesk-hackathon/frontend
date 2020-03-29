@@ -40,7 +40,7 @@
 
         <b-step-item label="Severity" icon="priority-high">
           <FormStepContentWrapper title="Severity">
-            <FormStepSeverity v-model="healthcheck" />
+            <FormStepSeverity v-model="healthcheck.severity" />
           </FormStepContentWrapper>
         </b-step-item>
 
@@ -116,6 +116,7 @@ export default {
   methods: {
     ...mapActions("forms", [
       "createSubmission",
+      "createAdmission",
       "savePersonalData",
       "saveCommonSymptoms",
       "saveRelatedConditions",
@@ -126,6 +127,7 @@ export default {
     async createTriage() {
       try {
         await this.createSubmission(this.identification);
+        await this.createAdmission();
         await Promise.all([
           this.savePersonalData(this.personalData),
           this.saveCommonSymptoms(this.commonSymptoms),
@@ -139,6 +141,7 @@ export default {
         this.relatedConditions = {};
         this.identification = {};
         this.healthcheck = {};
+        this.admission = {};
         this.activeStep = 0;
       } catch (e) {
         console.log(e);
@@ -157,8 +160,8 @@ export default {
       commonSymptoms: { overall_wellbeing: {} },
       relatedConditions: {},
       identification: {},
-      healthcheck: {},
-      test: {}
+      healthcheck: { severity: "WHITE" },
+      admission: {}
     };
   }
 };
