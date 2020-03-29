@@ -14,12 +14,6 @@
           </FormStepContentWrapper>
         </b-step-item>
 
-        <b-step-item label="Healthcheck" icon="alert-circle-outline">
-          <FormStepContentWrapper title="Healthcheck">
-            <FormStepHealthcheck v-model="healthCheck" />
-          </FormStepContentWrapper>
-        </b-step-item>
-
         <b-step-item label="Symptoms" icon="alert-circle-outline">
           <FormStepContentWrapper title="Symptoms">
             <FormStepCommonSymptoms v-model="commonSymptoms" />
@@ -29,6 +23,18 @@
         <b-step-item label="Additional information" icon="plus">
           <FormStepContentWrapper title="Additional information">
             <FormStepRelatedConditions v-model="relatedConditions" />
+          </FormStepContentWrapper>
+        </b-step-item>
+
+        <b-step-item label="Healthcheck" icon="alert-circle-outline">
+          <FormStepContentWrapper title="Healthcheck">
+            <FormStepHealthcheck v-model="healthcheck" />
+          </FormStepContentWrapper>
+        </b-step-item>
+
+        <b-step-item label="Severity" icon="check">
+          <FormStepContentWrapper title="Severity">
+            <FormStepSeverity v-model="healthcheck.severity" />
           </FormStepContentWrapper>
         </b-step-item>
 
@@ -83,6 +89,7 @@ import FormStepPersonalData from "@/components/Triage/FormStepPersonalData.vue";
 import FormStepCommonSymptoms from "@/components/Triage/FormStepCommonSymptoms.vue";
 import FormStepRelatedConditions from "@/components/Triage/FormStepRelatedConditions.vue";
 import FormStepHealthcheck from "@/components/Triage/FormStepHealthcheck.vue";
+import FormStepSeverity from "@/components/Triage/FormStepSeverity.vue";
 import FormStepFinish from "@/components/Triage/FormStepFinish.vue";
 import { mapState, mapActions, mapGetters } from "vuex";
 import { ValidationObserver } from "vee-validate";
@@ -95,6 +102,7 @@ export default {
     FormStepCommonSymptoms,
     FormStepRelatedConditions,
     FormStepHealthcheck,
+    FormStepSeverity,
     FormStepFinish,
     ValidationObserver
   },
@@ -116,13 +124,14 @@ export default {
           this.saveCommonSymptoms(this.commonSymptoms),
           this.saveRelatedConditions(this.relatedConditions),
           this.saveOverallWellbeing(this.commonSymptoms.overall_wellbeing),
-          this.saveHealthCheck(this.healthCheck)
+          this.saveHealthcheck(this.healthcheck)
         ]);
         await this.resetState;
         this.personalData = {};
         this.commonSymptoms = { overall_wellbeing: {} };
         this.relatedConditions = {};
         this.identification = {};
+        this.healthcheck = {};
         this.activeStep = 0;
       } catch (e) {
         console.log(e);
@@ -141,7 +150,7 @@ export default {
       commonSymptoms: { overall_wellbeing: {} },
       relatedConditions: {},
       identification: {},
-      healthCheck: {}
+      healthcheck: {}
     };
   }
 };

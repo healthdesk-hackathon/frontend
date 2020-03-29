@@ -5,13 +5,13 @@
         :to="{ name: 'Backoffice.TriageNew' }"
         tag="router-link"
         icon="plus"
-        label="Add a file"
+        label="Admit a patient"
       ></b-menu-item>
       <b-menu-item
         :to="{ name: 'Backoffice.TriageList' }"
         tag="router-link"
         icon="archive"
-        label="All files"
+        label="All admissions"
       ></b-menu-item>
     </b-menu-list>
   </b-menu>

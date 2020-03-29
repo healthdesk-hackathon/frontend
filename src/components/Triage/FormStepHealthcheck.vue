@@ -40,18 +40,24 @@
             type="number"
             placeholder="Eye"
             v-model="model.gcs_eye"
+            min="1"
+            max="4"
           ></b-input>
 
           <b-input
             type="number"
             placeholder="Verbal"
             v-model="model.gcs_verbal"
+            min="1"
+            max="5"
           ></b-input>
 
           <b-input
             type="number"
             placeholder="Motor"
             v-model="model.gcs_motor"
+            min="1"
+            max="6"
           ></b-input
         ></b-field>
       </b-field>
