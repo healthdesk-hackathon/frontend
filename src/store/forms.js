@@ -6,7 +6,7 @@ const SUBMISSION_ENDPOINT = "submission";
 const PERSONAL_DATA_ENDPOINT = "personal-data";
 const COMMON_SYMPTOMS_ENDPOINT = "common-symptoms";
 const RELATED_CONDITIONS_ENDPOINT = "related-conditions";
-const HEALTHCHECK_ENDPOINT = "healthcheck";
+const HEALTHCHECK_ENDPOINT = "health-snapshot";
 const OVERALL_WELLBEING_ENDPOINT = "overall-wellbeing";
 
 const MUTATIONS = {
