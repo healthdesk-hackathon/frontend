@@ -1,16 +1,22 @@
 <template>
   <section class="section">
-    <ValidationObserver ref="observer">
+    <ValidationObserver v-slot="{ invalid }">
       <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
         <b-step-item label="Identification" icon="account">
           <FormStepContentWrapper title="Identification">
-            <FormStepIdentification v-model="identification" />
+            <FormStepIdentification
+              :active="activeStep === 0"
+              v-model="identification"
+            />
           </FormStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Personal data" icon="account">
           <FormStepContentWrapper title="Personal data">
-            <FormStepPersonalData v-model="personalData" />
+            <FormStepPersonalData
+              :active="activeStep === 1"
+              v-model="personalData"
+            />
           </FormStepContentWrapper>
         </b-step-item>
 
@@ -34,7 +40,7 @@
 
         <b-step-item label="Severity" icon="check">
           <FormStepContentWrapper title="Severity">
-            <FormStepSeverity v-model="healthcheck.severity" />
+            <FormStepSeverity v-model="healthcheck" />
           </FormStepContentWrapper>
         </b-step-item>
 
@@ -53,9 +59,10 @@
                 class="has-text-weight-bold"
                 type="is-primary is-medium"
                 @click.prevent="next.action"
+                :disabled="invalid"
               >
-                Next step</b-button
-              >
+                Next step
+              </b-button>
               <b-button
                 v-else
                 expanded
@@ -64,8 +71,8 @@
                 type="is-primary is-medium"
                 @click.prevent="createTriage"
               >
-                Finish</b-button
-              >
+                Finish
+              </b-button>
               <br />
               <b-button
                 type="is-text is-small"
@@ -150,7 +157,8 @@ export default {
       commonSymptoms: { overall_wellbeing: {} },
       relatedConditions: {},
       identification: {},
-      healthcheck: {}
+      healthcheck: {},
+      test: {}
     };
   }
 };
