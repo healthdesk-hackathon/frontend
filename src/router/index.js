@@ -19,15 +19,25 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/backoffice"),
-    redirect: { name: "Backoffice.TriageList" },
+    redirect: { name: "Backoffice.TriageNew" },
     children: [
       {
-        path: "triage",
-        name: "Backoffice.TriageList",
+        path: "triage/new",
+        name: "Backoffice.TriageNew",
         component: () =>
           import(
             /* webpackChunkName: "about" */ "../views/backoffice/TriageList.vue"
-          )
+          ),
+        props: true
+      },
+      {
+        path: "triage/treated",
+        name: "Backoffice.TriageTreated",
+        component: () =>
+          import(
+            /* webpackChunkName: "about" */ "../views/backoffice/TriageList.vue"
+          ),
+        props: { showTreatedOnly: true }
       },
       {
         path: "triage/sort",
