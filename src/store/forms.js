@@ -6,6 +6,7 @@ const SUBMISSION_ENDPOINT = "submission";
 const PERSONAL_DATA_ENDPOINT = "personal-data";
 const COMMON_SYMPTOMS_ENDPOINT = "common-symptoms";
 const RELATED_CONDITIONS_ENDPOINT = "related-conditions";
+const HEALTHCHECK_ENDPOINT = "healthcheck";
 const OVERALL_WELLBEING_ENDPOINT = "overall-wellbeing";
 
 const MUTATIONS = {
@@ -15,7 +16,8 @@ const MUTATIONS = {
   SET_GRADED_SYMPTOMS: "SET_GRADED_SYMPTOMS",
   SET_OVERALL_WELLBEING: "SET_OVERALL_WELLBEING",
   SET_RELATED_CONDITIONS: "SET_RELATED_CONDITIONS",
-  SET_PERSONAL_DATA: "SET_PERSONAL_DATA"
+  SET_PERSONAL_DATA: "SET_PERSONAL_DATA",
+  SET_HEALTHCHECK: "SET_HEALTHCHECK"
 };
 
 const getDefaultState = () => {
@@ -27,7 +29,8 @@ const getDefaultState = () => {
     overallWellbeing: {},
     gradedSymptoms: {},
     personalData: {},
-    relatedConditions: {}
+    relatedConditions: {},
+    healthcheck: {}
   };
 };
 
@@ -61,6 +64,9 @@ const mutations = {
   },
   [MUTATIONS.SET_GRADED_SYMPTOMS](state, symptoms) {
     state.gradedSymptoms = { ...state.gradedSymptoms, ...symptoms };
+  },
+  [MUTATIONS.SET_HEALTHCHECK](state, healthcheck) {
+    state.healthcheck = { ...state.healthcheck, ...healthcheck };
   },
   [MUTATIONS.SET_OVERALL_WELLBEING](state, owObj) {
     state.overallWellbeing = { ...state.overallWellbeing, ...owObj };
@@ -156,6 +162,28 @@ const actions = {
         );
       }
       commit(MUTATIONS.SET_RELATED_CONDITIONS, response.data);
+    } catch (e) {
+      console.error(e);
+    }
+  },
+
+  async saveHealthcheck({ commit, state }, healthcheck) {
+    try {
+      const value = {
+        ...state.healthcheck,
+        submission: state.submission.id,
+        ...healthcheck
+      };
+      let response = null;
+      if (value.id) {
+        response = await API.service.put(
+          `${HEALTHCHECK_ENDPOINT}/${value.id}/`,
+          value
+        );
+      } else {
+        response = await API.service.post(`${HEALTHCHECK_ENDPOINT}/`, value);
+      }
+      commit(MUTATIONS.SET_HEALTHCHECK, response.data);
     } catch (e) {
       console.error(e);
     }

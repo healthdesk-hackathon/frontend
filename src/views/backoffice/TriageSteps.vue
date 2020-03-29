@@ -14,6 +14,12 @@
           </FormStepContentWrapper>
         </b-step-item>
 
+        <b-step-item label="Healthcheck" icon="alert-circle-outline">
+          <FormStepContentWrapper title="Healthcheck">
+            <FormStepHealthcheck v-model="healthCheck" />
+          </FormStepContentWrapper>
+        </b-step-item>
+
         <b-step-item label="Symptoms" icon="alert-circle-outline">
           <FormStepContentWrapper title="Symptoms">
             <FormStepCommonSymptoms v-model="commonSymptoms" />
@@ -76,6 +82,7 @@ import FormStepIdentification from "@/components/Triage/FormStepIdentification.v
 import FormStepPersonalData from "@/components/Triage/FormStepPersonalData.vue";
 import FormStepCommonSymptoms from "@/components/Triage/FormStepCommonSymptoms.vue";
 import FormStepRelatedConditions from "@/components/Triage/FormStepRelatedConditions.vue";
+import FormStepHealthcheck from "@/components/Triage/FormStepHealthcheck.vue";
 import FormStepFinish from "@/components/Triage/FormStepFinish.vue";
 import { mapState, mapActions, mapGetters } from "vuex";
 import { ValidationObserver } from "vee-validate";
@@ -87,6 +94,7 @@ export default {
     FormStepPersonalData,
     FormStepCommonSymptoms,
     FormStepRelatedConditions,
+    FormStepHealthcheck,
     FormStepFinish,
     ValidationObserver
   },
@@ -97,6 +105,7 @@ export default {
       "saveCommonSymptoms",
       "saveRelatedConditions",
       "saveOverallWellbeing",
+      "saveHealthcheck",
       "resetState"
     ]),
     async createTriage() {
@@ -106,7 +115,8 @@ export default {
           this.savePersonalData(this.personalData),
           this.saveCommonSymptoms(this.commonSymptoms),
           this.saveRelatedConditions(this.relatedConditions),
-          this.saveOverallWellbeing(this.commonSymptoms.overall_wellbeing)
+          this.saveOverallWellbeing(this.commonSymptoms.overall_wellbeing),
+          this.saveHealthCheck(this.healthCheck)
         ]);
         await this.resetState;
         this.personalData = {};
@@ -130,7 +140,8 @@ export default {
       personalData: {},
       commonSymptoms: { overall_wellbeing: {} },
       relatedConditions: {},
-      identification: {}
+      identification: {},
+      healthCheck: {}
     };
   }
 };
