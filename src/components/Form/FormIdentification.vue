@@ -86,7 +86,7 @@ export default {
     return {
       identification: {},
       identifierTypeOptions: [
-        { key: "TEL", label: "Phone number" },
+        { key: "TEL", label: "Phone number", rules: ["phoneNumber"] },
         { key: "EMAIL", label: "Email", rules: ["email"] },
         { key: "AHV", label: "AHV number" },
         { key: "INS", label: "Other Insurance number" },
