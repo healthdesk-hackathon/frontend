@@ -10,12 +10,7 @@ const routes = [
   //   name: "Example",
   //   component: Example
   // },
-  {
-    path: "/form/:id(.*)",
-    name: "Form",
-    props: true,
-    component: () => import(/* webpackChunkName: "about" */ "../views/Form.vue")
-  },
+
   {
     path: "/backoffice",
     name: "Backoffice",
@@ -37,20 +32,43 @@ const routes = [
     ]
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  },
-  {
     path: "/",
 
-    name: "LandingPage",
+    name: "Frontoffice",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/LandingPage.vue")
+      import(/* webpackChunkName: "about" */ "../views/frontoffice"),
+    redirect: { name: "Frontoffice.LandingPage" },
+    children: [
+      {
+        path: "",
+
+        name: "LandingPage",
+        component: () =>
+          import(
+            /* webpackChunkName: "about" */ "../views/frontoffice/LandingPage.vue"
+          )
+      },
+      {
+        path: "/form/:id(.*)",
+        name: "Form",
+        props: true,
+        component: () =>
+          import(
+            /* webpackChunkName: "about" */ "../views/frontoffice/Form.vue"
+          )
+      },
+      {
+        path: "/about",
+        name: "About",
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+          import(
+            /* webpackChunkName: "about" */ "../views/frontoffice/About.vue"
+          )
+      }
+    ]
   }
 ];
 
