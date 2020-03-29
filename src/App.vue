@@ -1,11 +1,7 @@
 <template>
   <div id="app">
     <!-- <router-link to="/example">Example</router-link> -->
-    <div class="section">
-      <div class="container">
-        <router-view />
-      </div>
-    </div>
+    <router-view />
   </div>
 </template>
 

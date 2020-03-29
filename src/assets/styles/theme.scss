@@ -18,6 +18,10 @@ $text-light: #5d7792;
 $body-size: 17px;
 $title-color: $primary;
 
+// Menu
+$menu-item-active-color: $primary;
+$menu-item-active-background-color: none;
+
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: (
   "white": (
