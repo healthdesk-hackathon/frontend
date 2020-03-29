@@ -1,7 +1,11 @@
 <template>
   <div>
-    <h1>{{ showTreatedOnly }}</h1>
-    <router-view />
+    <h1 class="title is-2">
+      {{ showTreatedOnly ? "Treated submissions" : "New submissions" }}
+    </h1>
+    <section class="section">
+      <!-- <b-table :data="data" :columns="columns"></b-table> -->
+    </section>
   </div>
 </template>
 
