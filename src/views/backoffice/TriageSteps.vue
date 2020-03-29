@@ -3,7 +3,7 @@
     <ValidationObserver ref="observer" v-slot="{ invalid }">
       <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
         <b-step-item label="Identification" icon="account">
-          <FormStepContentWrapper title="Identifification">
+          <FormStepContentWrapper title="Identification">
             <FormStepIdentification v-model="identification" />
           </FormStepContentWrapper>
         </b-step-item>
@@ -73,6 +73,7 @@
 
 <script>
 import FormStepContentWrapper from "@/components/Triage/FormStepContentWrapper.vue";
+import FormStepIdentification from "@/components/Triage/FormStepIdentification.vue";
 import FormStepPersonalData from "@/components/Triage/FormStepPersonalData.vue";
 import FormStepCommonSymptoms from "@/components/Triage/FormStepCommonSymptoms.vue";
 import FormStepRelatedConditions from "@/components/Triage/FormStepRelatedConditions.vue";
@@ -83,6 +84,7 @@ import { ValidationObserver } from "vee-validate";
 export default {
   components: {
     FormStepContentWrapper,
+    FormStepIdentification,
     FormStepPersonalData,
     FormStepCommonSymptoms,
     FormStepRelatedConditions,
@@ -107,7 +109,8 @@ export default {
       // data
       personalData: {},
       commonSymptoms: { overall_wellbeing: {} },
-      relatedConditions: {}
+      relatedConditions: {},
+      identification: {}
     };
   }
 };

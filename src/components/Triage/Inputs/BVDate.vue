@@ -36,7 +36,7 @@ export default {
     }
   },
   data: () => ({
-    innerValue: ""
+    innerValue: null
   }),
   watch: {
     // Handles internal model changes.

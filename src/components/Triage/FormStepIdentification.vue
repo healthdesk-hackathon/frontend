@@ -1,36 +1,31 @@
 <template>
   <ValidationObserver ref="observer">
     <div>
-      <h1 class="title is-1 is-spaced has-text-centered">Identification</h1>
-      <div class="columns is-centered">
-        <div class="column is-half">
-          <h1 class="subtitle is-4 has-text-centered">
-            Identify the patient
-          </h1>
-          <section class="section">
-            <b-v-select
-              placeholder="Choose ID, email, insurance number..."
-              v-model="identification.identifierType"
-              expanded
-              rules="required"
-            >
-              <option
-                v-for="identifierTypeOption in identifierTypeOptions"
-                :value="identifierTypeOption.key"
-                :key="identifierTypeOption.key"
-              >
-                {{ identifierTypeOption.label }}
-              </option>
-            </b-v-select>
-            <b-v-input
-              v-if="identification.identifierType"
-              :rules="idRules"
-              :placeholder="inputPlaceholder"
-              v-model="identification.identifier"
-            ></b-v-input>
-          </section>
-        </div>
-      </div>
+      <h4 class="subtitle is-4 has-text-centered">
+        Identify the patient
+      </h4>
+      <section class="section">
+        <b-v-select
+          placeholder="Choose ID, email, insurance number..."
+          v-model="identification.identifierType"
+          expanded
+          rules="required"
+        >
+          <option
+            v-for="identifierTypeOption in identifierTypeOptions"
+            :value="identifierTypeOption.key"
+            :key="identifierTypeOption.key"
+          >
+            {{ identifierTypeOption.label }}
+          </option>
+        </b-v-select>
+        <b-v-input
+          v-if="identification.identifierType"
+          :rules="idRules"
+          :placeholder="inputPlaceholder"
+          v-model="identification.identifier"
+        ></b-v-input>
+      </section>
     </div>
   </ValidationObserver>
 </template>
@@ -48,7 +43,7 @@ export default {
         return this.value;
       },
       set(value) {
-        this.$emit("input", this.value);
+        this.$emit("input", value);
       }
     },
     inputPlaceholder() {
@@ -76,7 +71,7 @@ export default {
   data() {
     return {
       identifierTypeOptions: [
-        { key: "TEL", label: "Phone number", rules: ["phoneNumber"] },
+        { key: "TEL", label: "Phone number" },
         { key: "EMAIL", label: "Email", rules: ["email"] },
         { key: "AHV", label: "AHV number" },
         { key: "INS", label: "Other Insurance number" },
