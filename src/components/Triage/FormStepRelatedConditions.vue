@@ -1,7 +1,7 @@
 <template>
   <div>
     <h4 class="subtitle is-4 has-text-centered">
-      Do you have any preexisting condition?
+      Does the patient have any preexisting condition?
     </h4>
     <section class="section">
       <div class="columns">

@@ -71,7 +71,7 @@
                 type="is-primary is-medium"
                 @click.prevent="createTriage"
               >
-                Finish
+                Submit
               </b-button>
               <br />
               <b-button

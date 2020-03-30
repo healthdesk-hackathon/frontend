@@ -50,7 +50,7 @@ const routes = [
       {
         path: "",
 
-        name: "LandingPage",
+        name: "Frontoffice.LandingPage",
         component: () =>
           import(
             /* webpackChunkName: "about" */ "../views/frontoffice/LandingPage.vue"

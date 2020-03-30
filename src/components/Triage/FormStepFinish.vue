@@ -1,7 +1,7 @@
 <template>
   <div>
     <h4 class="subtitle is-4 has-text-centered">
-      Please review your data and confirm
+      If everything is in order, you now the submit the admission.
     </h4>
     <!-- <section class="section">
       <div class="columns is-centered" v-if="submissionReview">
