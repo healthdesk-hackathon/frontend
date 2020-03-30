@@ -17,12 +17,14 @@
       <b-field label="Blood pressure">
         <b-field>
           <b-input
+            expanded
             type="number"
             placeholder="Systolic"
             v-model="model.blood_pressure_systolic"
           ></b-input>
 
           <b-input
+            expanded
             type="number"
             placeholder="Diastolic"
             v-model="model.blood_pressure_diastolic"
@@ -34,7 +36,7 @@
         <b-input type="number" v-model="model.oxygen_saturation"></b-input>
       </b-field>
 
-      <b-field :label="`Glasgow Coma Scale: ${gcsTotal}`">
+      <b-field :label="`Glasgow Coma Scale (total: ${gcsTotal})`">
         <b-field>
           <b-input
             type="number"
@@ -42,6 +44,7 @@
             v-model="model.gcs_eye"
             min="1"
             max="4"
+            expanded
           ></b-input>
 
           <b-input
@@ -50,6 +53,7 @@
             v-model="model.gcs_verbal"
             min="1"
             max="5"
+            expanded
           ></b-input>
 
           <b-input
@@ -58,6 +62,7 @@
             v-model="model.gcs_motor"
             min="1"
             max="6"
+            expanded
           ></b-input
         ></b-field>
       </b-field>
