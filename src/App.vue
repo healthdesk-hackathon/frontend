@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- <router-link to="/example">Example</router-link> -->
     <router-view />
     <div id="help-button">
       <b-button
@@ -55,9 +54,9 @@ export default {
   name: "App",
   data() {
     return {
-      isCardModalActive: false,
+      isCardModalActive: false
     };
-  },
+  }
 };
 </script>
 
