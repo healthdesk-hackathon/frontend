@@ -1,6 +1,10 @@
 import axios from "axios";
 import store from "../store";
 
+import store from '../store'
+
+console.log(store)
+
 class Service {
   constructor() {
     let service = axios.create({
