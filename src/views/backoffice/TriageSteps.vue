@@ -3,51 +3,51 @@
     <ValidationObserver v-slot="{ invalid }">
       <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
         <b-step-item label="Identification" icon="account-plus">
-          <FormStepContentWrapper title="Identification">
-            <FormStepIdentification
+          <TriageStepContentWrapper title="Identification">
+            <TriageStepIdentification
               :active="activeStep === 0"
               v-model="identification"
             />
-          </FormStepContentWrapper>
+          </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Personal data" icon="account">
-          <FormStepContentWrapper title="Personal data">
-            <FormStepPersonalData
+          <TriageStepContentWrapper title="Personal data">
+            <TriageStepPersonalData
               :active="activeStep === 1"
               v-model="personalData"
             />
-          </FormStepContentWrapper>
+          </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Symptoms" icon="alert-circle-outline">
-          <FormStepContentWrapper title="Symptoms">
-            <FormStepCommonSymptoms v-model="commonSymptoms" />
-          </FormStepContentWrapper>
+          <TriageStepContentWrapper title="Symptoms">
+            <TriageStepCommonSymptoms v-model="commonSymptoms" />
+          </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Additional information" icon="plus">
-          <FormStepContentWrapper title="Additional information">
-            <FormStepRelatedConditions v-model="relatedConditions" />
-          </FormStepContentWrapper>
+          <TriageStepContentWrapper title="Additional information">
+            <TriageStepRelatedConditions v-model="relatedConditions" />
+          </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Healthcheck" icon="head-check">
-          <FormStepContentWrapper title="Healthcheck">
-            <FormStepHealthcheck v-model="healthcheck" />
-          </FormStepContentWrapper>
+          <TriageStepContentWrapper title="Healthcheck">
+            <TriageStepHealthcheck v-model="healthcheck" />
+          </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Severity" icon="priority-high">
-          <FormStepContentWrapper title="Severity">
-            <FormStepSeverity v-model="healthcheck.severity" />
-          </FormStepContentWrapper>
+          <TriageStepContentWrapper title="Severity">
+            <TriageStepSeverity v-model="healthcheck.severity" />
+          </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Done" icon="check">
-          <FormStepContentWrapper title="Final review">
-            <FormStepFinish :submissionReview="submissionReview" />
-          </FormStepContentWrapper>
+          <TriageStepContentWrapper title="Final review">
+            <TriageStepFinish :submissionReview="submissionReview" />
+          </TriageStepContentWrapper>
         </b-step-item>
         <template slot="navigation" slot-scope="{ previous, next }">
           <div class=" columns is-centered">
@@ -90,27 +90,27 @@
 </template>
 
 <script>
-import FormStepContentWrapper from "@/components/Triage/FormStepContentWrapper.vue";
-import FormStepIdentification from "@/components/Triage/FormStepIdentification.vue";
-import FormStepPersonalData from "@/components/Triage/FormStepPersonalData.vue";
-import FormStepCommonSymptoms from "@/components/Triage/FormStepCommonSymptoms.vue";
-import FormStepRelatedConditions from "@/components/Triage/FormStepRelatedConditions.vue";
-import FormStepHealthcheck from "@/components/Triage/FormStepHealthcheck.vue";
-import FormStepSeverity from "@/components/Triage/FormStepSeverity.vue";
-import FormStepFinish from "@/components/Triage/FormStepFinish.vue";
+import TriageStepContentWrapper from "@/components/Triage/TriageStepContentWrapper.vue";
+import TriageStepIdentification from "@/components/Triage/TriageStepIdentification.vue";
+import TriageStepPersonalData from "@/components/Triage/TriageStepPersonalData.vue";
+import TriageStepCommonSymptoms from "@/components/Triage/TriageStepCommonSymptoms.vue";
+import TriageStepRelatedConditions from "@/components/Triage/TriageStepRelatedConditions.vue";
+import TriageStepHealthcheck from "@/components/Triage/TriageStepHealthcheck.vue";
+import TriageStepSeverity from "@/components/Triage/TriageStepSeverity.vue";
+import TriageStepFinish from "@/components/Triage/TriageStepFinish.vue";
 import { mapState, mapActions, mapGetters } from "vuex";
 import { ValidationObserver } from "vee-validate";
 
 export default {
   components: {
-    FormStepContentWrapper,
-    FormStepIdentification,
-    FormStepPersonalData,
-    FormStepCommonSymptoms,
-    FormStepRelatedConditions,
-    FormStepHealthcheck,
-    FormStepSeverity,
-    FormStepFinish,
+    TriageStepContentWrapper,
+    TriageStepIdentification,
+    TriageStepPersonalData,
+    TriageStepCommonSymptoms,
+    TriageStepRelatedConditions,
+    TriageStepHealthcheck,
+    TriageStepSeverity,
+    TriageStepFinish,
     ValidationObserver
   },
   methods: {
