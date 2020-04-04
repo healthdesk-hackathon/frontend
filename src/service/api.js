@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "../store";
 
 class Service {
   constructor() {
@@ -17,7 +18,20 @@ class Service {
     this.service = service;
   }
 
-  handleRequestSuccess(config) {
+  async handleRequestSuccess(config) {
+    if (!store.state.auth.tokens) {
+      return config;
+    }
+
+    const { access } = store.state.auth.tokens;
+    if (access) {
+      // Will trigger infinite loop if trying to refresh on refresh call
+      if (!config.url.startsWith("token/")) {
+        await store.dispatch("auth/tryRefresh");
+        const { access } = store.state.auth.tokens;
+        config.headers.authorization = `Bearer ${access}`;
+      }
+    }
     return config;
   }
 
