@@ -1,25 +1,31 @@
 <template>
-  <div class="columns">
-    <!-- <div class="column is-narrow" id="menu-column">
-      <section class="section">
-        <TheSideBar />
-      </section>
-    </div> -->
-    <div class="column">
-      <section class="section">
-        <router-view />
-      </section>
+  <div>
+    <TheNavigation />
+    <div class="columns">
+      <div class="column is-narrow" id="menu-column">
+        <!-- TODO: fix this column on scroll -->
+        <section class="section">
+          <TheSideBar />
+        </section>
+      </div>
+      <div class="column">
+        <section class="section">
+          <router-view />
+        </section>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
-// import TheSideBar from "@/components/Dashboard/TheSidebar";
+import TheSideBar from "@/components/Dashboard/TheSidebar";
+import TheNavigation from "@/components/Dashboard/TheNavigation";
 
 export default {
   components: {
-    // TheSideBar
+    TheSideBar,
+    TheNavigation
   },
   computed: {
     things() {

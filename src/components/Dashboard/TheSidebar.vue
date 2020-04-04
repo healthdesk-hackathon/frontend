@@ -2,7 +2,7 @@
   <b-menu>
     <b-menu-list label="Triage">
       <b-menu-item
-        :to="{ name: 'Backoffice.TriageNew' }"
+        :to="{ name: 'backoffice.triageNew' }"
         tag="router-link"
         icon="plus"
         label="Admit a patient"

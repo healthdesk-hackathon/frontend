@@ -53,7 +53,7 @@ export default {
       try {
         this.formIdentificationActive = true;
         await this.$store.dispatch("forms/createSubmission", identification);
-        this.$router.push({ name: "Form", params: { id: this.submission.id } });
+        this.$router.push({ name: "form", params: { id: this.submission.id } });
       } catch (e) {
         console.error(e);
       }
