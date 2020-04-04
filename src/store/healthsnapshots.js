@@ -1,6 +1,6 @@
 import { API } from "@/service/api";
 
-const HEALTSNAPSHOT_ENDPOINT = "bed";
+const HEALTSNAPSHOT_ENDPOINT = "health-snapshot";
 
 const MUTATIONS = {
   HEALTH_SNAPSHOTS: "HEALTH_SNAPSHOTS"

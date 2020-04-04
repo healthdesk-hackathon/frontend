@@ -8,6 +8,30 @@
         label="Admit a patient"
       ></b-menu-item>
     </b-menu-list>
+
+    <b-menu-list label="Bed Management">
+      <b-menu-item
+        :to="{ name: 'backoffice.bedList' }"
+        tag="router-link"
+        icon="bed"
+        label="See all beds"
+      ></b-menu-item>
+    </b-menu-list>
+
+    <b-menu-list label="Health Snapshots">
+      <b-menu-item
+        :to="{ name: 'backoffice.healthSnapshotNew' }"
+        tag="router-link"
+        icon="plus"
+        label="Create a health snapshot"
+      ></b-menu-item>
+      <b-menu-item
+        :to="{ name: 'backoffice.healthSnapshotList' }"
+        tag="router-link"
+        icon="bottle-tonic-plus"
+        label="See all health snapshots"
+      ></b-menu-item>
+    </b-menu-list>
   </b-menu>
 </template>
 
