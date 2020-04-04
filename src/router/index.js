@@ -16,7 +16,7 @@ const routes = [
         name: "backoffice.triageNew",
         component: () =>
           import(
-            /* webpackChunkName: "about" */ "../views/backoffice/TriageSteps.vue"
+            /* webpackChunkName: "about" */ "../views/backoffice/triage/TriageSteps.vue"
           )
       },
       {
@@ -24,7 +24,7 @@ const routes = [
         name: "backoffice.triageList",
         component: () =>
           import(
-            /* webpackChunkName: "about" */ "../views/backoffice/TriageList.vue"
+            /* webpackChunkName: "about" */ "../views/backoffice/triage/TriageList.vue"
           )
       }
     ]
