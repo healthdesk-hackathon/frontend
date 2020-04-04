@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="has-background-white-bis">
     <TheNavigation />
     <div class="columns">
-      <div class="column is-narrow" id="menu-column">
+      <div class="column is-narrow has-background-white" id="menu-column">
         <!-- TODO: fix this column on scroll -->
         <section class="section">
           <TheSideBar />
@@ -10,7 +10,9 @@
       </div>
       <div class="column">
         <section class="section">
-          <router-view />
+          <div class="box">
+            <router-view />
+          </div>
         </section>
       </div>
     </div>
