@@ -3,7 +3,7 @@ import { API } from "@/service/api";
 const HEALTSNAPSHOT_ENDPOINT = "health-snapshot";
 
 const MUTATIONS = {
-  HEALTH_SNAPSHOTS: "HEALTH_SNAPSHOTS"
+  SET_HEALTH_SNAPSHOTS: "SET_HEALTH_SNAPSHOTS"
 };
 
 const state = {
@@ -13,16 +13,25 @@ const state = {
 const getters = {};
 
 const mutations = {
-  [MUTATIONS.HEALTH_SNAPSHOTS](state, healthSnapshots) {
+  [MUTATIONS.SET_HEALTH_SNAPSHOTS](state, healthSnapshots) {
     state.healthSnapshots = healthSnapshots;
   }
 };
 
 const actions = {
+  async createHealthSnapshot({ dispatch }, healthSnapshot) {
+    try {
+      await API.service.post(HEALTSNAPSHOT_ENDPOINT + "/", healthSnapshot);
+      await dispatch("fetchHealthSnapshots");
+    } catch (e) {
+      console.log(e);
+    }
+  },
+
   async fetchHealthSnapshots({ commit }) {
     try {
       const response = await API.service.get(HEALTSNAPSHOT_ENDPOINT + "/");
-      commit(MUTATIONS.HEALTH_SNAPSHOTS, response.data);
+      commit(MUTATIONS.SET_HEALTH_SNAPSHOTS, response.data);
     } catch (e) {
       console.log(e);
     }

@@ -36,7 +36,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions("triage", ["fetchSubmissions"])
+    ...mapActions("triage", ["fetchSubmissions"]),
+    ...mapActions("admissions", ["fetchAdmissions"])
   },
   async mounted() {
     await this.$store.dispatch("auth/load");
@@ -44,6 +45,7 @@ export default {
       await this.$router.push({ name: "generic.login" });
     } else {
       await this.fetchSubmissions();
+      await this.fetchAdmissions();
     }
   },
   watch: {

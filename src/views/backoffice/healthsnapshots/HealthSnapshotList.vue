@@ -5,12 +5,27 @@
     </h1>
     <section class="section">
       <!-- <b-table :data="data" :columns="columns"></b-table> -->
+      {{ healthSnapshots }}
+      {{ admissions }}
     </section>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapActions, mapState } from "vuex";
+
+export default {
+  computed: {
+    ...mapState("healthsnapshots", ["healthSnapshots"]),
+    ...mapState("admissions", ["admissions"])
+  },
+  mounted() {
+    this.fetchHealthSnapshots();
+  },
+  methods: {
+    ...mapActions("healthsnapshots", ["fetchHealthSnapshots"])
+  }
+};
 </script>
 
 <style></style>
