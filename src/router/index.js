@@ -5,25 +5,16 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: "/example",
-  //   name: "Example",
-  //   component: Example
-  // },
-
   {
     path: "/backoffice",
-    name: "Backoffice",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    name: "backoffice",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/backoffice"),
-    redirect: { name: "Backoffice.TriageNew" },
+      import(/* webpackChunkName: "about" */ "../views/backoffice"), // lazy laoding using separate chunk
+    redirect: { name: "backoffice.triageNew" },
     children: [
       {
         path: "triage/new",
-        name: "Backoffice.TriageNew",
+        name: "backoffice.triageNew",
         component: () =>
           import(
             /* webpackChunkName: "about" */ "../views/backoffice/TriageSteps.vue"
@@ -31,7 +22,7 @@ const routes = [
       },
       {
         path: "triage/all",
-        name: "Backoffice.TriageList",
+        name: "backoffice.triageList",
         component: () =>
           import(
             /* webpackChunkName: "about" */ "../views/backoffice/TriageList.vue"
@@ -42,15 +33,15 @@ const routes = [
   {
     path: "/",
 
-    name: "Frontoffice",
+    name: "frontoffice",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/frontoffice"),
-    redirect: { name: "Frontoffice.LandingPage" },
+    redirect: { name: "frontoffice.landingPage" },
     children: [
       {
         path: "",
 
-        name: "Frontoffice.LandingPage",
+        name: "frontoffice.landingPage",
         component: () =>
           import(
             /* webpackChunkName: "about" */ "../views/frontoffice/LandingPage.vue"
@@ -58,22 +49,11 @@ const routes = [
       },
       {
         path: "/form/:id(.*)",
-        name: "Form",
+        name: "form",
         props: true,
         component: () =>
           import(
             /* webpackChunkName: "about" */ "../views/frontoffice/Form.vue"
-          )
-      },
-      {
-        path: "/about",
-        name: "About",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(
-            /* webpackChunkName: "about" */ "../views/frontoffice/About.vue"
           )
       }
     ]

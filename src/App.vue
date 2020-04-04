@@ -24,7 +24,7 @@
           <p>
             <span @click="isCardModalActive = false"
               ><router-link
-                :to="{ name: 'Frontoffice.LandingPage' }"
+                :to="{ name: 'frontoffice.landingPage' }"
                 @click="isCardModalActive = false"
                 >The public form</router-link
               ></span
@@ -36,7 +36,7 @@
           <h4 class="is-size-4">Nurse form</h4>
           <p>
             <span @click="isCardModalActive = false"
-              ><router-link :to="{ name: 'Backoffice.TriageNew' }"
+              ><router-link :to="{ name: 'backoffice.triageNew' }"
                 >The nurse form</router-link
               ></span
             >
@@ -55,9 +55,9 @@ export default {
   name: "App",
   data() {
     return {
-      isCardModalActive: false
+      isCardModalActive: false,
     };
-  }
+  },
 };
 </script>
 

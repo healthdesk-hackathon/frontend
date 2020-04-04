@@ -1,10 +1,10 @@
 <template>
   <div class="columns">
-    <!-- <div class="column is-narrow" id="menu-column">
+    <div class="column is-narrow" id="menu-column">
       <section class="section">
         <TheSideBar />
       </section>
-    </div> -->
+    </div>
     <div class="column">
       <section class="section">
         <router-view />
@@ -24,14 +24,14 @@ export default {
   computed: {
     things() {
       return this.$store.state.triage.submissions;
-    }
+    },
   },
   methods: {
-    ...mapActions("triage", ["fetchSubmissions"])
+    ...mapActions("triage", ["fetchSubmissions"]),
   },
   mounted() {
     this.fetchSubmissions();
-  }
+  },
 };
 </script>
 
