@@ -57,6 +57,9 @@ export default {
     return {
       isCardModalActive: false
     };
+  },
+  mounted() {
+    this.$store.dispatch('auth/load')
   }
 };
 </script>
