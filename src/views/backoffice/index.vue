@@ -38,15 +38,15 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch("auth/load");
-    if (!this.tokens.access && this.$route.name !== "backoffice.login") {
-      this.$router.push({ name: "backoffice.login" });
+    if (!this.tokens.access && this.$route.name !== "generic.login") {
+      this.$router.push({ name: "generic.login" });
     }
     this.fetchSubmissions();
   },
   watch: {
     "tokens.access"(value) {
-      if (!value && this.$route.name !== "backoffice.login") {
-        this.$router.push({ name: "backoffice.login" });
+      if (!value && this.$route.name !== "generic.login") {
+        this.$router.push({ name: "generic.login" });
       }
     }
   }
