@@ -15,23 +15,23 @@
 
 <script>
 import { mapActions } from "vuex";
-// import TheSideBar from "@/components/Dashboard/TheSidebar";
+import TheSideBar from "@/components/Dashboard/TheSidebar";
 
 export default {
   components: {
-    // TheSideBar
+    TheSideBar
   },
   computed: {
     things() {
       return this.$store.state.triage.submissions;
-    },
+    }
   },
   methods: {
-    ...mapActions("triage", ["fetchSubmissions"]),
+    ...mapActions("triage", ["fetchSubmissions"])
   },
   mounted() {
     this.fetchSubmissions();
-  },
+  }
 };
 </script>
 
