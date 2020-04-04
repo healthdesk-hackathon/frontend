@@ -44,7 +44,7 @@ const mutations = {
 
 const actions = {
   load({ commit }) {
-    const tokenStr = localStorage.getItem("auth-token");
+    const tokenStr = localStorage.getItem("auth-tokens");
     if (!tokenStr) return;
 
     commit(MUTATIONS.SET_TOKENS, JSON.parse(tokenStr));
@@ -72,7 +72,7 @@ const actions = {
   },
 
   async tryRefresh({ commit, state, dispatch }) {
-    if (!state.expiration && new Date() < state.expiration) return;
+    if (state.expiration && new Date() < state.expiration) return;
 
     try {
       const response = await API.service.post(AUTH_ENDPOINT + "/refresh/", {
