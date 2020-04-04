@@ -145,7 +145,7 @@
         rounded
         class="has-text-weight-bold"
         type="is-primary is-medium"
-        @click.prevent="createHealthSnapshot(healthSnapshot)"
+        @click.prevent="saveHealthSnapshot"
       >
         Submit
       </b-button>
@@ -166,7 +166,15 @@ export default {
     ...mapState("admissions", ["admissions"])
   },
   methods: {
-    ...mapActions("healthsnapshots", ["createHealthSnapshot"])
+    ...mapActions("healthsnapshots", ["createHealthSnapshot"]),
+    async saveHealthSnapshot() {
+      try {
+        await this.createHealthSnapshot(this.healthSnapshot);
+        this.healthSnapshot = {};
+      } catch (e) {
+        console.log(e);
+      }
+    }
   }
 };
 </script>
