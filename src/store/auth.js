@@ -22,13 +22,18 @@ const getters = {};
 const mutations = {
   [MUTATIONS.SET_TOKENS](state, tokens) {
     if (!tokens) {
-      state.tokens = null;
+      state.tokens = {
+        access: null,
+        refresh: null
+      };
       state.expiration = null;
       return;
     }
 
-    const decoded = jwtDecode(tokens.access);
-    state.expiration = new Date(decoded.exp * 1000);
+    if (tokens.access) {
+      const decoded = jwtDecode(tokens.access);
+      state.expiration = new Date(decoded.exp * 1000);
+    }
 
     state.tokens = {
       ...state.tokens,
@@ -71,9 +76,9 @@ const actions = {
 
     try {
       const response = await API.service.post(AUTH_ENDPOINT + "/refresh/", {
-        refresh: state.refresh
+        refresh: state.tokens.refresh
       });
-      commit(MUTATIONS.SET_TOKENS, response.data);
+      await commit(MUTATIONS.SET_TOKENS, response.data);
     } catch (e) {
       dispatch("logout", {});
     }

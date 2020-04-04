@@ -39,9 +39,10 @@ export default {
   async mounted() {
     await this.$store.dispatch("auth/load");
     if (!this.tokens.access && this.$route.name !== "generic.login") {
-      this.$router.push({ name: "generic.login" });
+      await this.$router.push({ name: "generic.login" });
+    } else {
+      await this.fetchSubmissions();
     }
-    this.fetchSubmissions();
   },
   watch: {
     "tokens.access"(value) {
