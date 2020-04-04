@@ -1,71 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+import generic from "./generic";
+import backoffice from "./backoffice";
+import frontoffice from "./frontoffice";
+
 Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: "/backoffice",
-    name: "backoffice",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/backoffice"), // lazy laoding using separate chunk
-    redirect: { name: "backoffice.triageNew" },
-    children: [
-      {
-        path: "login",
-        name: "backoffice.login",
-        component: () =>
-          import(
-            /* webpackChunkName: "about" */ "../views/backoffice/Login.vue"
-          )
-      },
-      {
-        path: "triage/new",
-        name: "backoffice.triageNew",
-        component: () =>
-          import(
-            /* webpackChunkName: "about" */ "../views/backoffice/TriageSteps.vue"
-          )
-      },
-      {
-        path: "triage/all",
-        name: "backoffice.triageList",
-        component: () =>
-          import(
-            /* webpackChunkName: "about" */ "../views/backoffice/TriageList.vue"
-          )
-      }
-    ]
-  },
-  {
-    path: "/",
-
-    name: "frontoffice",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/frontoffice"),
-    redirect: { name: "frontoffice.landingPage" },
-    children: [
-      {
-        path: "",
-
-        name: "frontoffice.landingPage",
-        component: () =>
-          import(
-            /* webpackChunkName: "about" */ "../views/frontoffice/LandingPage.vue"
-          )
-      },
-      {
-        path: "/form/:id(.*)",
-        name: "form",
-        props: true,
-        component: () =>
-          import(
-            /* webpackChunkName: "about" */ "../views/frontoffice/Form.vue"
-          )
-      }
-    ]
-  }
-];
+const routes = [generic, backoffice, frontoffice];
 
 const router = new VueRouter({
   routes,

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="title is-2">
-      Files
+      Health Snapshots
     </h1>
     <section class="section">
       <!-- <b-table :data="data" :columns="columns"></b-table> -->
