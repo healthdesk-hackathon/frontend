@@ -6,6 +6,12 @@ const routes = {
   redirect: { name: "backoffice.triageNew" },
   children: [
     {
+      path: "login",
+      name: "backoffice.login",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "../views/backoffice/Login.vue")
+    },
+    {
       path: "triage/new",
       name: "backoffice.triageNew",
       component: () =>

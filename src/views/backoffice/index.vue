@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 import TheSideBar from "@/components/Dashboard/TheSidebar";
 import TheNavigation from "@/components/Dashboard/TheNavigation";
 
@@ -28,6 +28,7 @@ export default {
     TheNavigation
   },
   computed: {
+    ...mapState("auth", ["tokens"]),
     things() {
       return this.$store.state.triage.submissions;
     }
@@ -35,8 +36,19 @@ export default {
   methods: {
     ...mapActions("triage", ["fetchSubmissions"])
   },
-  mounted() {
+  async mounted() {
+    await this.$store.dispatch("auth/load");
+    if (!this.tokens.access && this.$route.name !== "backoffice.login") {
+      this.$router.push({ name: "backoffice.login" });
+    }
     this.fetchSubmissions();
+  },
+  watch: {
+    "tokens.access"(value) {
+      if (!value && this.$route.name !== "backoffice.login") {
+        this.$router.push({ name: "backoffice.login" });
+      }
+    }
   }
 };
 </script>

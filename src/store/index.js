@@ -5,6 +5,7 @@ import Vuex from "vuex";
 import forms from "./forms";
 import triage from "./triage";
 import beds from "./beds";
+import auth from "./auth";
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   modules: {
     forms,
     triage,
-    beds
+    beds,
+    auth
   }
 });
