@@ -6,6 +6,7 @@ import BVInput from "./components/Form/Inputs/BVInput";
 import BVSelect from "./components/Form/Inputs/BVSelect";
 import BVDate from "./components/Form/Inputs/BVDate";
 import "./vee-validate";
+import "./filters";
 
 import Buefy from "buefy";
 
