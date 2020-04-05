@@ -42,20 +42,12 @@ const routes = {
         )
     },
     {
-      path: "healthsnapshots/all",
-      name: "backoffice.healthSnapshotList",
-      component: () =>
-        import(
-          /* webpackChunkName: "backoffice" */ "../views/backoffice/healthsnapshots/HealthSnapshotList.vue"
-        )
-    },
-    {
-      path: "healthsnapshots/filtered",
-      name: "backoffice.healthSnapshotFiltered",
+      path: "healthsnapshots/:admission_id",
+      name: "backoffice.healthSnapshotForAdmission",
       props: true,
       component: () =>
         import(
-          /* webpackChunkName: "backoffice" */ "../views/backoffice/healthsnapshots/HealthSnapshotList.vue"
+          /* webpackChunkName: "backoffice" */ "../views/backoffice/healthsnapshots/HealthSnapshotForAdmission.vue"
         )
     },
     // Admissions list

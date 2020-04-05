@@ -28,9 +28,8 @@ const actions = {
     }
   },
 
-  async fetchHealthSnapshots({ commit }, data) {
+  async fetchHealthSnapshots({ commit }, data = null) {
     try {
-      console.log(data);
       const response = await API.service.request({
         method: "get",
         url: HEALTHSNAPSHOT_ENDPOINT + "/",
