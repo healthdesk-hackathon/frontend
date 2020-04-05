@@ -1,17 +1,62 @@
 <template>
   <div id="app">
-    <!-- <router-link to="/example">Example</router-link> -->
-    <div class="section">
-      <div class="container">
-        <router-view />
-      </div>
+    <router-view />
+    <div id="help-button">
+      <b-button
+        type="is-warning"
+        size="is-medium"
+        icon-right="help"
+        rounded
+        @click="isCardModalActive = true"
+        ><span class="has-text-weight-bold">Help</span></b-button
+      >
     </div>
+    <b-modal :active.sync="isCardModalActive" :width="640" scroll="keep">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title is-centered">
+            How to use this demo
+          </p>
+        </header>
+        <div class="card-content">
+          <h4 class="is-size-4">Public form</h4>
+          <p>
+            <span @click="isCardModalActive = false"
+              ><router-link
+                :to="{ name: 'frontoffice.landingPage' }"
+                @click="isCardModalActive = false"
+                >The public form</router-link
+              ></span
+            >
+            is meant to be filled out by patients at home or anytime before they
+            come to the field hospital.
+          </p>
+          <br />
+          <h4 class="is-size-4">Nurse form</h4>
+          <p>
+            <span @click="isCardModalActive = false"
+              ><router-link :to="{ name: 'backoffice.triageNew' }"
+                >The nurse form</router-link
+              ></span
+            >
+            is meant to be filled out by a nurse directly at the field hospital.
+            It is the backoffice of the application, holds much more
+            information, and serves as a triage for admission.
+          </p>
+        </div>
+      </div>
+    </b-modal>
   </div>
 </template>
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  data() {
+    return {
+      isCardModalActive: false
+    };
+  }
 };
 </script>
 
@@ -28,5 +73,11 @@ export default {
 
 body {
   height: 100vh;
+}
+
+#help-button {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
 }
 </style>

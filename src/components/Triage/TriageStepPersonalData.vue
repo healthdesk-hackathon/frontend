@@ -1,23 +1,25 @@
 <template>
   <div>
-    <h4 class="subtitle is-4 has-text-centered">Tell us more about yourself</h4>
+    <h4 class="subtitle is-4 has-text-centered">
+      Enter the patient's personal information
+    </h4>
     <section class="section">
       <b-v-input
         label="First Name"
         v-model="model.first_name"
-        rules="required"
+        :rules="{ required: active }"
       ></b-v-input>
 
       <b-v-input
         label="Last Name"
         v-model="model.last_name"
-        rules="required"
+        :rules="{ required: active }"
       ></b-v-input>
 
       <b-v-select
         label="Gender"
         v-model="model.gender"
-        rules="required"
+        :rules="{ required: active }"
         expanded
       >
         <option
@@ -59,7 +61,8 @@
 <script>
 export default {
   props: {
-    value: { type: Object, required: true }
+    value: { type: Object, required: true },
+    active: { type: Boolean, required: true }
   },
   data() {
     return {

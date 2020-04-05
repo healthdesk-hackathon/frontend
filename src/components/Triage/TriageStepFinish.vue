@@ -1,9 +1,9 @@
 <template>
   <div>
     <h4 class="subtitle is-4 has-text-centered">
-      Please review your data and confirm
+      If everything is in order, you now the submit the admission.
     </h4>
-    <section class="section">
+    <!-- <section class="section">
       <div class="columns is-centered" v-if="submissionReview">
         <div class="column is-narrow">
           <table class="table">
@@ -33,7 +33,7 @@
           Nothing to review, please add some data first.
         </h5>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 
