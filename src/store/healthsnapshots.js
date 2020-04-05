@@ -30,8 +30,12 @@ const actions = {
 
   async fetchHealthSnapshots({ commit }, data) {
     try {
-      console.log(data)
-      const response = await API.service.request({ method: 'get', url: HEALTHSNAPSHOT_ENDPOINT + "/", params: data });
+      console.log(data);
+      const response = await API.service.request({
+        method: "get",
+        url: HEALTHSNAPSHOT_ENDPOINT + "/",
+        params: data
+      });
       commit(MUTATIONS.SET_HEALTH_SNAPSHOTS, response.data);
     } catch (e) {
       console.log(e);

@@ -10,17 +10,22 @@
         v-on:select="open_row"
       >
         <template slot-scope="props">
-          <b-table-column field="local_barcode" label="Hospital ID">{{ props.row.local_barcode }}</b-table-column>
+          <b-table-column field="local_barcode" label="Hospital ID">{{
+            props.row.local_barcode
+          }}</b-table-column>
 
-          <b-table-column field="current_bed" label="Current Bed">{{ props.row.current_bed }}</b-table-column>
+          <b-table-column field="current_bed" label="Current Bed">{{
+            props.row.current_bed
+          }}</b-table-column>
 
-          <b-table-column
-            field="current_severity"
-            label="Condition Severity"
-          >{{ props.row.current_severity }}</b-table-column>
+          <b-table-column field="current_severity" label="Condition Severity">{{
+            props.row.current_severity
+          }}</b-table-column>
 
           <b-table-column field="admitted_at" label="Date" centered>
-            <span class="tag is-success">{{ new Date(props.row.date).toLocaleDateString() }}</span>
+            <span class="tag is-success">{{
+              new Date(props.row.date).toLocaleDateString()
+            }}</span>
           </b-table-column>
         </template>
       </b-table>
