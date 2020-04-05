@@ -49,12 +49,6 @@
         icon="plus"
         label="Create a health snapshot"
       ></b-menu-item>
-      <b-menu-item
-        :to="{ name: 'backoffice.healthSnapshotList' }"
-        tag="router-link"
-        icon="bottle-tonic-plus"
-        label="See all health snapshots"
-      ></b-menu-item>
     </b-menu-list>
   </b-menu>
 </template>
