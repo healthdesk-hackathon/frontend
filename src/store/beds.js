@@ -37,6 +37,7 @@ const actions = {
   async fetchBedTypes({ commit }) {
     try {
       const response = await API.service.get(BEDTYPE_ENDPOINT + "/");
+      console.log(response.data);
       commit(MUTATIONS.SET_BEDTYPES, response.data);
     } catch (e) {
       console.log(e);
