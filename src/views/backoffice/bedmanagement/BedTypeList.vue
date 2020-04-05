@@ -62,6 +62,13 @@ export default {
   },
   async mounted() {
     await this.fetchBedTypes();
+
+    this.pollingInterval = setInterval(() => {
+      this.fetchBedTypes();
+    }, 10 * 1000);
+  },
+  destroyed() {
+    clearInterval(this.pollingInterval);
   },
   methods: {
     ...mapActions("beds", [
