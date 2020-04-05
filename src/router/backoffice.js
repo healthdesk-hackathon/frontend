@@ -3,8 +3,17 @@ const routes = {
   name: "backoffice",
   component: () =>
     import(/* webpackChunkName: "backoffice" */ "../views/backoffice"), // lazy laoding using separate chunk
-  redirect: { name: "backoffice.triageNew" },
+  redirect: { name: "backoffice.dashboard" },
   children: [
+    // dashboard
+    {
+      path: "dashboard",
+      name: "backoffice.dashboard",
+      component: () =>
+        import(
+          /* webpackChunkName: "backoffice" */ "../views/backoffice/dashboard/Dashboard.vue"
+        )
+    },
     // Triage
     {
       path: "triage/new",
