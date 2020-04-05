@@ -12,7 +12,14 @@
         paginated
       >
         <template slot-scope="props">
-          <b-table-column label="ID" field="id" sortable searchable>
+          <b-table-column
+            width="40"
+            label="ID"
+            field="id"
+            numeric
+            sortable
+            searchable
+          >
             {{ props.row.id }}
           </b-table-column>
           <b-table-column label="Bed type" field="bed_type">

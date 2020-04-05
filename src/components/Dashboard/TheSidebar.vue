@@ -11,6 +11,12 @@
 
     <b-menu-list label="Bed Management">
       <b-menu-item
+        :to="{ name: 'backoffice.bedTypeList' }"
+        tag="router-link"
+        icon="bed"
+        label="See all bed types"
+      ></b-menu-item>
+      <b-menu-item
         :to="{ name: 'backoffice.bedList' }"
         tag="router-link"
         icon="bed"

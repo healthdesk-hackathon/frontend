@@ -49,6 +49,14 @@ const routes = {
         import(
           /* webpackChunkName: "backoffice" */ "../views/backoffice/bedmanagement/BedList.vue"
         )
+    },
+    {
+      path: "bedmanagement/types/all",
+      name: "backoffice.bedTypeList",
+      component: () =>
+        import(
+          /* webpackChunkName: "backoffice" */ "../views/backoffice/bedmanagement/BedTypeList.vue"
+        )
     }
   ]
 };
