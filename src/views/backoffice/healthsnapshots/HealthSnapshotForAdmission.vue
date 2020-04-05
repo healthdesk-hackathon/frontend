@@ -1,8 +1,12 @@
 <template>
   <div>
     <section class="section">
-      <h1 class="title is-2">Health Snapshots</h1>
-      <h1 class="subtitle">{{ admission.patient_display }}</h1>
+      <h1 class="title is-2 is-spaced">Health Snapshots</h1>
+      <h1 class="subtitle">
+        <span class="has-text-weight-semibold">
+          {{ admission.patient_display }}
+        </span>
+      </h1>
       <b-table
         :data="healthSnapshots"
         :default-sort="['created_at', 'desc']"
@@ -34,7 +38,7 @@
             >{{ props.row.blood_pressure_diastolic }}
           </b-table-column>
 
-          <b-table-column label="GCS" sortable
+          <b-table-column label="GCS"
             >{{
               props.row.gcs_eye + props.row.gcs_motor + props.row.gcs_verbal
             }}

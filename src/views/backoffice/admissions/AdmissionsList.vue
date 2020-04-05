@@ -10,12 +10,12 @@
         paginated
         @click="open_row"
       >
-        <template slot-scope="props">
-          <b-table-column field="patient_display" label="Patient">{{
+        <template slot-scope="props" sortable>
+          <b-table-column field="patient_display" label="Patient" searchable>{{
             props.row.patient_display
           }}</b-table-column>
 
-          <b-table-column field="local_barcode" label="Hospital ID">{{
+          <b-table-column field="local_barcode" label="Hospital ID" sortable>{{
             props.row.local_barcode
           }}</b-table-column>
 
@@ -23,14 +23,15 @@
             props.row.current_bed
           }}</b-table-column>
 
-          <b-table-column field="current_severity" label="Condition Severity">{{
-            props.row.current_severity
-          }}</b-table-column>
+          <b-table-column
+            field="current_severity"
+            label="Condition Severity"
+            sortable
+            >{{ props.row.current_severity }}</b-table-column
+          >
 
-          <b-table-column field="admitted_at" label="Date" centered>
-            <span class="tag is-success">{{
-              new Date(props.row.date).toLocaleDateString()
-            }}</span>
+          <b-table-column field="admitted_at" label="Date" centered sortable>
+            {{ props.row.admitted_at | date }}
           </b-table-column>
         </template>
       </b-table>
