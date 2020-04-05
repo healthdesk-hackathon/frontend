@@ -40,6 +40,24 @@ const routes = {
           /* webpackChunkName: "backoffice" */ "../views/backoffice/healthsnapshots/HealthSnapshotList.vue"
         )
     },
+    {
+      path: "healthsnapshots/filtered",
+      name: "backoffice.healthSnapshotFiltered",
+      props: true,
+      component: () =>
+        import(
+          /* webpackChunkName: "backoffice" */ "../views/backoffice/healthsnapshots/HealthSnapshotList.vue"
+        )
+    },
+    // Admissions list
+    {
+      path: "admissions/all",
+      name: "backoffice.admissionsList",
+      component: () =>
+        import(
+          /* webpackChunkName: "backoffice" */ "../views/backoffice/admissions/AdmissionsList.vue"
+        )
+    },
 
     // Bed management
     {

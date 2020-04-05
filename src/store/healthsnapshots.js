@@ -1,6 +1,6 @@
 import { API } from "@/service/api";
 
-const HEALTSNAPSHOT_ENDPOINT = "health-snapshot";
+const HEALTHSNAPSHOT_ENDPOINT = "health-snapshot";
 
 const MUTATIONS = {
   SET_HEALTH_SNAPSHOTS: "SET_HEALTH_SNAPSHOTS"
@@ -21,16 +21,17 @@ const mutations = {
 const actions = {
   async createHealthSnapshot({ dispatch }, healthSnapshot) {
     try {
-      await API.service.post(HEALTSNAPSHOT_ENDPOINT + "/", healthSnapshot);
+      await API.service.post(HEALTHSNAPSHOT_ENDPOINT + "/", healthSnapshot);
       await dispatch("fetchHealthSnapshots");
     } catch (e) {
       console.log(e);
     }
   },
 
-  async fetchHealthSnapshots({ commit }) {
+  async fetchHealthSnapshots({ commit }, data) {
     try {
-      const response = await API.service.get(HEALTSNAPSHOT_ENDPOINT + "/");
+      console.log(data)
+      const response = await API.service.request({ method: 'get', url: HEALTHSNAPSHOT_ENDPOINT + "/", params: data });
       commit(MUTATIONS.SET_HEALTH_SNAPSHOTS, response.data);
     } catch (e) {
       console.log(e);
@@ -40,7 +41,7 @@ const actions = {
   async updateHealthSnapshot({ dispatch }, healthSnapshot) {
     try {
       await API.service.put(
-        `${HEALTSNAPSHOT_ENDPOINT}/${healthSnapshot.id}`,
+        `${HEALTHSNAPSHOT_ENDPOINT}/${healthSnapshot.id}`,
         healthSnapshot
       );
       await dispatch("fetchHealthSnapshots");
@@ -52,7 +53,7 @@ const actions = {
   async deleteHealthSnapshot({ dispatch }, healthSnapshot) {
     try {
       await API.service.delete(
-        `${HEALTSNAPSHOT_ENDPOINT}/${healthSnapshot.id}`
+        `${HEALTHSNAPSHOT_ENDPOINT}/${healthSnapshot.id}`
       );
       await dispatch("fetchHealthSnapshots");
     } catch (e) {
