@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="section">
     <h1 class="title is-2">
       Dashboard
     </h1>
@@ -35,7 +35,7 @@
         />
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
