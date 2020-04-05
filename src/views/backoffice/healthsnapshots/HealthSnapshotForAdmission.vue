@@ -2,6 +2,7 @@
   <div>
     <section class="section">
       <h1 class="title is-2">Health Snapshots</h1>
+      <h1 class="subtitle">{{ admission.patient_display }}</h1>
       <b-table
         :data="healthSnapshots"
         :default-sort="['created_at', 'desc']"
@@ -13,13 +14,31 @@
             props.row.created_at | datetime
           }}</b-table-column>
 
-          <b-table-column field="admission" label="Admission" searchable>{{
-            props.row.admission
-          }}</b-table-column>
-
           <b-table-column field="severity" label="Severity" sortable>{{
             props.row.severity
           }}</b-table-column>
+
+          <b-table-column field="heart_rate" label="HR" sortable>{{
+            props.row.heart_rate
+          }}</b-table-column>
+
+          <b-table-column field="breathing_rate" label="BR" sortable
+            >{{ props.row.breathing_rate }}
+          </b-table-column>
+
+          <b-table-column field="blood_pressure_systolic" label="BPS" sortable
+            >{{ props.row.blood_pressure_systolic }}
+          </b-table-column>
+
+          <b-table-column field="blood_pressure_diastolic" label="BPD" sortable
+            >{{ props.row.blood_pressure_diastolic }}
+          </b-table-column>
+
+          <b-table-column label="GCS" sortable
+            >{{
+              props.row.gcs_eye + props.row.gcs_motor + props.row.gcs_verbal
+            }}
+          </b-table-column>
         </template>
         <template slot="empty">
           <section class="section">
@@ -41,7 +60,7 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   props: {
-    admission_id: { type: String, required: false, default: null }
+    admission: { type: Object, required: true }
   },
   data() {
     return {};
@@ -50,25 +69,12 @@ export default {
     ...mapState("healthsnapshots", ["healthSnapshots"])
   },
   mounted() {
-    // this.fetchHealthSnapshots();
+    if (this.admission)
+      this.fetchHealthSnapshots({ admission_id: this.admission.id });
+    else this.fetchHealthSnapshots();
   },
   methods: {
     ...mapActions("healthsnapshots", ["fetchHealthSnapshots"])
-  },
-  watch: {
-    admission_id: {
-      // the callback will be called immediately after the start of the observation
-      immediate: true,
-      handler(admission_id) {
-        if (admission_id) {
-          var data = { admission_id: admission_id };
-        } else {
-          data = null;
-        }
-
-        this.fetchHealthSnapshots(data);
-      }
-    }
   }
 };
 </script>

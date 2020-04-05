@@ -1,15 +1,20 @@
 <template>
   <div>
     <section class="section">
+      <h1 class="title is-2">Admissions</h1>
       <b-table
         :loading="!admissions"
         :data="admissions"
         default-sort="created_at"
         hoverable
         paginated
-        v-on:select="open_row"
+        @click="open_row"
       >
         <template slot-scope="props">
+          <b-table-column field="patient_display" label="Patient">{{
+            props.row.patient_display
+          }}</b-table-column>
+
           <b-table-column field="local_barcode" label="Hospital ID">{{
             props.row.local_barcode
           }}</b-table-column>
@@ -48,8 +53,8 @@ export default {
 
     open_row(row) {
       this.$router.push({
-        name: "backoffice.healthSnapshotFiltered",
-        params: { admission_id: row.id }
+        name: "backoffice.healthSnapshotForAdmission",
+        params: { admission: row, admission_id: row.id }
       });
     }
   }
