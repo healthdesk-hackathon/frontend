@@ -36,6 +36,7 @@
               v-if="props.row.state !== 0"
               @click="setUnavailable(props.row)"
               size="is-small"
+              type="is-warning"
             >
               Unavailable
             </b-button>
@@ -43,6 +44,7 @@
               v-if="props.row.state === 0"
               @click="setAvailable(props.row)"
               size="is-small"
+              type="is-success"
             >
               Available
             </b-button>
@@ -50,6 +52,7 @@
               v-if="props.row.state !== 0"
               @click="setEquipmentFailure(props.row)"
               size="is-small"
+              type="is-danger"
             >
               Equipment failure
             </b-button>
@@ -57,11 +60,22 @@
               v-if="props.row.state !== 0"
               @click="setCleaning(props.row)"
               size="is-small"
+              type="is-info"
             >
               Cleaning
             </b-button>
           </div>
         </b-table-column>
+      </template>
+      <template slot="empty">
+        <section class="section">
+          <div class="content has-text-grey has-text-centered">
+            <p>
+              <b-icon icon="emoticon-sad" size="is-large"> </b-icon>
+            </p>
+            <p>Nothing here.</p>
+          </div>
+        </section>
       </template>
     </b-table>
   </section>
