@@ -1,16 +1,46 @@
 <template>
   <div>
-    <h1 class="title is-2">
-      Health Snapshots
-    </h1>
     <section class="section">
-      <!-- <b-table :data="data" :columns="columns"></b-table> -->
+      <h1 class="title is-2">
+        Health Snapshots
+      </h1>
+      <b-table :data="healthSnapshots" :columns="columns"></b-table>
     </section>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapActions, mapState } from "vuex";
+
+export default {
+  data() {
+    return {
+      columns: [
+        {
+          field: "created_at",
+          label: "Date/Time"
+        },
+        {
+          field: "admission",
+          label: "Admission"
+        },
+        {
+          field: "severity",
+          label: "Severity"
+        }
+      ]
+    };
+  },
+  computed: {
+    ...mapState("healthsnapshots", ["healthSnapshots"])
+  },
+  mounted() {
+    this.fetchHealthSnapshots();
+  },
+  methods: {
+    ...mapActions("healthsnapshots", ["fetchHealthSnapshots"])
+  }
+};
 </script>
 
 <style></style>
