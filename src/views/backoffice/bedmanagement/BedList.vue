@@ -4,7 +4,7 @@
       Beds
     </h1>
     <b-table
-      :loading="!beds"
+      :loading="loading"
       :data="beds"
       default-sort="id"
       hoverable
@@ -87,6 +87,7 @@ import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
+      loading: true,
       columns: [
         {
           field: "bed_type",
@@ -109,6 +110,7 @@ export default {
   async mounted() {
     await this.fetchBedTypes();
     await this.fetchBeds();
+    this.loading = false;
   },
   methods: {
     ...mapActions("beds", [
