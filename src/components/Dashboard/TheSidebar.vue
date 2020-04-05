@@ -1,5 +1,14 @@
 <template>
   <b-menu>
+    <b-menu-list>
+      <b-menu-item
+        :to="{ name: 'backoffice.dashboard' }"
+        tag="router-link"
+        icon="chart-line"
+        label="View Dashboard"
+      ></b-menu-item>
+    </b-menu-list>
+
     <b-menu-list label="Triage">
       <b-menu-item
         :to="{ name: 'backoffice.triageNew' }"
