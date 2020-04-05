@@ -47,6 +47,18 @@
           <b-table-column label="Total" field="total" numeric sortable>
             {{ props.row.total }}
           </b-table-column>
+          <b-table-column label="Actions">
+            <div class="buttons">
+              <b-button
+                v-if="props.row.state !== 0"
+                @click="addBeds(props.row)"
+                size="is-small"
+                icon-left="plus"
+              >
+                Add beds
+              </b-button>
+            </div>
+          </b-table-column>
         </template>
       </b-table>
     </section>
@@ -71,9 +83,17 @@ export default {
     clearInterval(this.pollingInterval);
   },
   methods: {
+    addBeds(bedType) {
+      const amountStr = prompt("How many beds do you want to add?");
+      if (!amountStr) return;
+      const amount = parseInt(amountStr);
+      bedType.total += amount;
+      this.updateBedType(bedType);
+    },
     ...mapActions("beds", [
       "fetchBeds",
       "fetchBedTypes",
+      "updateBedType",
       "setAvailable",
       "setUnavailable",
       "setCleaning",

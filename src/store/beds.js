@@ -46,7 +46,7 @@ const actions = {
 
   async updateBedType({ dispatch }, bedType) {
     try {
-      await API.service.put(`${BEDTYPE_ENDPOINT}/${bedType.id}`, bedType);
+      await API.service.put(`${BEDTYPE_ENDPOINT}/${bedType.id}/`, bedType);
       await dispatch("fetchBedTypes");
     } catch (e) {
       console.log(e);
@@ -55,7 +55,7 @@ const actions = {
 
   async deleteBedType({ dispatch }, bedType) {
     try {
-      await API.service.delete(`${BEDTYPE_ENDPOINT}/${bedType.id}`);
+      await API.service.delete(`${BEDTYPE_ENDPOINT}/${bedType.id}/`);
       await dispatch("fetchBedTypes");
     } catch (e) {
       console.log(e);
