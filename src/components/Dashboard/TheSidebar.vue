@@ -9,6 +9,15 @@
       ></b-menu-item>
     </b-menu-list>
 
+    <b-menu-list label="Admitted Patients">
+      <b-menu-item
+        :to="{ name: 'backoffice.admissionsList' }"
+        tag="router-link"
+        icon="bed"
+        label="Admitted patients"
+      ></b-menu-item>
+    </b-menu-list>
+
     <b-menu-list label="Bed Management">
       <b-menu-item
         :to="{ name: 'backoffice.bedTypeList' }"
