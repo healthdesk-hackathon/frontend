@@ -30,15 +30,25 @@ const state = {
           label: "Search patient",
         },
         {
+          to: { name: "backoffice.registerPatient" },
+          icon: "plus",
+          label: "Register a patient",
+        },
+        {
           to: { name: "backoffice.admitNew" },
           context: "patient",
-          icon: "plus",
+          icon: "import",
           label: "Admit a patient",
         },
         {
-          to: { name: "backoffice.admissionsList" },
+          to: { name: "backoffice.patientsList" },
 
-          icon: "bed",
+          icon: "account-group",
+          label: "Recent patient registrations",
+        },
+        {
+          to: { name: "backoffice.admissionsList" },
+          icon: "clipboard-list",
           label: "Recent admissions",
         },
         {
