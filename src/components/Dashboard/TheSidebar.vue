@@ -21,22 +21,28 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState(["sidebarmenu", "user", "patient", "admission"]),
-    groupMenuList: function() {
-      // Filter the sidebarMenuList for the user's groups
+    ...mapState(["sidebarmenu", "user"]),
+    groupMenuList() {
+      // Deep clone the state, as the current filtering and manipulation
+      // messes up the arrays otherwise
+      let list = JSON.parse(JSON.stringify(this.sidebarmenu.sidebarMenuList));
 
-      var list = this.sidebarmenu.sidebarMenuList.filter(
-        listitem => this.user.groups.indexOf(listitem.group) >= 0
-      );
+      // Filter the sidebarMenuList for the user's groups
+      list = list.filter(listitem => this.user.groups.includes(listitem.group));
 
       // For the remaining groups, filter the menu items to show
       // only those without a context, or where the current state
       // has an item for the context.
       // For example, if the context of an item is an admission, and
       // and the store state has an admission set, keep the item.
+
+      let currentView = this.user.current_view;
+
       list.forEach(listitem => {
         listitem.menu_items = listitem.menu_items.filter(
-          item => !item.context || (this[item.context] && this[item.context].id)
+          item =>
+            !item.context ||
+            (currentView[item.context] && currentView[item.context].id)
         );
       });
 

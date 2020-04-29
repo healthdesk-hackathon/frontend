@@ -3,11 +3,11 @@ import { API } from "@/service/api";
 const ADMISSION_ENDPOINT = "admission";
 
 const MUTATIONS = {
-  SET_ADMISSIONS: "ADMISSIONS"
+  SET_ADMISSIONS: "ADMISSIONS",
 };
 
 const state = {
-  admissions: []
+  admissions: [],
 };
 
 const getters = {};
@@ -15,18 +15,22 @@ const getters = {};
 const mutations = {
   [MUTATIONS.SET_ADMISSIONS](state, admissions) {
     state.admissions = admissions;
-  }
+  },
 };
 
 const actions = {
-  async fetchAdmissions({ commit }) {
+  async fetchAdmissions({ commit }, data = null) {
     try {
-      const response = await API.service.get(ADMISSION_ENDPOINT + "/");
+      const response = await API.service.request({
+        method: "get",
+        url: ADMISSION_ENDPOINT + "/",
+        params: data,
+      });
       commit(MUTATIONS.SET_ADMISSIONS, response.data);
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 };
 
 export default {
@@ -34,5 +38,5 @@ export default {
   getters,
   mutations,
   actions,
-  namespaced: true
+  namespaced: true,
 };
