@@ -46,7 +46,7 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   props: {
-    patient_id: { type: String, required: true },
+    patient_id: { type: String, required: false },
     current: { type: Boolean, required: false }
   },
   watch: {
@@ -65,7 +65,7 @@ export default {
 
     open_row(row) {
       this.$router.push({
-        name: "backoffice.healthSnapshotForAdmission",
+        name: "backoffice.admission",
         params: { admission: row, admission_id: row.id }
       });
     },

@@ -31,38 +31,41 @@
           </div>
         </div>
         <div class="card-header">
-          <router-link :to="true" class="card-footer-item">Action 1</router-link>
-          <router-link :to="true" class="card-footer-item">Action 2</router-link>
+          <router-link :to="'/'" class="card-footer-item">Action 1</router-link>
+          <router-link :to="'/'" class="card-footer-item">Action 2</router-link>
         </div>
-        <div class="card-header">
+        <div class="extra-content">
           <div class="card-content">
-            <b-collapse aria-id="patientIdentifiers">
+            <b-collapse aria-id="patientIdentifiers" class="card" animation="slide" :open="false">
               <div
                 slot="trigger"
                 slot-scope="props"
-                class="none"
+                class="card-header"
                 role="button"
                 aria-controls="patientIdentifiers"
+                animation="slide"
               >
                 <p class="card-header-title">
-                  Identifiers
+                  Identifiers ({{patient.patient_identifiers.length}})
                   <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"></b-icon>
                 </p>
               </div>
               <div class="card-content">
-                <div class="content"></div>
+                <div class="content">
+                  <identifiers-list :patient="this.patient" />
+                </div>
               </div>
             </b-collapse>
-            <b-collapse aria-id="patientPhones">
+            <b-collapse aria-id="patientPhones" class="card" animation="slide" :open="false">
               <div
                 slot="trigger"
                 slot-scope="props"
-                class="none"
+                class="card-header"
                 role="button"
                 aria-controls="patientPhones"
               >
                 <p class="card-header-title">
-                  Phone
+                  Phone ({{patient.phones.length}})
                   <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"></b-icon>
                 </p>
               </div>
@@ -72,21 +75,25 @@
                 </div>
               </div>
             </b-collapse>
-            <b-collapse aria-id="patientNextOfKin">
+            <b-collapse aria-id="patientNextOfKin" class="card" animation="slide" :open="false">
               <div
                 slot="trigger"
                 slot-scope="props"
-                class="none"
+                class="card-header"
                 role="button"
                 aria-controls="patientNextOfKin"
+                animation="slide"
+                open="false"
               >
                 <p class="card-header-title">
-                  Next of Kin
+                  Next of Kin ({{patient.next_of_kin_contacts.length}})
                   <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"></b-icon>
                 </p>
               </div>
               <div class="card-content">
-                <div class="content"></div>
+                <div class="content">
+                  <next-of-kin-contacts-list :patient="this.patient" />
+                </div>
               </div>
             </b-collapse>
           </div>
@@ -103,11 +110,15 @@
 import { mapActions, mapState } from "vuex";
 import AdmissionsForPatient from "@/components/Patients/AdmissionsForPatient.vue";
 import PhonesList from "@/components/Patients/PhonesList.vue";
+import IdentifiersList from "@/components/Patients/IdentifiersList.vue";
+import NextOfKinContactsList from "@/components/Patients/NextOfKinContactsList.vue";
 
 export default {
   components: {
     AdmissionsForPatient,
-    PhonesList
+    PhonesList,
+    IdentifiersList,
+    NextOfKinContactsList
   },
   props: {
     patient_id: { type: String, required: true }

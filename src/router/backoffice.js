@@ -50,6 +50,17 @@ const routes = {
           /* webpackChunkName: "backoffice" */ "../views/backoffice/healthsnapshots/HealthSnapshotForAdmission.vue"
         ),
     },
+
+    // Admission
+    {
+      path: "admissions/:admission_id",
+      name: "backoffice.admission",
+      component: () =>
+        import(
+          /* webpackChunkName: "backoffice" */ "../views/backoffice/admissions/Admission.vue"
+        ),
+    },
+
     // Admissions list
     {
       path: "admissions/all",
