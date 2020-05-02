@@ -32,6 +32,7 @@ const actions = {
   // Patients
   async fetchPatients({ commit }) {
     try {
+      commit(MUTATIONS.SET_PATIENTS, []);
       const response = await API.service.get(PATIENT_ENDPOINT + "/");
       const patients = [...response.data];
       response.data.forEach((b) => {
@@ -47,6 +48,8 @@ const actions = {
 
   async fetchPatient({ commit }, id) {
     try {
+      commit(MUTATIONS.SET_PATIENT, {});
+      console.log(PATIENT_ENDPOINT + "/" + id);
       const response = await API.service.get(PATIENT_ENDPOINT + "/" + id);
       const patient = { ...response.data };
 

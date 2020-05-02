@@ -16,7 +16,7 @@
                 <p
                   class="title is-4"
                 >{{ patient.personal_data.first_name || '-' }} {{ patient.personal_data.last_name || '-' }}</p>
-                <p class="subtitle is-6 patient-dob">
+                <p class="patient-dob">
                   <span>DOB:</span>
                   {{ patient.personal_data.date_of_birth || '-'}}
                   <span>Gender:</span>
@@ -31,8 +31,12 @@
           </div>
         </div>
         <div class="card-header">
-          <router-link :to="'/'" class="card-footer-item">Action 1</router-link>
-          <router-link :to="'/'" class="card-footer-item">Action 2</router-link>
+          <router-link
+            v-if="currently_admitted"
+            :to="{name: 'backoffice.admission', params: { admission_id: patient.current_admission_id }}"
+            class="card-footer-item"
+          >View Current Admission</router-link>
+          <router-link v-else :to="'/'" class="card-footer-item">Admit Patient</router-link>
         </div>
         <div class="extra-content">
           <div class="card-content">
@@ -52,7 +56,7 @@
               </div>
               <div class="card-content">
                 <div class="content">
-                  <identifiers-list :patient="this.patient" />
+                  <identifiers-list :patient="patient" />
                 </div>
               </div>
             </b-collapse>
@@ -71,7 +75,7 @@
               </div>
               <div class="card-content">
                 <div class="content">
-                  <phones-list :patient="this.patient" />
+                  <phones-list :patient="patient" />
                 </div>
               </div>
             </b-collapse>
@@ -92,14 +96,14 @@
               </div>
               <div class="card-content">
                 <div class="content">
-                  <next-of-kin-contacts-list :patient="this.patient" />
+                  <next-of-kin-contacts-list :patient="patient" />
                 </div>
               </div>
             </b-collapse>
           </div>
         </div>
         <div class="extra-content">
-          <admissions-for-patient :patient-id="this.patient_id" />
+          <admissions-for-patient :patient_id="patient.id" :patient="patient" />
         </div>
       </div>
     </section>
@@ -135,9 +139,16 @@ export default {
   methods: {
     ...mapActions("patients", ["fetchPatient"]),
 
+    currently_admitted() {
+      return (
+        this.patient.current_admission &&
+        this.patient.current_admission.admitted
+      );
+    },
+
     reloadPatient() {
       let patient = this.$store.state.patient;
-      console.log(patient);
+
       if (this.patient_id && (!patient || patient.id != this.patient_id)) {
         this.$store.dispatch("patients/fetchPatient", this.patient_id);
       }

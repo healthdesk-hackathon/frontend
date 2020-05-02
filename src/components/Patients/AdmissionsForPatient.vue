@@ -11,6 +11,13 @@
         @click="open_row"
       >
         <template slot-scope="props" sortable>
+          <b-table-column field="currently_admitted" label="Currently Admitted" sortable>
+            <b-checkbox
+              :disabled="true"
+              :value="props.row.admitted"
+              @click.native.prevent.stop="true"
+            />
+          </b-table-column>
           <b-table-column field="local_barcode" label="Hospital ID" sortable>
             {{
             props.row.local_barcode
@@ -31,7 +38,7 @@
 
           <b-table-column
             field="admitted_at"
-            label="Date"
+            label="Admission Date"
             centered
             sortable
           >{{ props.row.admitted_at | date }}</b-table-column>
@@ -46,14 +53,14 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   props: {
-    patient_id: { type: String, required: false },
-    current: { type: Boolean, required: false }
+    patient_id: { type: String, required: true },
+    patient: { type: Object, required: false }
   },
   watch: {
-    $route: "reloadPatient"
+    patient_id: "reloadPatient"
   },
   computed: {
-    ...mapState("admissions", ["admissions"], "patients", ["patient"])
+    ...mapState("admissions", ["admissions"])
   },
   mounted() {
     this.reloadPatient();
@@ -71,12 +78,6 @@ export default {
     },
 
     reloadPatient() {
-      let patient = this.$store.state.patient;
-      console.log(patient);
-      if (this.patient_id && (!patient || patient.id != this.patient_id)) {
-        this.$store.dispatch("patients/fetchPatient", this.patient_id);
-      }
-
       if (this.patient_id) {
         this.$store.dispatch("admissions/fetchAdmissions", {
           patient_id: this.patient_id
