@@ -3,11 +3,11 @@ import { API } from "@/service/api";
 const HEALTHSNAPSHOT_ENDPOINT = "health-snapshot";
 
 const MUTATIONS = {
-  SET_HEALTH_SNAPSHOTS: "SET_HEALTH_SNAPSHOTS"
+  SET_HEALTH_SNAPSHOTS: "SET_HEALTH_SNAPSHOTS",
 };
 
 const state = {
-  healthSnapshots: []
+  healthSnapshots: [],
 };
 
 const getters = {};
@@ -15,7 +15,7 @@ const getters = {};
 const mutations = {
   [MUTATIONS.SET_HEALTH_SNAPSHOTS](state, healthSnapshots) {
     state.healthSnapshots = healthSnapshots;
-  }
+  },
 };
 
 const actions = {
@@ -33,7 +33,7 @@ const actions = {
       const response = await API.service.request({
         method: "get",
         url: HEALTHSNAPSHOT_ENDPOINT + "/",
-        params: data
+        params: data,
       });
       commit(MUTATIONS.SET_HEALTH_SNAPSHOTS, response.data);
     } catch (e) {
@@ -62,7 +62,7 @@ const actions = {
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 };
 
 export default {
@@ -70,5 +70,5 @@ export default {
   getters,
   mutations,
   actions,
-  namespaced: true
+  namespaced: true,
 };

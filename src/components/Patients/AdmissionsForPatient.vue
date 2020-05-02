@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="section">
-      <h1 class="title is-2">Admissions</h1>
+      <h4 class="title is-4">Admissions</h4>
       <b-table
         :loading="!admissions"
         :data="admissions"
@@ -11,12 +11,13 @@
         @click="open_row"
       >
         <template slot-scope="props" sortable>
-          <b-table-column field="patient_display" label="Patient" searchable>
-            {{
-            props.row.patient_display
-            }}
+          <b-table-column field="currently_admitted" label="Currently Admitted" sortable>
+            <b-checkbox
+              :disabled="true"
+              :value="props.row.admitted"
+              @click.native.prevent.stop="true"
+            />
           </b-table-column>
-
           <b-table-column field="local_barcode" label="Hospital ID" sortable>
             {{
             props.row.local_barcode
@@ -37,7 +38,7 @@
 
           <b-table-column
             field="admitted_at"
-            label="Date"
+            label="Admission Date"
             centered
             sortable
           >{{ props.row.admitted_at | date }}</b-table-column>
@@ -52,30 +53,36 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   props: {
-    patient_id: { type: String, required: false }
+    patient_id: { type: String, required: true },
+    patient: { type: Object, required: false }
   },
-
-  data: function() {
-    return {
-      patient: null
-    };
+  watch: {
+    patient_id: "reloadPatient"
   },
-
   computed: {
     ...mapState("admissions", ["admissions"])
   },
   mounted() {
-    if (this.patient_id) this.fetchAdmissions({ patient_id: this.patient.id });
-    this.fetchAdmissions();
+    this.reloadPatient();
   },
   methods: {
-    ...mapActions("admissions", ["fetchAdmissions"]),
+    ...mapActions("admissions", ["fetchAdmissions"], "patients", [
+      "fetchPatient"
+    ]),
 
     open_row(row) {
       this.$router.push({
-        name: "backoffice.healthSnapshotForAdmission",
+        name: "backoffice.admission",
         params: { admission: row, admission_id: row.id }
       });
+    },
+
+    reloadPatient() {
+      if (this.patient_id) {
+        this.$store.dispatch("admissions/fetchAdmissions", {
+          patient_id: this.patient_id
+        });
+      }
     }
   }
 };

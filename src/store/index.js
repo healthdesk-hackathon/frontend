@@ -10,22 +10,20 @@ import healthsnapshots from "./healthsnapshots";
 import sidebarmenu from "./sidebarmenu";
 import user from "./user";
 import auth from "./auth";
-import patient from "./patient";
-import admission from "./admission";
+import patients from "./patients";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     forms,
-    admissions,
     triage,
+    admissions,
     beds,
     auth,
     healthsnapshots,
     sidebarmenu,
-    patient,
-    admission,
+    patients,
     user,
   },
 });
