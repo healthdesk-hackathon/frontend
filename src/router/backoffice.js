@@ -12,7 +12,7 @@ const routes = {
       component: () =>
         import(
           /* webpackChunkName: "backoffice" */ "../views/backoffice/dashboard/Dashboard.vue"
-        )
+        ),
     },
     // Triage
     {
@@ -21,7 +21,7 @@ const routes = {
       component: () =>
         import(
           /* webpackChunkName: "backoffice" */ "../views/backoffice/triage/TriageSteps.vue"
-        )
+        ),
     },
     {
       path: "triage/all",
@@ -29,7 +29,7 @@ const routes = {
       component: () =>
         import(
           /* webpackChunkName: "backoffice" */ "../views/backoffice/triage/TriageList.vue"
-        )
+        ),
     },
 
     // Health Snapshots
@@ -39,7 +39,7 @@ const routes = {
       component: () =>
         import(
           /* webpackChunkName: "backoffice" */ "../views/backoffice/healthsnapshots/HealthSnapshotNew.vue"
-        )
+        ),
     },
     {
       path: "healthsnapshots/:admission_id",
@@ -48,8 +48,19 @@ const routes = {
       component: () =>
         import(
           /* webpackChunkName: "backoffice" */ "../views/backoffice/healthsnapshots/HealthSnapshotForAdmission.vue"
-        )
+        ),
     },
+
+    // Admission
+    {
+      path: "admissions/:admission_id",
+      name: "backoffice.admission",
+      component: () =>
+        import(
+          /* webpackChunkName: "backoffice" */ "../views/backoffice/admissions/Admission.vue"
+        ),
+    },
+
     // Admissions list
     {
       path: "admissions/all",
@@ -57,7 +68,28 @@ const routes = {
       component: () =>
         import(
           /* webpackChunkName: "backoffice" */ "../views/backoffice/admissions/AdmissionsList.vue"
-        )
+        ),
+    },
+
+    // Patient
+    {
+      path: "patients/:patient_id",
+      name: "backoffice.patient",
+      props: true,
+      component: () =>
+        import(
+          /* webpackChunkName: "backoffice" */ "../views/backoffice/patients/Patient.vue"
+        ),
+    },
+
+    // Patients list
+    {
+      path: "patients/all",
+      name: "backoffice.patientsList",
+      component: () =>
+        import(
+          /* webpackChunkName: "backoffice" */ "../views/backoffice/patients/PatientsList.vue"
+        ),
     },
 
     // Bed management
@@ -67,7 +99,7 @@ const routes = {
       component: () =>
         import(
           /* webpackChunkName: "backoffice" */ "../views/backoffice/bedmanagement/BedList.vue"
-        )
+        ),
     },
     {
       path: "bedmanagement/types/all",
@@ -75,9 +107,9 @@ const routes = {
       component: () =>
         import(
           /* webpackChunkName: "backoffice" */ "../views/backoffice/bedmanagement/BedTypeList.vue"
-        )
-    }
-  ]
+        ),
+    },
+  ],
 };
 
 export default routes;

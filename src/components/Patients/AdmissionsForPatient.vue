@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="section">
-      <h1 class="title is-2">Admissions</h1>
+      <h4 class="title is-4">Admissions</h4>
       <b-table
         :loading="!admissions"
         :data="admissions"
@@ -11,12 +11,6 @@
         @click="open_row"
       >
         <template slot-scope="props" sortable>
-          <b-table-column field="patient_display" label="Patient" searchable>
-            {{
-            props.row.patient_display
-            }}
-          </b-table-column>
-
           <b-table-column field="local_barcode" label="Hospital ID" sortable>
             {{
             props.row.local_barcode
@@ -52,30 +46,42 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   props: {
-    patient_id: { type: String, required: false }
+    patient_id: { type: String, required: false },
+    current: { type: Boolean, required: false }
   },
-
-  data: function() {
-    return {
-      patient: null
-    };
+  watch: {
+    $route: "reloadPatient"
   },
-
   computed: {
-    ...mapState("admissions", ["admissions"])
+    ...mapState("admissions", ["admissions"], "patients", ["patient"])
   },
   mounted() {
-    if (this.patient_id) this.fetchAdmissions({ patient_id: this.patient.id });
-    this.fetchAdmissions();
+    this.reloadPatient();
   },
   methods: {
-    ...mapActions("admissions", ["fetchAdmissions"]),
+    ...mapActions("admissions", ["fetchAdmissions"], "patients", [
+      "fetchPatient"
+    ]),
 
     open_row(row) {
       this.$router.push({
-        name: "backoffice.healthSnapshotForAdmission",
+        name: "backoffice.admission",
         params: { admission: row, admission_id: row.id }
       });
+    },
+
+    reloadPatient() {
+      let patient = this.$store.state.patient;
+      console.log(patient);
+      if (this.patient_id && (!patient || patient.id != this.patient_id)) {
+        this.$store.dispatch("patients/fetchPatient", this.patient_id);
+      }
+
+      if (this.patient_id) {
+        this.$store.dispatch("admissions/fetchAdmissions", {
+          patient_id: this.patient_id
+        });
+      }
     }
   }
 };

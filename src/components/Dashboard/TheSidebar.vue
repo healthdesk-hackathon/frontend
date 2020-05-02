@@ -1,58 +1,53 @@
 <template>
   <b-menu>
-    <b-menu-list>
+    <b-menu-list
+      v-for="menuListItem in groupMenuList"
+      :key="menuListItem.group"
+      :label="menuListItem.label"
+    >
       <b-menu-item
-        :to="{ name: 'backoffice.dashboard' }"
+        v-for="menuItem in menuListItem.menu_items"
+        :key="menuItem.to.name"
+        :to="menuItem.to"
         tag="router-link"
-        icon="chart-line"
-        label="View Dashboard"
-      ></b-menu-item>
-    </b-menu-list>
-
-    <b-menu-list label="Triage">
-      <b-menu-item
-        :to="{ name: 'backoffice.triageNew' }"
-        tag="router-link"
-        icon="plus"
-        label="Admit a patient"
-      ></b-menu-item>
-    </b-menu-list>
-
-    <b-menu-list label="Admitted Patients">
-      <b-menu-item
-        :to="{ name: 'backoffice.admissionsList' }"
-        tag="router-link"
-        icon="bed"
-        label="Admitted patients"
-      ></b-menu-item>
-    </b-menu-list>
-
-    <b-menu-list label="Bed Management">
-      <b-menu-item
-        :to="{ name: 'backoffice.bedTypeList' }"
-        tag="router-link"
-        icon="bed"
-        label="See all bed types"
-      ></b-menu-item>
-      <b-menu-item
-        :to="{ name: 'backoffice.bedList' }"
-        tag="router-link"
-        icon="bed"
-        label="See all beds"
-      ></b-menu-item>
-    </b-menu-list>
-
-    <b-menu-list label="Health Snapshots">
-      <b-menu-item
-        :to="{ name: 'backoffice.healthSnapshotNew' }"
-        tag="router-link"
-        icon="plus"
-        label="Create a health snapshot"
+        :icon="menuItem.icon"
+        :label="menuItem.label"
       ></b-menu-item>
     </b-menu-list>
   </b-menu>
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState(["sidebarmenu", "user"]),
+    groupMenuList() {
+      // Deep clone the state, as the current filtering and manipulation
+      // messes up the arrays otherwise
+      let list = JSON.parse(JSON.stringify(this.sidebarmenu.sidebarMenuList));
+
+      // Filter the sidebarMenuList for the user's groups
+      list = list.filter(listitem => this.user.groups.includes(listitem.group));
+
+      // For the remaining groups, filter the menu items to show
+      // only those without a context, or where the current state
+      // has an item for the context.
+      // For example, if the context of an item is an admission, and
+      // and the store state has an admission set, keep the item.
+
+      let currentView = this.user.current_view;
+
+      list.forEach(listitem => {
+        listitem.menu_items = listitem.menu_items.filter(
+          item =>
+            !item.context ||
+            (currentView[item.context] && currentView[item.context].id)
+        );
+      });
+
+      return list;
+    }
+  }
+};
 </script>
