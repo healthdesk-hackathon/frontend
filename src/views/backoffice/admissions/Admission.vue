@@ -13,6 +13,7 @@
               </div>
               <div class="media-content">
                 <p class="title is-4">{{ admission.patient_display || '-' }}</p>
+                <p class>{{ admission.local_barcode }}</p>
                 <p class>
                   <span>Admitted at:</span>
                   {{ admission.admitted_at | datetime }}
