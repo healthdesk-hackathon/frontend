@@ -72,8 +72,9 @@ export default {
     ...mapActions("admissions", ["fetchAdmissions"]),
 
     open_row(row) {
+      this.$store.dispatch("user/setCurrentView", { admission: row });
       this.$router.push({
-        name: "backoffice.healthSnapshotForAdmission",
+        name: "backoffice.admission",
         params: { admission: row, admission_id: row.id }
       });
     }

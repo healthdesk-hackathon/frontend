@@ -55,6 +55,7 @@ const routes = {
     {
       path: "admissions/:admission_id",
       name: "backoffice.admission",
+      props: true,
       component: () =>
         import(
           /* webpackChunkName: "backoffice" */ "../views/backoffice/admissions/Admission.vue"
