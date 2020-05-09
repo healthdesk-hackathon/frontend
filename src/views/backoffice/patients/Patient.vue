@@ -13,14 +13,14 @@
                 </figure>
               </div>
               <div class="media-content">
-                <p
-                  class="title is-4"
-                >{{ patient.personal_data.first_name || '-' }} {{ patient.personal_data.last_name || '-' }}</p>
+                <p class="title is-4">
+                  {{ patient.personal_data.first_name || "-" }} {{ patient.personal_data.last_name || "-" }}
+                </p>
                 <p class="patient-dob">
                   <span>DOB:</span>
-                  {{ patient.personal_data.date_of_birth || '-'}}
+                  {{ patient.personal_data.date_of_birth || "-" }}
                   <span>Gender:</span>
-                  {{ patient.personal_data && patient.personal_data.gender_display || '-' }}
+                  {{ (patient.personal_data && patient.personal_data.gender_display) || "-" }}
                 </p>
                 <p class="record-created-at">
                   <span>Registered:</span>
@@ -33,9 +33,10 @@
         <div class="card-header">
           <router-link
             v-if="currently_admitted"
-            :to="{name: 'backoffice.admission', params: { admission_id: patient.current_admission_id }}"
+            :to="{ name: 'backoffice.admission', params: { admission_id: patient.current_admission_id } }"
             class="card-footer-item"
-          >View Current Admission</router-link>
+            >View Current Admission</router-link
+          >
           <router-link v-else :to="'/'" class="card-footer-item">Admit Patient</router-link>
         </div>
         <div class="extra-content">
@@ -50,7 +51,7 @@
                 animation="slide"
               >
                 <p class="card-header-title">
-                  Identifiers ({{patient.patient_identifiers.length}})
+                  Identifiers ({{ patient.patient_identifiers.length }})
                   <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"></b-icon>
                 </p>
               </div>
@@ -61,15 +62,9 @@
               </div>
             </b-collapse>
             <b-collapse aria-id="patientPhones" class="card" animation="slide" :open="false">
-              <div
-                slot="trigger"
-                slot-scope="props"
-                class="card-header"
-                role="button"
-                aria-controls="patientPhones"
-              >
+              <div slot="trigger" slot-scope="props" class="card-header" role="button" aria-controls="patientPhones">
                 <p class="card-header-title">
-                  Phone ({{patient.phones.length}})
+                  Phone ({{ patient.phones.length }})
                   <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"></b-icon>
                 </p>
               </div>
@@ -90,7 +85,7 @@
                 open="false"
               >
                 <p class="card-header-title">
-                  Next of Kin ({{patient.next_of_kin_contacts.length}})
+                  Next of Kin ({{ patient.next_of_kin_contacts.length }})
                   <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"></b-icon>
                 </p>
               </div>
@@ -122,38 +117,35 @@ export default {
     AdmissionsForPatient,
     PhonesList,
     IdentifiersList,
-    NextOfKinContactsList
+    NextOfKinContactsList,
   },
   props: {
-    patient_id: { type: String, required: true }
+    patient_id: { type: String, required: true },
   },
   watch: {
-    $route: "reloadPatient"
+    $route: "reloadPatient",
   },
   computed: {
-    ...mapState("patients", ["patient"])
+    ...mapState("patient", ["patient"]),
   },
   mounted() {
     this.reloadPatient();
   },
   methods: {
-    ...mapActions("patients", ["fetchPatient"]),
+    ...mapActions("patient", ["fetchPatient"]),
 
     currently_admitted() {
-      return (
-        this.patient.current_admission &&
-        this.patient.current_admission.admitted
-      );
+      return this.patient.current_admission && this.patient.current_admission.admitted;
     },
 
     reloadPatient() {
       let patient = this.$store.state.patient;
 
       if (this.patient_id && (!patient || patient.id != this.patient_id)) {
-        this.$store.dispatch("patients/fetchPatient", this.patient_id);
+        this.$store.dispatch("patient/fetchPatient", this.patient_id);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -7,28 +7,17 @@
           {{ admission.patient_display }}
         </span>
       </h1>
-      <b-table
-        :data="healthSnapshots"
-        :default-sort="['created_at', 'desc']"
-        hoverable
-        paginated
-      >
+      <b-table :data="healthSnapshots" :default-sort="['created_at', 'desc']" hoverable paginated>
         <template slot-scope="props">
           <b-table-column field="created_at" label="Date/Time" sortable>{{
             props.row.created_at | datetime
           }}</b-table-column>
 
-          <b-table-column field="severity" label="Severity" sortable>{{
-            props.row.severity
-          }}</b-table-column>
+          <b-table-column field="severity" label="Severity" sortable>{{ props.row.severity }}</b-table-column>
 
-          <b-table-column field="heart_rate" label="HR" sortable>{{
-            props.row.heart_rate
-          }}</b-table-column>
+          <b-table-column field="heart_rate" label="HR" sortable>{{ props.row.heart_rate }}</b-table-column>
 
-          <b-table-column field="breathing_rate" label="BR" sortable
-            >{{ props.row.breathing_rate }}
-          </b-table-column>
+          <b-table-column field="breathing_rate" label="BR" sortable>{{ props.row.breathing_rate }} </b-table-column>
 
           <b-table-column field="blood_pressure_systolic" label="BPS" sortable
             >{{ props.row.blood_pressure_systolic }}
@@ -39,9 +28,7 @@
           </b-table-column>
 
           <b-table-column label="GCS"
-            >{{
-              props.row.gcs_eye + props.row.gcs_motor + props.row.gcs_verbal
-            }}
+            >{{ props.row.gcs_eye + props.row.gcs_motor + props.row.gcs_verbal }}
           </b-table-column>
         </template>
         <template slot="empty">
@@ -64,22 +51,21 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   props: {
-    admission: { type: Object, required: true }
+    admission: { type: Object, required: true },
   },
   data() {
     return {};
   },
   computed: {
-    ...mapState("healthsnapshots", ["healthSnapshots"])
+    ...mapState("health_snapshot", ["healthSnapshots"]),
   },
   mounted() {
-    if (this.admission)
-      this.fetchHealthSnapshots({ admission_id: this.admission.id });
+    if (this.admission) this.fetchHealthSnapshots({ admission_id: this.admission.id });
     else this.fetchHealthSnapshots();
   },
   methods: {
-    ...mapActions("healthsnapshots", ["fetchHealthSnapshots"])
-  }
+    ...mapActions("health_snapshot", ["fetchHealthSnapshots"]),
+  },
 };
 </script>
 

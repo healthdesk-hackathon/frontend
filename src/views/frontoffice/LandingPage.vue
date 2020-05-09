@@ -38,27 +38,27 @@ import FormIdentification from "@/components/Form/FormIdentification.vue";
 export default {
   name: "LandingPage",
   components: {
-    FormIdentification
+    FormIdentification,
   },
   computed: {
-    ...mapState("forms", ["submission"])
+    ...mapState("submission", ["submission"]),
   },
   data() {
     return {
-      formIdentificationActive: false
+      formIdentificationActive: false,
     };
   },
   methods: {
     async createSubmission(identification) {
       try {
         this.formIdentificationActive = true;
-        await this.$store.dispatch("forms/createSubmission", identification);
+        await this.$store.dispatch("submission/createSubmission", identification);
         this.$router.push({ name: "form", params: { id: this.submission.id } });
       } catch (e) {
         console.error(e);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
