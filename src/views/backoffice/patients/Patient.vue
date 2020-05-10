@@ -122,11 +122,11 @@ export default {
   props: {
     patient_id: { type: String, required: true },
   },
-  watch: {
-    $route: "reloadPatient",
-  },
   computed: {
     ...mapState("patient", ["patient"]),
+  },
+  watch: {
+    $route: "reloadPatient",
   },
   mounted() {
     this.reloadPatient();

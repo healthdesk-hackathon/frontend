@@ -73,13 +73,18 @@ const actions = {
       console.log(e);
     }
   },
-  async savePersonalData({ commit, state }, personalData) {
+  async savePersonalData({ commit, state }, data) {
     try {
+      if (data.workflow) {
+        var workflow_id = data.workflow.id;
+        var patient_id = data.workflow.related_data.patient.id;
+      }
       const value = {
         ...state.personalData,
-        workflow: state.workflow.id,
-        ...personalData,
-        date_of_birth: dayjs(personalData.date_of_birth).format("YYYY-MM-DD"),
+        workflow_id: workflow_id,
+        patient_id: patient_id,
+        ...data.personalData,
+        date_of_birth: dayjs(data.personalData.date_of_birth).format("YYYY-MM-DD"),
       };
       let response = null;
       if (value.id) {
@@ -93,12 +98,17 @@ const actions = {
     }
   },
 
-  async savePatientIdentifier({ commit, state }, patientIdentifier) {
+  async savePatientIdentifier({ commit, state }, data) {
     try {
+      if (data.workflow) {
+        var workflow_id = data.workflow.id;
+        var patient_id = data.workflow.related_data.patient.id;
+      }
       const value = {
         ...state.patientIdentifier,
-        workflow: state.workflow.id,
-        ...patientIdentifier,
+        workflow_id: workflow_id,
+        patient_id: patient_id,
+        ...data.patientIdentifier,
       };
       let response = null;
       if (value.id) {

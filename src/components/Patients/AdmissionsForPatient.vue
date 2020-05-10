@@ -22,13 +22,13 @@
             {{ props.row.current_bed }}
           </b-table-column>
 
-          <b-table-column field="current_severity" label="Condition Severity" sortable>{{
-            props.row.current_severity
-          }}</b-table-column>
+          <b-table-column field="current_severity" label="Condition Severity" sortable>
+            {{ props.row.current_severity }}
+          </b-table-column>
 
-          <b-table-column field="admitted_at" label="Admission Date" centered sortable>{{
-            props.row.admitted_at | date
-          }}</b-table-column>
+          <b-table-column field="admitted_at" label="Admission Date" centered sortable>
+            {{ props.row.admitted_at | date }}
+          </b-table-column>
         </template>
       </b-table>
     </section>
@@ -53,7 +53,8 @@ export default {
     this.reloadPatient();
   },
   methods: {
-    ...mapActions("admission", ["fetchAdmissions"], "patient", ["fetchPatient"]),
+    ...mapActions("admission", ["fetchAdmissions"]),
+    ...mapActions("patient", ["fetchPatient"]),
 
     open_row(row) {
       this.$router.push({

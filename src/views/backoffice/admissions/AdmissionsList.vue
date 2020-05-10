@@ -69,7 +69,7 @@ export default {
     this.fetchAdmissions();
   },
   methods: {
-    ...mapActions("admissions", ["fetchAdmissions"]),
+    ...mapActions("admission", ["fetchAdmissions"]),
 
     open_row(row) {
       this.$router.push({

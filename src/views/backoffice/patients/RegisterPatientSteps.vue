@@ -10,13 +10,13 @@
 
         <b-step-item label="Personal data" icon="account">
           <RegisterPatientStepContentWrapper title="Personal data">
-            <RegisterPatientStepPersonalData v-model="personalData" />
+            <RegisterPatientStepPersonalData :active="activeStep === 1" v-model="personalData" />
           </RegisterPatientStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Done" icon="account">
           <RegisterPatientStepContentWrapper title="Review">
-            <RegisterPatientStepFinish />
+            <RegisterPatientStepFinish :personalData="personalData" :complete="complete" />
           </RegisterPatientStepContentWrapper>
         </b-step-item>
 
@@ -34,7 +34,7 @@
                 >Next step</b-button
               >
               <b-button
-                v-else
+                v-if="next.disabled && !complete"
                 expanded
                 rounded
                 class="has-text-weight-bold"
@@ -43,7 +43,11 @@
                 >Submit</b-button
               >
               <br />
-              <b-button type="is-text is-small" :disabled="previous.disabled" @click.prevent="previous.action"
+              <b-button
+                v-if="!complete"
+                type="is-text is-small"
+                :disabled="previous.disabled"
+                @click.prevent="previous.action"
                 >Previous step</b-button
               >
             </div>
@@ -71,33 +75,46 @@ export default {
     ValidationObserver,
   },
   methods: {
-    ...mapActions("workflow", ["createWorkflow", "resetState"], "patient", [
-      "savePatientIdentifer",
-      "savePersonalData",
-    ]),
+    ...mapActions("patient", ["savePatientIdentifier", "savePersonalData"]),
+    ...mapActions("workflow", ["createWorkflow", "resetState"]),
 
-    async nextStep(next) {
-      if (this.activeStep == 0) this.setupSteps();
+    nextStep(next) {
+      if (this.activeStep === 0) {
+        this.startWorkflow();
+      }
       next.action();
     },
 
-    async setupSteps() {
+    setupSteps() {
+      this.resetState();
+      this.personalData = {};
+      this.identification = {};
+      this.complete = false;
+    },
+
+    async startWorkflow() {
       try {
         await this.createWorkflow("register patient");
-        await this.resetState;
-        this.personalData = {};
-        this.identification = {};
       } catch (e) {
         console.log(e);
       }
     },
+
     async registerPatient() {
       try {
-        await Promise.all([this.savePatientIdentifier(this.identification), this.savePersonalData(this.personalData)]);
-        await this.resetState;
-        this.personalData = {};
-        this.identification = {};
-        this.activeStep = 0;
+        await Promise.all([
+          console.log(this),
+          this.savePatientIdentifier({
+            patientIdentifier: this.identification,
+            workflow: this.workflow,
+          }),
+          this.savePersonalData({
+            personalData: this.personalData,
+            workflow: this.workflow,
+          }),
+        ]);
+        this.setupSteps();
+        this.complete = true;
       } catch (e) {
         console.log(e);
       }
@@ -112,7 +129,14 @@ export default {
       // data
       personalData: {},
       identification: {},
+      complete: false,
     };
+  },
+  watch: {
+    $route: "setupSteps",
+  },
+  mounted() {
+    this.setupSteps();
   },
 };
 </script>
