@@ -43,15 +43,7 @@ const routes = {
     {
       path: "admissions/:admission_id",
       name: "backoffice.admission",
-<<<<<<< HEAD
       component: () => import(/* webpackChunkName: "backoffice" */ "../views/backoffice/admissions/Admission.vue"),
-=======
-      props: true,
-      component: () =>
-        import(
-          /* webpackChunkName: "backoffice" */ "../views/backoffice/admissions/Admission.vue"
-        ),
->>>>>>> 9b88f16f7561a41e5ea14108402942d11ef82f59
     },
 
     // Admissions list
