@@ -44,8 +44,8 @@ export default {
     if (!this.tokens.access && this.$route.name !== "generic.login") {
       await this.$router.push({ name: "generic.login" });
     } else {
-      await this.fetchSubmissions();
-      await this.fetchAdmissions();
+      // await this.fetchSubmissions();
+      // await this.fetchAdmissions();
     }
   },
   watch: {
