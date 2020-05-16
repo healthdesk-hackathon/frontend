@@ -2,28 +2,30 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 // register modules below
-import forms from "./forms";
-import admissions from "./admissions";
+import submission from "./submission";
+import admission from "./admission";
 import triage from "./triage";
 import beds from "./beds";
-import healthsnapshots from "./healthsnapshots";
+import health_snapshot from "./health_snapshot";
 import sidebarmenu from "./sidebarmenu";
 import user from "./user";
 import auth from "./auth";
-import patients from "./patients";
+import patient from "./patient";
+import workflow from "./workflow";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    forms,
+    submission,
     triage,
-    admissions,
+    admission,
     beds,
     auth,
-    healthsnapshots,
+    health_snapshot,
     sidebarmenu,
-    patients,
+    patient,
     user,
+    workflow,
   },
 });

@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     ...mapActions("triage", ["fetchSubmissions"]),
-    ...mapActions("admissions", ["fetchAdmissions"])
+    ...mapActions("admission", ["fetchAdmissions"])
   },
   async mounted() {
     await this.$store.dispatch("auth/load");

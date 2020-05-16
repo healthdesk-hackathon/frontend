@@ -4,19 +4,13 @@
       <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
         <b-step-item label="Identification" icon="account-plus">
           <TriageStepContentWrapper title="Identification">
-            <TriageStepIdentification
-              :active="activeStep === 0"
-              v-model="identification"
-            />
+            <TriageStepIdentification :active="activeStep === 0" v-model="identification" />
           </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Personal data" icon="account">
           <TriageStepContentWrapper title="Personal data">
-            <TriageStepPersonalData
-              :active="activeStep === 1"
-              v-model="personalData"
-            />
+            <TriageStepPersonalData :active="activeStep === 1" v-model="personalData" />
           </TriageStepContentWrapper>
         </b-step-item>
 
@@ -74,11 +68,7 @@
                 Submit
               </b-button>
               <br />
-              <b-button
-                type="is-text is-small"
-                :disabled="previous.disabled"
-                @click.prevent="previous.action"
-              >
+              <b-button type="is-text is-small" :disabled="previous.disabled" @click.prevent="previous.action">
                 Previous step
               </b-button>
             </div>
@@ -111,10 +101,10 @@ export default {
     TriageStepHealthcheck,
     TriageStepSeverity,
     TriageStepFinish,
-    ValidationObserver
+    ValidationObserver,
   },
   methods: {
-    ...mapActions("forms", [
+    ...mapActions("submission", [
       "createSubmission",
       "createAdmission",
       "savePersonalData",
@@ -122,7 +112,7 @@ export default {
       "saveRelatedConditions",
       "saveOverallWellbeing",
       "saveHealthcheck",
-      "resetState"
+      "resetState",
     ]),
     async createTriage() {
       try {
@@ -133,7 +123,7 @@ export default {
           this.saveCommonSymptoms(this.commonSymptoms),
           this.saveRelatedConditions(this.relatedConditions),
           this.saveOverallWellbeing(this.commonSymptoms.overall_wellbeing),
-          this.saveHealthcheck(this.healthcheck)
+          this.saveHealthcheck(this.healthcheck),
         ]);
         await this.resetState;
         this.personalData = {};
@@ -146,11 +136,11 @@ export default {
       } catch (e) {
         console.log(e);
       }
-    }
+    },
   },
   computed: {
-    ...mapState("forms", ["submission"]),
-    ...mapGetters("forms", ["submissionReview"])
+    ...mapState("submission", ["submission"]),
+    ...mapGetters("submission", ["submissionReview"]),
   },
   data() {
     return {
@@ -161,9 +151,9 @@ export default {
       relatedConditions: {},
       identification: {},
       healthcheck: { severity: "WHITE" },
-      admission: {}
+      admission: {},
     };
-  }
+  },
 };
 </script>
 

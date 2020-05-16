@@ -50,11 +50,7 @@
                 Finish</b-button
               >
               <br />
-              <b-button
-                type="is-text is-small"
-                :disabled="previous.disabled"
-                @click.prevent="save(previous.action)"
-              >
+              <b-button type="is-text is-small" :disabled="previous.disabled" @click.prevent="save(previous.action)">
                 Previous step
               </b-button>
             </div>
@@ -76,18 +72,18 @@ import { ValidationObserver } from "vee-validate";
 
 export default {
   props: {
-    id: { type: String, required: true }
+    id: { type: String, required: true },
   },
   mounted() {
     this.getSubmissionByID(this.id);
   },
   methods: {
-    ...mapActions("forms", [
+    ...mapActions("submission", [
       "getSubmissionByID",
       "savePersonalData",
       "saveCommonSymptoms",
       "saveRelatedConditions",
-      "saveOverallWellbeing"
+      "saveOverallWellbeing",
     ]),
     submissionOver() {
       alert(
@@ -103,7 +99,7 @@ export default {
         case 1:
           await Promise.all([
             this.saveCommonSymptoms(this.commonSymptoms),
-            this.saveOverallWellbeing(this.commonSymptoms.overall_wellbeing)
+            this.saveOverallWellbeing(this.commonSymptoms.overall_wellbeing),
           ]);
           cb();
           break;
@@ -114,7 +110,7 @@ export default {
         default:
           console.error("Unknown operation");
       }
-    }
+    },
   },
   components: {
     FormStepContentWrapper,
@@ -122,11 +118,11 @@ export default {
     FormStepCommonSymptoms,
     FormStepRelatedConditions,
     FormStepFinish,
-    ValidationObserver
+    ValidationObserver,
   },
   computed: {
-    ...mapState("forms", ["submission"]),
-    ...mapGetters("forms", ["submissionReview"])
+    ...mapState("submission", ["submission"]),
+    ...mapGetters("submission", ["submissionReview"]),
   },
   data() {
     return {
@@ -135,9 +131,9 @@ export default {
       personalData: {},
       phone: {},
       commonSymptoms: { overall_wellbeing: {} },
-      relatedConditions: {}
+      relatedConditions: {},
     };
-  }
+  },
 };
 </script>
 

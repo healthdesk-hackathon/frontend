@@ -6,15 +6,8 @@
       </h1>
 
       <b-field label="Admission">
-        <b-select
-          placeholder="Select an admission"
-          v-model="healthSnapshot.admission"
-        >
-          <option
-            v-for="admission in admissions"
-            :value="admission.id"
-            :key="admission.id"
-          >
+        <b-select placeholder="Select an admission" v-model="healthSnapshot.admission">
+          <option v-for="admission in admissions" :value="admission.id" :key="admission.id">
             Patient: {{ admission.patient }}
           </option>
         </b-select>
@@ -25,18 +18,11 @@
       </b-field>
 
       <b-field label="Breathing rate">
-        <b-input
-          type="number"
-          v-model="healthSnapshot.breathing_rate"
-        ></b-input>
+        <b-input type="number" v-model="healthSnapshot.breathing_rate"></b-input>
       </b-field>
 
       <b-field label="Temperature">
-        <b-input
-          type="number"
-          step="0.1"
-          v-model="healthSnapshot.temperature"
-        ></b-input>
+        <b-input type="number" step="0.1" v-model="healthSnapshot.temperature"></b-input>
       </b-field>
 
       <b-field label="Blood pressure">
@@ -58,22 +44,12 @@
       </b-field>
 
       <b-field label="Oxygen saturation">
-        <b-input
-          type="number"
-          v-model="healthSnapshot.oxygen_saturation"
-        ></b-input>
+        <b-input type="number" v-model="healthSnapshot.oxygen_saturation"></b-input>
       </b-field>
 
       <b-field label="Glasgow Coma Scale">
         <b-field>
-          <b-input
-            type="number"
-            placeholder="Eye"
-            v-model="healthSnapshot.gcs_eye"
-            min="1"
-            max="4"
-            expanded
-          ></b-input>
+          <b-input type="number" placeholder="Eye" v-model="healthSnapshot.gcs_eye" min="1" max="4" expanded></b-input>
 
           <b-input
             type="number"
@@ -96,45 +72,21 @@
       </b-field>
 
       <b-field label="Observations">
-        <b-input
-          type="textarea"
-          maxlength="200"
-          v-model="healthSnapshot.observations"
-        ></b-input>
+        <b-input type="textarea" maxlength="200" v-model="healthSnapshot.observations"></b-input>
       </b-field>
       <p class="is-size-6 has-text-weight-bold" style="padding-bottom: 0.5rem">
         Severity
       </p>
       <b-field>
-        <b-radio
-          v-model="healthSnapshot.severity"
-          name="name"
-          size="is-medium"
-          native-value="WHITE"
-        >
+        <b-radio v-model="healthSnapshot.severity" name="name" size="is-medium" native-value="WHITE">
           White (dismissal) </b-radio
-        ><b-radio
-          v-model="healthSnapshot.severity"
-          name="name"
-          size="is-medium"
-          native-value="GREEN"
-        >
+        ><b-radio v-model="healthSnapshot.severity" name="name" size="is-medium" native-value="GREEN">
           Green
         </b-radio>
-        <b-radio
-          v-model="healthSnapshot.severity"
-          name="name"
-          size="is-medium"
-          native-value="YELLOW"
-        >
+        <b-radio v-model="healthSnapshot.severity" name="name" size="is-medium" native-value="YELLOW">
           Yellow
         </b-radio>
-        <b-radio
-          v-model="healthSnapshot.severity"
-          name="name"
-          size="is-medium"
-          native-value="RED"
-        >
+        <b-radio v-model="healthSnapshot.severity" name="name" size="is-medium" native-value="RED">
           Red
         </b-radio></b-field
       >
@@ -159,14 +111,14 @@ import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
-      healthSnapshot: {}
+      healthSnapshot: {},
     };
   },
   computed: {
-    ...mapState("admissions", ["admissions"])
+    ...mapState("admissions", ["admissions"]),
   },
   methods: {
-    ...mapActions("healthsnapshots", ["createHealthSnapshot"]),
+    ...mapActions("health_snapshot", ["createHealthSnapshot"]),
     async saveHealthSnapshot() {
       try {
         await this.createHealthSnapshot(this.healthSnapshot);
@@ -174,8 +126,8 @@ export default {
       } catch (e) {
         console.log(e);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
