@@ -103,7 +103,6 @@ export default {
     async registerPatient() {
       try {
         await Promise.all([
-          console.log(this),
           this.savePatientIdentifier({
             patientIdentifier: this.identification,
             workflow: this.workflow,
@@ -113,6 +112,8 @@ export default {
             workflow: this.workflow,
           }),
         ]);
+
+        this.$router.push({ name: "backoffice.patient", params: { patient_id: this.patient.id } });
         this.setupSteps();
         this.complete = true;
       } catch (e) {
@@ -122,6 +123,7 @@ export default {
   },
   computed: {
     ...mapState("workflow", ["workflow"]),
+    ...mapState("patient", ["patient"]),
   },
   data() {
     return {

@@ -38,7 +38,7 @@ const state = {
           to: { name: "backoffice.admitNew" },
           context: "patient",
           icon: "import",
-          label: "Admit a patient",
+          label: "Admit this patient",
         },
         {
           to: { name: "backoffice.patientsList" },

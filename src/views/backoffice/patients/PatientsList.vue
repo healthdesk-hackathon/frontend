@@ -39,8 +39,6 @@ export default {
     ...mapActions("patient", ["fetchPatients"]),
 
     open_row(row) {
-      this.$store.dispatch("user/setCurrentView", { patient: row });
-
       this.$router.push({
         name: "backoffice.patient",
         params: { patient: row, patient_id: row.id },

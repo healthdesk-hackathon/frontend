@@ -124,6 +124,9 @@ export default {
   },
   computed: {
     ...mapState("patient", ["patient"]),
+    currently_admitted() {
+      return this.patient.current_admission && this.patient.current_admission.admitted;
+    },
   },
   watch: {
     $route: "reloadPatient",
@@ -133,18 +136,20 @@ export default {
   },
   methods: {
     ...mapActions("patient", ["fetchPatient"]),
+    ...mapActions("user", ["setCurrentView"]),
 
-    currently_admitted() {
-      return this.patient.current_admission && this.patient.current_admission.admitted;
-    },
-
-    reloadPatient() {
-      let patient = this.$store.state.patient;
+    async reloadPatient() {
+      let patient = this.patient;
 
       if (this.patient_id && (!patient || patient.id != this.patient_id)) {
-        this.$store.dispatch("patient/fetchPatient", this.patient_id);
+        await Promise.all([this.fetchPatient(this.patient_id)]);
+        this.setCurrentView({ patient: this.patient });
       }
     },
+  },
+  beforeRouteLeave(to, from, next) {
+    this.setCurrentView({ patient: {} });
+    next();
   },
 };
 </script>
