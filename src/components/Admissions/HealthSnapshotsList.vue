@@ -2,16 +2,10 @@
   <div>
     <div class="list-actions">
       <router-link
-<<<<<<< HEAD
         :to="{ name: 'backoffice.admission', params: { admission_id: admission_id } }"
         class="card-footer-item"
         >Add Health Snapshot</router-link
       >
-=======
-        :to="{name: 'backoffice.admission', params: { admission_id: admission_id }}"
-        class="card-footer-item"
-      >Add Health Snapshot</router-link>
->>>>>>> 9b88f16f7561a41e5ea14108402942d11ef82f59
     </div>
     <section class="section">
       <b-table
@@ -75,7 +69,7 @@ export default {
   },
 
   computed: {
-    ...mapState("health_snapshot", ["healthSnapshots"]), 
+    ...mapState("health_snapshot", ["healthSnapshots"]),
     ...mapState("admission", ["admission"]),
   },
   mounted() {
