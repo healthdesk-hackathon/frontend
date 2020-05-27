@@ -37,7 +37,12 @@
             class="card-footer-item"
             >View Current Admission</router-link
           >
-          <router-link v-else :to="'/'" class="card-footer-item">Admit Patient</router-link>
+          <router-link
+            v-else
+            :to="{ name: 'backoffice.admitPatient', params: { patient_id: patient.id } }"
+            class="card-footer-item"
+            >Admit Patient</router-link
+          >
         </div>
         <div class="extra-content">
           <div class="card-content">

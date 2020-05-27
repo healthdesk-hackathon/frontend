@@ -26,15 +26,15 @@
           </TriageStepContentWrapper>
         </b-step-item>
 
-        <b-step-item label="Healthcheck" icon="head-check">
-          <TriageStepContentWrapper title="Healthcheck">
-            <TriageStepHealthcheck v-model="healthcheck" />
+        <b-step-item label="HealthSnapshot" icon="head-check">
+          <TriageStepContentWrapper title="HealthSnapshot">
+            <TriageStepHealthcheck v-model="health_snapshot" />
           </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Severity" icon="priority-high">
           <TriageStepContentWrapper title="Severity">
-            <TriageStepSeverity v-model="healthcheck.severity" />
+            <TriageStepSeverity v-model="health_snapshot.severity" />
           </TriageStepContentWrapper>
         </b-step-item>
 
@@ -123,14 +123,14 @@ export default {
           this.saveCommonSymptoms(this.commonSymptoms),
           this.saveRelatedConditions(this.relatedConditions),
           this.saveOverallWellbeing(this.commonSymptoms.overall_wellbeing),
-          this.saveHealthcheck(this.healthcheck),
+          this.saveHealthcheck(this.health_snapshot),
         ]);
         await this.resetState;
         this.personalData = {};
         this.commonSymptoms = { overall_wellbeing: {} };
         this.relatedConditions = {};
         this.identification = {};
-        this.healthcheck = { severity: "WHITE" };
+        this.health_snapshot = { severity: "WHITE" };
         this.admission = {};
         this.activeStep = 0;
       } catch (e) {
@@ -150,7 +150,7 @@ export default {
       commonSymptoms: { overall_wellbeing: {} },
       relatedConditions: {},
       identification: {},
-      healthcheck: { severity: "WHITE" },
+      health_snapshot: { severity: "WHITE" },
       admission: {},
     };
   },

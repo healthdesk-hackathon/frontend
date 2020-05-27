@@ -12,11 +12,11 @@
                 </figure>
               </div>
               <div class="media-content">
-                <p class="title is-4">{{ admission.patient_display || '-' }}</p>
+                <p class="title is-4">{{ admission.patient_display || "-" }}</p>
                 <p class>{{ admission.local_barcode }}</p>
                 <p class>
                   <span>Admitted at:</span>
-                  {{ admission.admitted_at | datetime }}
+                  {{ !admission.admitted_at ? "(no date)" : admission.admitted_at }}
                 </p>
                 <p class>
                   <span>Bed:</span>
@@ -32,21 +32,25 @@
         </div>
         <div v-if="admission.admitted" class="card-header">
           <router-link
-            :to="{name: 'backoffice.admission', params: { admission_id: admission_id }}"
+            :to="{ name: 'backoffice.admission', params: { admission_id: admission_id } }"
             class="card-footer-item"
-          >Change Bed</router-link>
+            >Change Bed</router-link
+          >
           <router-link
-            :to="{name: 'backoffice.admission', params: { admission_id: admission_id }}"
+            :to="{ name: 'backoffice.admission', params: { admission_id: admission_id } }"
             class="card-footer-item"
-          >Discharge</router-link>
+            >Discharge</router-link
+          >
           <router-link
-            :to="{name: 'backoffice.admission', params: { admission_id: admission_id }}"
+            :to="{ name: 'backoffice.admission', params: { admission_id: admission_id } }"
             class="card-footer-item"
-          >Transfer</router-link>
+            >Transfer</router-link
+          >
           <router-link
-            :to="{name: 'backoffice.admission', params: { admission_id: admission_id }}"
+            :to="{ name: 'backoffice.admission', params: { admission_id: admission_id } }"
             class="card-footer-item"
-          >Deceased</router-link>
+            >Deceased</router-link
+          >
         </div>
         <div v-else class="card-header">
           <span class="card-footer-item">Previous Admission</span>
@@ -110,34 +114,36 @@ import HealthSnapshotsList from "@/components/Admissions/HealthSnapshotsList.vue
 
 export default {
   components: {
-    HealthSnapshotsList
+    HealthSnapshotsList,
   },
   props: {
-    admission_id: { type: String, required: false }
+    admission_id: { type: String, required: false },
   },
   watch: {
-    $route: "reloadAdmission"
+    $route: "reloadAdmission",
   },
   computed: {
-    ...mapState("admissions", ["admission"])
+    ...mapState("admission", ["admission"]),
   },
 
   mounted() {
     this.reloadAdmission();
   },
   methods: {
-    ...mapActions("admissions", ["fetchAdmission"]),
+    ...mapActions("admission", ["fetchAdmission"]),
 
-    reloadAdmission() {
-      let admission = this.$store.state.admission;
-      if (
-        this.admission_id &&
-        (!admission || admission.id != this.admission_id)
-      ) {
-        this.$store.dispatch("admissions/fetchAdmission", this.admission_id);
+    async reloadAdmission() {
+      let admission = this.admission;
+      if (this.admission_id && (!admission || admission.id != this.admission_id)) {
+        await Promise.all([this.fetchAdmission(this.admission_id)]);
+        this.setCurrentView({ admission: this.admission });
       }
-    }
-  }
+    },
+  },
+  beforeRouteLeave(to, from, next) {
+    this.setCurrentView({ admission: {} });
+    next();
+  },
 };
 </script>
 

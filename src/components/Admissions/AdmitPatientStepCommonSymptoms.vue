@@ -1,16 +1,21 @@
 <template>
   <div>
     <h4 class="subtitle is-4 has-text-centered">
-      Describe your general condition
+      Describe the patient's general condition
     </h4>
 
     <section class="section">
-      <h5 class="subtitle is-5 has-text-centered">How do you feel overall?</h5>
-      <b-slider :min="1" :max="10" ticks v-model="model.overallWellbeing.overall_value" size="is-medium"></b-slider>
+      <h5 class="subtitle is-5 has-text-centered">
+        How does the patient feel overall?
+      </h5>
+      <b-slider :min="1" :max="10" ticks v-model="overall_wellbeing.overall_value" size="is-medium"></b-slider>
+      <h5 class="subtitle is-5 has-text-centered">
+        0 (very bad) to 10 (very good)
+      </h5>
     </section>
     <section class="section">
       <h5 class="subtitle is-5 has-text-centered">
-        Which symptoms do you have?
+        Which symptoms does the patient have?
       </h5>
       <br />
 
@@ -47,6 +52,7 @@
 export default {
   props: {
     value: { type: Object, required: true },
+    overall_wellbeing: { type: Object, required: true },
   },
   computed: {
     model: {

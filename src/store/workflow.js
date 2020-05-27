@@ -4,6 +4,7 @@ const WORKFLOW_ENDPOINT = "workflow";
 
 const RELATED_ACTIONS = {
   patient: "patient/setPatient",
+  admission: "admission/setAdmission",
 };
 
 const MUTATIONS = {
@@ -71,10 +72,22 @@ const actions = {
    * By creating this at the start of the workflow, and posting the request to
    * the backend, any initialisation work can be done.
    */
-  async createWorkflow({ dispatch, commit }, workflowType) {
+  async createWorkflow({ dispatch, commit }, data) {
     try {
+      let rel_id, rel_type;
+      let workflow_type = data.workflow_type;
+      delete data["workflow_type"];
+
+      rel_id = Object.values(data)[0].id;
+      rel_type = Object.keys(data)[0];
+
+      console.log(rel_type);
       const response = await API.service.post(WORKFLOW_ENDPOINT + "/", {
-        workflow_type: workflowType,
+        workflow_type: workflow_type,
+        related_data: {
+          rel_id: rel_id,
+          rel_type: rel_type,
+        },
       });
       commit(MUTATIONS.SET_WORKFLOW, response.data);
 

@@ -32,7 +32,7 @@ const getDefaultState = () => {
     personalData: {},
     patientIdentifier: {},
     relatedConditions: {},
-    healthcheck: {},
+    health_snapshot: {},
     admission: {},
   };
 };
@@ -71,8 +71,8 @@ const mutations = {
   [MUTATIONS.SET_GRADED_SYMPTOMS](state, symptoms) {
     state.gradedSymptoms = { ...state.gradedSymptoms, ...symptoms };
   },
-  [MUTATIONS.SET_HEALTHCHECK](state, healthcheck) {
-    state.healthcheck = { ...state.healthcheck, ...healthcheck };
+  [MUTATIONS.SET_HEALTHCHECK](state, health_snapshot) {
+    state.health_snapshot = { ...state.health_snapshot, ...health_snapshot };
   },
   [MUTATIONS.SET_OVERALL_WELLBEING](state, owObj) {
     state.overallWellbeing = { ...state.overallWellbeing, ...owObj };
@@ -166,13 +166,13 @@ const actions = {
     }
   },
 
-  async saveHealthcheck({ commit, state }, healthcheck) {
+  async saveHealthcheck({ commit, state }, health_snapshot) {
     try {
       const value = {
-        ...state.healthcheck,
+        ...state.health_snapshot,
         workflow: state.workflow.id,
         admission: state.admission.id,
-        ...healthcheck,
+        ...health_snapshot,
       };
       let response = null;
       if (value.id) {

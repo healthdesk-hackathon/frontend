@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 class="subtitle is-4 has-text-centered">Proceed to health_snapshot</h4>
+    <h4 class="subtitle is-4 has-text-centered">Proceed to health snapshot</h4>
     <section class="section">
       <b-field label="Heart rate">
         <b-input type="number" v-model="model.heart_rate"></b-input>

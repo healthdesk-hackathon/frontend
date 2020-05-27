@@ -39,10 +39,20 @@ const routes = {
         ),
     },
 
+    // Admit patient
+    {
+      path: "admissions/new",
+      name: "backoffice.admitPatient",
+      props: true,
+      component: () =>
+        import(/* webpackChunkName: "backoffice" */ "../views/backoffice/admissions/AdmitPatientSteps.vue"),
+    },
+
     // Admission
     {
       path: "admissions/:admission_id",
       name: "backoffice.admission",
+      props: true,
       component: () => import(/* webpackChunkName: "backoffice" */ "../views/backoffice/admissions/Admission.vue"),
     },
 

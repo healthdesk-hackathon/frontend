@@ -94,7 +94,7 @@ export default {
 
     async startWorkflow() {
       try {
-        await this.createWorkflow("register patient");
+        await this.createWorkflow({ workflow_type: "register patient" });
       } catch (e) {
         console.log(e);
       }
