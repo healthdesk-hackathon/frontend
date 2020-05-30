@@ -4,43 +4,43 @@
       <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
         <b-step-item label="Identification" icon="account-plus">
           <TriageStepContentWrapper title="Identification">
-            <TriageStepIdentification :active="activeStep === 0" v-model="identification" />
+            <RegisterPatientStepIdentification :active="activeStep === 0" v-model="identification" />
           </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Personal data" icon="account">
           <TriageStepContentWrapper title="Personal data">
-            <TriageStepPersonalData :active="activeStep === 1" v-model="personalData" />
+            <RegisterPatientStepPersonalData :active="activeStep === 1" v-model="personalData" />
           </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Symptoms" icon="alert-circle-outline">
           <TriageStepContentWrapper title="Symptoms">
-            <TriageStepCommonSymptoms v-model="commonSymptoms" />
+            <AdmitPatientStepCommonSymptoms v-model="commonSymptoms" :overall_wellbeing="overallWellbeing" />
           </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Additional information" icon="plus">
           <TriageStepContentWrapper title="Additional information">
-            <TriageStepRelatedConditions v-model="relatedConditions" />
+            <AdmitPatientStepRelatedConditions v-model="relatedConditions" />
           </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="HealthSnapshot" icon="head-check">
           <TriageStepContentWrapper title="HealthSnapshot">
-            <TriageStepHealthcheck v-model="health_snapshot" />
+            <AdmitPatientStepHealthcheck v-model="health_snapshot" />
           </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Severity" icon="priority-high">
           <TriageStepContentWrapper title="Severity">
-            <TriageStepSeverity v-model="health_snapshot.severity" />
+            <AdmitPatientStepSeverity v-model="health_snapshot.severity" />
           </TriageStepContentWrapper>
         </b-step-item>
 
         <b-step-item label="Done" icon="check">
           <TriageStepContentWrapper title="Final review">
-            <TriageStepFinish :submissionReview="submissionReview" />
+            <TriageStepFinish :complete="complete" />
           </TriageStepContentWrapper>
         </b-step-item>
         <template slot="navigation" slot-scope="{ previous, next }">
@@ -52,7 +52,7 @@
                 rounded
                 class="has-text-weight-bold"
                 type="is-primary is-medium"
-                @click.prevent="next.action"
+                @click.prevent="nextStep(next)"
                 :disabled="invalid"
               >
                 Next step
@@ -63,7 +63,7 @@
                 rounded
                 class="has-text-weight-bold"
                 type="is-primary is-medium"
-                @click.prevent="createTriage"
+                @click.prevent="triageSubmission"
               >
                 Submit
               </b-button>
@@ -81,77 +81,101 @@
 
 <script>
 import TriageStepContentWrapper from "@/components/Triage/TriageStepContentWrapper.vue";
-import TriageStepIdentification from "@/components/Triage/TriageStepIdentification.vue";
-import TriageStepPersonalData from "@/components/Triage/TriageStepPersonalData.vue";
-import TriageStepCommonSymptoms from "@/components/Triage/TriageStepCommonSymptoms.vue";
-import TriageStepRelatedConditions from "@/components/Triage/TriageStepRelatedConditions.vue";
-import TriageStepHealthcheck from "@/components/Triage/TriageStepHealthcheck.vue";
-import TriageStepSeverity from "@/components/Triage/TriageStepSeverity.vue";
+import RegisterPatientStepIdentification from "@/components/Patients/RegisterPatientStepIdentification.vue";
+import RegisterPatientStepPersonalData from "@/components/Patients/RegisterPatientStepPersonalData.vue";
+import AdmitPatientStepCommonSymptoms from "@/components/Admissions/AdmitPatientStepCommonSymptoms.vue";
+import AdmitPatientStepRelatedConditions from "@/components/Admissions/AdmitPatientStepRelatedConditions.vue";
+import AdmitPatientStepHealthcheck from "@/components/Admissions/AdmitPatientStepHealthcheck.vue";
+import AdmitPatientStepSeverity from "@/components/Admissions/AdmitPatientStepSeverity.vue";
 import TriageStepFinish from "@/components/Triage/TriageStepFinish.vue";
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions } from "vuex";
 import { ValidationObserver } from "vee-validate";
 
 export default {
   components: {
     TriageStepContentWrapper,
-    TriageStepIdentification,
-    TriageStepPersonalData,
-    TriageStepCommonSymptoms,
-    TriageStepRelatedConditions,
-    TriageStepHealthcheck,
-    TriageStepSeverity,
+    RegisterPatientStepIdentification,
+    RegisterPatientStepPersonalData,
+    AdmitPatientStepCommonSymptoms,
+    AdmitPatientStepRelatedConditions,
+    AdmitPatientStepHealthcheck,
+    AdmitPatientStepSeverity,
     TriageStepFinish,
     ValidationObserver,
   },
   methods: {
-    ...mapActions("submission", [
-      "createSubmission",
-      "createAdmission",
-      "savePersonalData",
+    ...mapActions("workflow", ["createWorkflow", "resetState"]),
+    ...mapActions("patient", ["savePatientIdentifier", "savePersonalData"]),
+    ...mapActions("admission", [
       "saveCommonSymptoms",
       "saveRelatedConditions",
       "saveOverallWellbeing",
       "saveHealthcheck",
-      "resetState",
     ]),
-    async createTriage() {
+
+    nextStep(next) {
+      if (this.activeStep === 0) {
+        this.startWorkflow();
+      }
+      next.action();
+    },
+
+    setupSteps() {
+      this.resetState();
+      this.personalData = {};
+      this.identification = {};
+      this.commonSymptoms = {};
+      this.relatedConditions = {};
+      this.overallWellbeing = {};
+      this.healthSnapshot = { severity: "WHITE" };
+      this.complete = false;
+    },
+
+    async startWorkflow() {
       try {
-        await this.createSubmission(this.identification);
-        await this.createAdmission();
+        await this.createWorkflow({
+          workflow_type: "triage submission",
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    },
+
+    async triageSubmission() {
+      try {
         await Promise.all([
-          this.savePersonalData(this.personalData),
-          this.saveCommonSymptoms(this.commonSymptoms),
-          this.saveRelatedConditions(this.relatedConditions),
-          this.saveOverallWellbeing(this.commonSymptoms.overall_wellbeing),
-          this.saveHealthcheck(this.health_snapshot),
+          this.savePatientIdentifier({ patientIdentifier: this.identification, workflow: this.workflow }),
+          this.savePersonalData({ personalData: this.personalData, workflow: this.workflow }),
+          this.saveCommonSymptoms({ commonSymptoms: this.commonSymptoms, workflow: this.workflow }),
+          this.saveRelatedConditions({ relatedConditions: this.relatedConditions, workflow: this.workflow }),
+          this.saveOverallWellbeing({ overallWellbeing: this.overallWellbeing, workflow: this.workflow }),
+          this.saveHealthcheck({ healthSnapshot: this.healthSnapshot, workflow: this.workflow }),
         ]);
-        await this.resetState;
-        this.personalData = {};
-        this.commonSymptoms = { overall_wellbeing: {} };
-        this.relatedConditions = {};
-        this.identification = {};
-        this.health_snapshot = { severity: "WHITE" };
-        this.admission = {};
-        this.activeStep = 0;
+
+        this.$router.push({ name: "backoffice.admission", params: { admission_id: this.admission.id } });
+        this.setupSteps();
+        this.complete = true;
       } catch (e) {
         console.log(e);
       }
     },
   },
   computed: {
-    ...mapState("submission", ["submission"]),
-    ...mapGetters("submission", ["submissionReview"]),
+    ...mapState("workflow", ["workflow"]),
+    ...mapState("patient", ["patient"]),
+    ...mapState("admission", ["admission"]),
   },
   data() {
     return {
       activeStep: 0,
+      complete: false,
       // data
       personalData: {},
-      commonSymptoms: { overall_wellbeing: {} },
+      commonSymptoms: {},
+      overallWellbeing: {},
       relatedConditions: {},
       identification: {},
       health_snapshot: { severity: "WHITE" },
-      admission: {},
     };
   },
 };

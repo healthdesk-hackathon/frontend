@@ -132,10 +132,7 @@ export default {
         await Promise.all([
           this.saveCommonSymptoms({ commonSymptoms: this.commonSymptoms, workflow: this.workflow }),
           this.saveRelatedConditions({ relatedConditions: this.relatedConditions, workflow: this.workflow }),
-          this.saveOverallWellbeing({
-            overallWellbeing: this.overallWellbeing,
-            workflow: this.workflow,
-          }),
+          this.saveOverallWellbeing({ overallWellbeing: this.overallWellbeing, workflow: this.workflow }),
           this.saveHealthcheck({ healthSnapshot: this.healthSnapshot, workflow: this.workflow }),
         ]);
 

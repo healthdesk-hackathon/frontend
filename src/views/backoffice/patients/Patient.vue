@@ -148,8 +148,8 @@ export default {
 
       if (this.patient_id && (!patient || patient.id != this.patient_id)) {
         await Promise.all([this.fetchPatient(this.patient_id)]);
-        this.setCurrentView({ patient: this.patient });
       }
+      this.setCurrentView({ patient: this.patient });
     },
   },
   beforeRouteLeave(to, from, next) {

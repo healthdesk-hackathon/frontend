@@ -75,11 +75,11 @@ export default {
     id: { type: String, required: true },
   },
   mounted() {
-    this.getSubmissionByID(this.id);
+    this.getTriageSubmissionByID(this.id);
   },
   methods: {
-    ...mapActions("submission", [
-      "getSubmissionByID",
+    ...mapActions("triage_submission", [
+      "getTriageSubmissionByID",
       "savePersonalData",
       "saveCommonSymptoms",
       "saveRelatedConditions",
@@ -121,8 +121,8 @@ export default {
     ValidationObserver,
   },
   computed: {
-    ...mapState("submission", ["submission"]),
-    ...mapGetters("submission", ["submissionReview"]),
+    ...mapState("triage_submission", ["triage_submission"]),
+    ...mapGetters("triage_submission", ["submissionReview"]),
   },
   data() {
     return {

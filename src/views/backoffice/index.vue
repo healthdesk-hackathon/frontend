@@ -27,24 +27,24 @@ import TheNavigation from "@/components/Dashboard/TheNavigation";
 export default {
   components: {
     TheSideBar,
-    TheNavigation
+    TheNavigation,
   },
   computed: {
     ...mapState("auth", ["tokens"]),
     things() {
       return this.$store.state.triage.submissions;
-    }
+    },
   },
   methods: {
-    ...mapActions("triage", ["fetchSubmissions"]),
-    ...mapActions("admission", ["fetchAdmissions"])
+    ...mapActions("triage", ["fetchTriageSubmissions"]),
+    ...mapActions("admission", ["fetchAdmissions"]),
   },
   async mounted() {
     await this.$store.dispatch("auth/load");
     if (!this.tokens.access && this.$route.name !== "generic.login") {
       await this.$router.push({ name: "generic.login" });
     } else {
-      // await this.fetchSubmissions();
+      // await this.fetchTriageSubmissions();
       // await this.fetchAdmissions();
     }
   },
@@ -53,8 +53,8 @@ export default {
       if (!value && this.$route.name !== "generic.login") {
         this.$router.push({ name: "generic.login" });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

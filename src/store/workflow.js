@@ -78,8 +78,10 @@ const actions = {
       let workflow_type = data.workflow_type;
       delete data["workflow_type"];
 
-      rel_id = Object.values(data)[0].id;
-      rel_type = Object.keys(data)[0];
+      if (Object.values(data)[0]) {
+        rel_id = Object.values(data)[0].id;
+        rel_type = Object.keys(data)[0];
+      }
 
       console.log(rel_type);
       const response = await API.service.post(WORKFLOW_ENDPOINT + "/", {
@@ -90,12 +92,18 @@ const actions = {
         },
       });
       commit(MUTATIONS.SET_WORKFLOW, response.data);
-
-      for (let [k, v] of Object.entries(response.data.related_data)) {
-        dispatch(RELATED_ACTIONS[k], v, { root: true });
-      }
+      this.dispatch_data(dispatch, response.data.related_data);
     } catch (e) {
       console.log(e);
+    }
+  },
+
+  async dispatch_data({ dispatch }, val) {
+    for (let [k, v] of Object.entries(val)) {
+      if (RELATED_ACTIONS[k]) {
+        dispatch(RELATED_ACTIONS[k], v, { root: true });
+        this.dispatch_data(dispatch, v);
+      }
     }
   },
 

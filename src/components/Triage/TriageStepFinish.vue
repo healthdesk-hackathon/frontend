@@ -40,8 +40,10 @@
 <script>
 export default {
   props: {
-    submissionReview: { type: Object, required: false, default: null }
-  }
+    complete: { type: Boolean, required: false, default: false },
+
+    submissionReview: { type: Object, required: false, default: null },
+  },
 };
 </script>
 

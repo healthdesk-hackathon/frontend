@@ -2,7 +2,7 @@
   <section class="section">
     <FormIdentification
       v-if="formIdentificationActive"
-      @submit="createSubmission($event)"
+      @submit="createTriageSubmission($event)"
       @cancel="formIdentificationActive = false"
     />
     <div v-else>
@@ -41,7 +41,7 @@ export default {
     FormIdentification,
   },
   computed: {
-    ...mapState("submission", ["submission"]),
+    ...mapState("triage_submission", ["triage_submission"]),
   },
   data() {
     return {
@@ -49,11 +49,11 @@ export default {
     };
   },
   methods: {
-    async createSubmission(identification) {
+    async createTriageSubmission(identification) {
       try {
         this.formIdentificationActive = true;
-        await this.$store.dispatch("submission/createSubmission", identification);
-        this.$router.push({ name: "form", params: { id: this.submission.id } });
+        await this.$store.dispatch("triage_submission/createTriageSubmission", identification);
+        this.$router.push({ name: "form", params: { id: this.triage_submission.id } });
       } catch (e) {
         console.error(e);
       }

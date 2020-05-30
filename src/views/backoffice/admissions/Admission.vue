@@ -130,14 +130,15 @@ export default {
     this.reloadAdmission();
   },
   methods: {
+    ...mapActions("user", ["setCurrentView"]),
     ...mapActions("admission", ["fetchAdmission"]),
 
     async reloadAdmission() {
       let admission = this.admission;
       if (this.admission_id && (!admission || admission.id != this.admission_id)) {
         await Promise.all([this.fetchAdmission(this.admission_id)]);
-        this.setCurrentView({ admission: this.admission });
       }
+      this.setCurrentView({ admission: this.admission });
     },
   },
   beforeRouteLeave(to, from, next) {

@@ -2,9 +2,9 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 // register modules below
-import submission from "./submission";
+// import triage_submission from "./triage_submission";
+// import triage from "./triage";
 import admission from "./admission";
-import triage from "./triage";
 import beds from "./beds";
 import health_snapshot from "./health_snapshot";
 import sidebarmenu from "./sidebarmenu";
@@ -17,8 +17,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    submission,
-    triage,
+    // triage_submission,
+    // triage,
     admission,
     beds,
     auth,
