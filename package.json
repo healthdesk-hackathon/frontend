@@ -12,7 +12,7 @@
     "awesome-phonenumber": "^2.29.0",
     "axios": "^0.19.2",
     "buefy": "^0.8.13",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "core-js": "^3.6.4",
     "dayjs": "^1.8.23",
     "jwt-decode": "^2.2.0",
